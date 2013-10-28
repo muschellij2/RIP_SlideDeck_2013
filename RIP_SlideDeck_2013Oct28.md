@@ -115,44 +115,44 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 ## An "Ideal" MISTIE Patient: Blood Clot Formed
 
-<img src="RIP_SlideDeck_2013Oct28-figure/bloodclot.pdf" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
+<img src="RIP_SlideDeck_2013Oct28-figure/bloodclot.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 
 ---
 
 ## An "Ideal"" MISTIE Patient: Catheter Placed
 
-<img src="RIP_SlideDeck_2013Oct28-figure/catheter.pdf" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
+<img src="RIP_SlideDeck_2013Oct28-figure/catheter.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 
 ---
 
 ## An "Ideal" MISTIE Patient: Clearance!
 
-<img src="RIP_SlideDeck_2013Oct28-figure/clearance.pdf" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
+<img src="RIP_SlideDeck_2013Oct28-figure/clearance.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 
 ---
 
 
 ## Clot trajectories: Volume
 
-<img src="RIP_SlideDeck_2013Oct28-figure/ICH_vol_plot.pdf" style="width:500px; height:590px; display: block; margin: auto;" alt="Blood Clot">
+<img src="RIP_SlideDeck_2013Oct28-figure/ICH_vol_plot.png" style="width:500px; height:590px; display: block; margin: auto;" alt="Blood Clot">
 
 ---
 
 ## Clot trajectories: Volume Difference
 <font size="2">Method based on: Crainiceanu, Ciprian M., et al. "Bootstrap‐based inference on the difference in the means of two correlated functional processes." Statistics in Medicine 31.26 (2012): 3223-3240.</font>
-<img src="RIP_SlideDeck_2013Oct28-figure/ICH_vol_diff.pdf" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot Difference">
+<img src="RIP_SlideDeck_2013Oct28-figure/ICH_vol_diff.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot Difference">
 
 ---
 
 ## Clot Trajectories: % of Baseline
 
-<img src="RIP_SlideDeck_2013Oct28-figure/ICH_perc_plot.pdf" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot">
+<img src="RIP_SlideDeck_2013Oct28-figure/ICH_perc_plot.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot">
 
 ---
 
 ## Clot trajectories: % Difference
 
-<img src="RIP_SlideDeck_2013Oct28-figure/ICH_perc_diff.pdf" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot Difference">
+<img src="RIP_SlideDeck_2013Oct28-figure/ICH_perc_diff.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot Difference">
 
 ---
 
@@ -199,7 +199,7 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ## CT is NOT MRI (specifically not T1/T2)
 
 <!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Mon Oct 28 12:53:50 2013 -->
+<!-- Mon Oct 28 13:30:02 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> CT </TH> <TH> MRI </TH>  </TR>
   <TR> <TD align="right"> Domain </TD> <TD> Diagnostic </TD> <TD> Diagnostic/Research </TD> </TR>
@@ -246,14 +246,14 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 ## Results from 19 Scans
 
-<img src="RIP_SlideDeck_2013Oct28-figure/box1.pdf" style="width:550px; height:550px; display: block; margin: auto;" alt="Zombies" >
+<img src="RIP_SlideDeck_2013Oct28-figure/box1.png" style="width:550px; height:550px; display: block; margin: auto;" alt="Zombies" >
 
 ---
 
 
 ## Results from 19 Scans
 
-<img src="RIP_SlideDeck_2013Oct28-figure/box2.pdf" style="width:550px; height:550px; display: block; margin: auto;" alt="ZOmbies" >
+<img src="RIP_SlideDeck_2013Oct28-figure/box2.png" style="width:550px; height:550px; display: block; margin: auto;" alt="ZOmbies" >
 
 ---
 
@@ -339,6 +339,6 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 ## An Example CLEAR Patient
 
-<img src="RIP_SlideDeck_2013Oct28-figure/clearpt.pdf" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
+<img src="RIP_SlideDeck_2013Oct28-figure/clearpt.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 
 ---
