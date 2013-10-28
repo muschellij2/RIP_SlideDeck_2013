@@ -33,12 +33,12 @@ strong {
 
 Outline of Talk
 <img src="RIP_SlideDeck_2013Oct28-figure/zombie_brains.jpg" style="width:300px; height:300px; float: right" alt="ZOmbies" >
-* Stroke is bad, and is in the elderly population
-* Bigger stroke is worse
-* Estimation of the size of a strokeis important
-* Automatic estimation of Stroke size seems possible
+* Stroke is bad, and the elderly population is affected
+* Bigger stroke volumes are worse
+* Estimation of the size of a stroke is important
+* Automatic estimation of stroke size seems possible
 * CT scans are NOT MRI scans
-* Development of Methods for CT
+* Methods for CT image analysis
 
 <font size="2">Photo from [http://zombieshootersassociation.com/wp-content/uploads/2011/01/loRes-zombie1.jpg](http://zombieshootersassociation.com/wp-content/uploads/2011/01/loRes-zombie1.jpg)</font>
 
@@ -46,13 +46,18 @@ Outline of Talk
 
 ## Strokes are bad
 
-From AHA Stroke statistics 2013 report:
+From AHA Stroke statistics 2013 report$^1$:
 
 * Of all strokes, 87% are ischemic and **10%** are intracerebral hemorrhagic strokes, whereas 3% are subarachnoid hemorrhage strokes (GCNKSS, NINDS, 1999).
 
 * Each year, $\approx$ **795,000** people experience a new or recurrent stroke, 610,000 new, 185,000 recurrent.
 
 * On average, **every 40 seconds**, someone in the United States has a stroke (90 strokes/hour)
+
+* Intracerebral hemorrhage has a **high mortality rate**; **38%** survive the first year$^2$
+
+<font size="2">$^1$ Go, Alan S., et al. "Heart disease and stroke statistics—2013 update a report from the American Heart Association." Circulation 127.1 (2013): e6-e245.</font><br>
+<font size="2">$^2$ Qureshi, Adnan I., et al. "Spontaneous intracerebral hemorrhage." New England Journal of Medicine 344.19 (2001): 1450-1460.</font>
 
 ---
 
@@ -61,9 +66,9 @@ From AHA Stroke statistics 2013 report:
 From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 65-84)
 * Incidence for first-ever stroke was **9.51** (95% CI: 7.75-11.27) per 1,000 person years and **12.99** (95% CI: 10.99-14.98) including recurrent stroke (total incidence). 
 
-* Crude **mortality was 49.2% among first stroke patients** and 15% among persons without stroke$^1$
+* Crude **mortality was 49.2% among first stroke patients** and 15% among persons without stroke$^3$
 
-<font size="2">$^1$ Di Carlo, Antonio, et al. "Stroke in an elderly population: incidence and impact on survival and daily function." Cerebrovascular Diseases 16.2 (2003): 141-150.</font>
+<font size="2">$^3$ Di Carlo, Antonio, et al. "Stroke in an elderly population: incidence and impact on survival and daily function." Cerebrovascular Diseases 16.2 (2003): 141-150.</font>
 
 ---
 
@@ -71,13 +76,14 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 * Intracerebral (bleeds mainly in tissue, <strong>ICH</strong>) or Intraventricular (bleeds into ventricles, <strong>IVH</strong>) Hemorrhage trials
 
+* Minimally Invasive Surgery plus rt-PA for ICH Evacuation (<strong>MISTIE</strong>) 
+
+<img src="RIP_SlideDeck_2013Oct28-figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO">
+
 * Clot Lysis: Evaluating Accelerated Resolution of Intraventricular Hemorrhage Phase III (<strong>CLEAR III</strong>)
 
 <img src="RIP_SlideDeck_2013Oct28-figure/clear3_logo.png" style="width:125px; height:100px; display: block; margin: auto;" alt="CLEAR LOGO" >
 
-* Minimally Invasive Surgery plus rt-PA for ICH Evacuation (<strong>MISTIE</strong>) 
-
-<img src="RIP_SlideDeck_2013Oct28-figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO">
 
 * http://braininjuryoutcomes.com/mistie-about
 
@@ -158,11 +164,11 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 ## Outcome - modified Rankin Scale
 
-* Outcome - modified Rankin Score (**mRS**) - a functional measure of mobility and $\text{independence}^{1,2,3}$.  Good outcome: $\leq 3$ at 180 Day followup
+* Outcome - modified Rankin Score (**mRS**) - a functional measure of mobility and $\text{independence}^{4,5,6}$.  Good outcome: $\leq 3$ at 180 Day followup
 <img src="RIP_SlideDeck_2013Oct28-figure/mRS.png" style="width:660px; height:390px; display: block; margin: auto;" alt="Rankin_Scale">
-<font size="2">$^1$ Rankin J. “Cerebral vascular accidents in patients over the age of 60.” Scott Med J 1957;2:200-15</font><br>
-<font size="2">$^2$ Bonita R, Beaglehole R. “Modification of Rankin Scale: Recovery of motor function after stroke.” Stroke 1988 Dec;19(12):1497-1500</font><br>
-<font size="2">$^3$ Scale from [http://www.strokecenter.org/wp-content/uploads/2011/08/modified_rankin.pdf](http://www.strokecenter.org/wp-content/uploads/2011/08/modified_rankin.pdf)</font>
+<font size="2">$^4$ Rankin J. “Cerebral vascular accidents in patients over the age of 60.” Scott Med J 1957;2:200-15</font><br>
+<font size="2">$^5$ Bonita R, Beaglehole R. “Modification of Rankin Scale: Recovery of motor function after stroke.” Stroke 1988 Dec;19(12):1497-1500</font><br>
+<font size="2">$^6$ Scale from [http://www.strokecenter.org/wp-content/uploads/2011/08/modified_rankin.pdf](http://www.strokecenter.org/wp-content/uploads/2011/08/modified_rankin.pdf)</font>
 
 ---
 
@@ -171,7 +177,7 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 ## Does Blood matter?
 
-<img src="figure/plot_loess.png" title="plot of chunk plot.loess" alt="plot of chunk plot.loess" style="display: block; margin: auto;" />
+<img src="figure/plot_loess.png" title="plot of chunk plot_loess" alt="plot of chunk plot_loess" style="display: block; margin: auto;" />
 
 ---
 
@@ -199,7 +205,7 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ## CT is NOT MRI (specifically not T1/T2)
 
 <!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Mon Oct 28 13:30:02 2013 -->
+<!-- Mon Oct 28 13:55:06 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> CT </TH> <TH> MRI </TH>  </TR>
   <TR> <TD align="right"> Domain </TD> <TD> Diagnostic </TD> <TD> Diagnostic/Research </TD> </TR>
