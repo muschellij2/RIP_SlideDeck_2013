@@ -1,0 +1,49 @@
+<style type="text/css">
+.rightalign {
+    float: right;
+}
+.leftalign {
+    float: right;
+}
+</style>
+
+Clot Volume Prediction in Stroke
+========================================================
+author: John Muschelli
+date: 2013-Oct-28
+
+Neuroimaging data
+========================================================
+
+## Neuroimaging Data 
+
+<img src="RIP_SlideDeck_2013Oct28-figure/movie_final.gif" style="float:right;" height=308 width=308 alt="Spinning floating brain">
+
+<img src="RIP_SlideDeck_2013Oct28-figure/Data_pixels.png" height=308 width=600 alt="Data structure">
+
+---
+
+Neuroimaging data
+========================================================
+
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Slide With Code
+========================================================
+
+```{r}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
