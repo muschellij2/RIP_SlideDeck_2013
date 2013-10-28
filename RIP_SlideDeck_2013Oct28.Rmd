@@ -30,6 +30,7 @@ opts_chunk$set(echo=FALSE, prompt=FALSE, message=FALSE, warning=FALSE, comment="
 
 
 ```{r, prompt=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=ls())
 library(ggplot2)
 library(xtable)
 library(scales)
@@ -42,6 +43,7 @@ resdir <- file.path(homedir, "results")
 rundir <- file.path(resdir, "Manuscript")
 progdir <- file.path(homedir, "stataprograms")
 datadir <- file.path(Mdir, "statacalc")
+knitdir <- "~/CT_Registration/RIP_SlideDeck/"
 load(file=file.path(rundir, "All_Patients.Rda"))
 load(file=file.path(rundir, "Randomized_Patients.Rda"))
 ```
@@ -107,6 +109,16 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 
 ---
+
+```{r tabage}
+otab <- table(rando$Age > 65)
+ptrue <- prop.table(otab)["TRUE"]
+tab <- table(rando$Age > 65, rando$Group_Assigned)
+ptab <- prop.table(tab, 2)
+nsurg <- sum(rando$Group_Assigned == "Surgical")
+nmed <- sum(rando$Group_Assigned == "Medical")
+stopifnot((nsurg+nmed) == nrow(rando))
+```
 
 
 ## MISTIE Trial - Intracerebral Hemorrhage
@@ -175,16 +187,6 @@ print(gage)
 
 
 
-```{r tabage}
-otab <- table(rando$Age > 65)
-ptrue <- prop.table(otab)["TRUE"]
-tab <- table(rando$Age > 65, rando$Group_Assigned)
-ptab <- prop.table(tab, 2)
-nsurg <- sum(rando$Group_Assigned == "Surgical")
-nmed <- sum(rando$Group_Assigned == "Medical")
-stopifnot((nsurg+nmed) == nrow(rando))
-```
-
 ## An "Ideal" MISTIE Patient: Blood Clot Formed
 
 <img src="RIP_SlideDeck_2013Oct28-figure/bloodclot.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
@@ -202,7 +204,6 @@ stopifnot((nsurg+nmed) == nrow(rando))
 <img src="RIP_SlideDeck_2013Oct28-figure/clearance.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 
 ---
-
 
 ## Clot trajectories: Volume
 
@@ -225,6 +226,18 @@ stopifnot((nsurg+nmed) == nrow(rando))
 ## Clot trajectories: % Difference
 
 <img src="RIP_SlideDeck_2013Oct28-figure/ICH_perc_diff.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot Difference">
+
+---
+
+## Clot Trajectories: Volume, Age Groups
+
+<img src="RIP_SlideDeck_2013Oct28-figure/plots_age2.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot">
+
+---
+
+## Clot Trajectories: % Difference, Age Groups
+
+<img src="RIP_SlideDeck_2013Oct28-figure/plots_age1.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot Difference">
 
 ---
 
@@ -304,6 +317,8 @@ print(glo)
 ---
 
 ## CT is NOT MRI (specifically not T1/T2)
+<br>
+<br>
 
 ```{r procon, results='asis'}
 ct <- c("Diagnostic", "Houndsfield Units", "One exists", "Measures humans/rooms/beds", "?")
@@ -349,14 +364,14 @@ print(xtable(df), type="html")
 
 ---
 
-## Results from 19 Scans
+## Brain Extraction Results from 19 Scans
 
 <img src="RIP_SlideDeck_2013Oct28-figure/box1.png" style="width:550px; height:550px; display: block; margin: auto;" alt="Zombies" >
 
 ---
 
 
-## Results from 19 Scans
+## Brain Extraction Results from 19 Scans
 
 <img src="RIP_SlideDeck_2013Oct28-figure/box2.png" style="width:550px; height:550px; display: block; margin: auto;" alt="ZOmbies" >
 
@@ -366,21 +381,24 @@ print(xtable(df), type="html")
 ## Clot Prediction - data
 
 * 6 scans (pilot run) from 6 different subjects
-* Blood clots are manually segmented
+* Blood clots are manually segmented (**gold standard**)
   * Think of tracing a lot of pictures with a mouse
-* Skull Stripped images are used to limit only to brain tissue
+* Skull Stripped images are used to limit **only to brain tissue**
+  * Could also be used to estimate **cranial volume**
+  * **Intensity-based normalization** - standardize across subjects
 
 ---
 
 
 ## Predicting Clot
 
-* Run a model (logistic regression) with 10% of the brain with covariates:
+* Run a model (**logistic regression**) with **10%** of the brain with covariates:
   * Raw intensity
   * Z-scores in all 3 planes with whole image
-  * Z-scores in all 3 planes with only brain image
+  * Z-scores in all 3 planes with only brain image (skull stripped)
+  * Indicator if intensity **$\geq$ 40** (established threshold)
 * Predict on the 90% not fit using the model
-* One hold out subject completely
+* **One hold-out** subject completely not used in model fit
 
 ---
 
@@ -410,14 +428,9 @@ print(xtable(df), type="html")
 ---
 
 
-
 ## Thanks
 
-* Dan Hanley and BIOS
-* Ciprian Crainiceanu
-* Elizabeth Sweeney
-* Brian Caffo
-* 
+* Questions
 
 ---
 

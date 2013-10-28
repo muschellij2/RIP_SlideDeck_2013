@@ -91,6 +91,9 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ---
 
 
+
+
+
 ## MISTIE Trial - Intracerebral Hemorrhage
 
 * Number of patients: **N = 123**, number randomized: **N = 96**
@@ -116,9 +119,6 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 
 
-
-
-
 ## An "Ideal" MISTIE Patient: Blood Clot Formed
 
 <img src="RIP_SlideDeck_2013Oct28-figure/bloodclot.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
@@ -136,7 +136,6 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 <img src="RIP_SlideDeck_2013Oct28-figure/clearance.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 
 ---
-
 
 ## Clot trajectories: Volume
 
@@ -159,6 +158,18 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ## Clot trajectories: % Difference
 
 <img src="RIP_SlideDeck_2013Oct28-figure/ICH_perc_diff.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot Difference">
+
+---
+
+## Clot Trajectories: Volume, Age Groups
+
+<img src="RIP_SlideDeck_2013Oct28-figure/plots_age2.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot">
+
+---
+
+## Clot Trajectories: % Difference, Age Groups
+
+<img src="RIP_SlideDeck_2013Oct28-figure/plots_age1.png" style="width:500px; height:500px; display: block; margin: auto;" alt="Blood Clot Difference">
 
 ---
 
@@ -218,9 +229,11 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ---
 
 ## CT is NOT MRI (specifically not T1/T2)
+<br>
+<br>
 
 <!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Mon Oct 28 14:20:32 2013 -->
+<!-- Mon Oct 28 15:01:49 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> CT </TH> <TH> MRI </TH>  </TR>
   <TR> <TD align="right"> Domain </TD> <TD> Diagnostic </TD> <TD> Diagnostic/Research </TD> </TR>
@@ -265,14 +278,14 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 ---
 
-## Results from 19 Scans
+## Brain Extraction Results from 19 Scans
 
 <img src="RIP_SlideDeck_2013Oct28-figure/box1.png" style="width:550px; height:550px; display: block; margin: auto;" alt="Zombies" >
 
 ---
 
 
-## Results from 19 Scans
+## Brain Extraction Results from 19 Scans
 
 <img src="RIP_SlideDeck_2013Oct28-figure/box2.png" style="width:550px; height:550px; display: block; margin: auto;" alt="ZOmbies" >
 
@@ -282,21 +295,24 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ## Clot Prediction - data
 
 * 6 scans (pilot run) from 6 different subjects
-* Blood clots are manually segmented
+* Blood clots are manually segmented (**gold standard**)
   * Think of tracing a lot of pictures with a mouse
-* Skull Stripped images are used to limit only to brain tissue
+* Skull Stripped images are used to limit **only to brain tissue**
+  * Could also be used to estimate **cranial volume**
+  * **Intensity-based normalization** - standardize across subjects
 
 ---
 
 
 ## Predicting Clot
 
-* Run a model (logistic regression) with 10% of the brain with covariates:
+* Run a model (**logistic regression**) with **10%** of the brain with covariates:
   * Raw intensity
   * Z-scores in all 3 planes with whole image
-  * Z-scores in all 3 planes with only brain image
+  * Z-scores in all 3 planes with only brain image (skull stripped)
+  * Indicator if intensity **$\geq$ 40** (established threshold)
 * Predict on the 90% not fit using the model
-* One hold out subject completely
+* **One hold-out** subject completely not used in model fit
 
 ---
 
@@ -326,14 +342,9 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ---
 
 
-
 ## Thanks
 
-* Dan Hanley and BIOS
-* Ciprian Crainiceanu
-* Elizabeth Sweeney
-* Brian Caffo
-* 
+* Questions
 
 ---
 
