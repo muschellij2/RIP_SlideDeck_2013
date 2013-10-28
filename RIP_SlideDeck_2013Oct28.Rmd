@@ -288,15 +288,15 @@ print(xtable(df), type="html")
 
 ## Skull Stripping
 
-* Many applications we want to work with brain only 
+* Many applications we want to work with brain only <img src="RIP_SlideDeck_2013Oct28-figure/eyes.png" style="width:300px; height:300px; float: right;" alt="Eyes" >
 * Skull, and other objects are picked up by CT
-  * Biological - nasal cavity, eyes
+  * Biological - nasal cavity, eyes 
   * Not biological - cushions, the table
 * Try standard MRI software (with some modifications)
 
 ---
 
-## Human + Room
+## Human + Room + FOV
 
 <img src="RIP_SlideDeck_2013Oct28-figure/the_room.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 

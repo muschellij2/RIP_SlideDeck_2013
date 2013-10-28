@@ -205,7 +205,7 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ## CT is NOT MRI (specifically not T1/T2)
 
 <!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Mon Oct 28 13:55:06 2013 -->
+<!-- Mon Oct 28 14:04:42 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> CT </TH> <TH> MRI </TH>  </TR>
   <TR> <TD align="right"> Domain </TD> <TD> Diagnostic </TD> <TD> Diagnostic/Research </TD> </TR>
@@ -220,15 +220,15 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 ## Skull Stripping
 
-* Many applications we want to work with brain only 
+* Many applications we want to work with brain only <img src="RIP_SlideDeck_2013Oct28-figure/eyes.png" style="width:300px; height:300px; float: right;" alt="Eyes" >
 * Skull, and other objects are picked up by CT
-  * Biological - nasal cavity, eyes
+  * Biological - nasal cavity, eyes 
   * Not biological - cushions, the table
 * Try standard MRI software (with some modifications)
 
 ---
 
-## Human + Room
+## Human + Room + FOV
 
 <img src="RIP_SlideDeck_2013Oct28-figure/the_room.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 
