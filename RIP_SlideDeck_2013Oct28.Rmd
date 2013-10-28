@@ -32,6 +32,7 @@ opts_chunk$set(echo=FALSE, prompt=FALSE, message=FALSE, warning=FALSE, comment="
 ```{r, prompt=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(xtable)
+library(scales)
 options(stringsAsFactors=FALSE)
 username <- Sys.info()["user"][[1]]
 rootdir = file.path("/Users", username, "Dropbox/CTR/DHanley/MISTIE")
@@ -238,15 +239,43 @@ stopifnot((nsurg+nmed) == nrow(rando))
 ---
 
 ```{r ich_loess}
-d <- alldat[order(alldat$Pre_Rand_ICHvol), ]
-d2 <- cbind
-glo <- ggplot(alldat, aes(x=Pre_Rand_ICHvol, y=Good_Outcome_Day_180)) + geom_smooth(method="loess") + geom_jitter(position = position_jitter(height = .1))
-glo <- glo + xlab("Pre-Randomization ICH Volume (cc)") + ylab(expression(paste(mRS <= 3))) + ggtitle("Functional outcome vs. ICH Volume")
+aglo <- ggplot(alldat, aes(x=Pre_Rand_ICHvol, y=Good_Outcome_Day_180)) + geom_smooth(method="loess") + geom_jitter(position = position_jitter(height = .1))
+aglo <- aglo + xlab("Pre-Randomization ICH Volume (cc)") + ylab(expression(paste(mRS <= 3))) + ggtitle("Functional outcome vs. ICH Volume: All Patients")
+```
+
+
+```{r rich_loess}
+glo <- ggplot(rando, aes(x=Pre_Rand_ICHvol, y=Good_Outcome_Day_180)) + geom_smooth(method="loess") + geom_jitter(position = position_jitter(height = .1))
+glo <- glo + xlab("Pre-Randomization ICH Volume (cc)") + ylab(expression(paste(mRS <= 3))) + ggtitle("Functional outcome vs. ICH Volume: Randomized Patients")
+glo <- glo + scale_y_continuous(breaks = c(0 ,1), labels = c("Bad", "Good"))
+
 ```
 
 ## Does Blood matter?
 
-```{r plot_loess, fig.align='center'}
+```{r rplot_loess, fig.align='center'}
+print(glo)
+```
+---
+
+```{r rich_loess_group}
+cols <- alpha(c("blue", "red"), 0.6)
+glo <- ggplot(rando, aes(x=Pre_Rand_ICHvol, y=Good_Outcome_Day_180, color=group)) + geom_smooth(method="loess", se=FALSE) + geom_jitter(position = position_jitter(height = .1))
+glo <- glo + xlab("Pre-Randomization ICH Volume (cc)") + ylab(expression(paste(mRS <= 3))) + ggtitle("Functional outcome vs. ICH Volume: Randomized Patients") + scale_color_manual(values=cols) + xlim(c(20, 90))
+glo <- glo  + theme(legend.justification=c(0,0), 
+                 legend.position=c(0,0.65), 
+                 legend.direction= "horizontal",
+                 legend.background = 
+                   element_rect(fill="transparent"),
+                 legend.key = element_rect(
+                   fill="transparent", 
+                   color="gray90")) 
+glo <- glo + scale_y_continuous(breaks = c(0 ,1), labels = c("Bad", "Good"))
+```
+
+## Does Blood matter?
+<font size="2">Removed one subject with volume $>$ 100.
+```{r rplot_loess_group, fig.align='center'}
 print(glo)
 ```
 ---

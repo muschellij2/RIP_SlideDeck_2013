@@ -175,9 +175,22 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 
 
 
+
+
+
+
 ## Does Blood matter?
 
-<img src="figure/plot_loess.png" title="plot of chunk plot_loess" alt="plot of chunk plot_loess" style="display: block; margin: auto;" />
+<img src="figure/rplot_loess.png" title="plot of chunk rplot_loess" alt="plot of chunk rplot_loess" style="display: block; margin: auto;" />
+
+---
+
+
+
+
+## Does Blood matter?
+
+<img src="figure/rplot_loess_group.png" title="plot of chunk rplot_loess_group" alt="plot of chunk rplot_loess_group" style="display: block; margin: auto;" />
 
 ---
 
@@ -205,7 +218,7 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ## CT is NOT MRI (specifically not T1/T2)
 
 <!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Mon Oct 28 14:07:35 2013 -->
+<!-- Mon Oct 28 14:13:54 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> CT </TH> <TH> MRI </TH>  </TR>
   <TR> <TD align="right"> Domain </TD> <TD> Diagnostic </TD> <TD> Diagnostic/Research </TD> </TR>
