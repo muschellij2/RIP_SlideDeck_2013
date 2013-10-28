@@ -274,10 +274,12 @@ glo <- glo + scale_y_continuous(breaks = c(0 ,1), labels = c("Bad", "Good"))
 ```
 
 ## Does Blood matter?
-<font size="2">Removed one subject with volume $>$ 100.
+
+<font size="2">Removed one subject with volume $>$ 100.</font>
 ```{r rplot_loess_group, fig.align='center'}
 print(glo)
 ```
+
 ---
 
 ## Does Blood matter?
