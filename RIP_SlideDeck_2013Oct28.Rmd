@@ -50,12 +50,12 @@ load(file=file.path(rundir, "Randomized_Patients.Rda"))
 
 Outline of Talk
 <img src="RIP_SlideDeck_2013Oct28-figure/zombie_brains.jpg" style="width:300px; height:300px; float: right" alt="ZOmbies" >
-* Stroke is bad, and the elderly population is affected
-* Bigger stroke volumes are worse
-* Estimation of the size of a stroke is important
-* Automatic estimation of stroke size seems possible
-* CT scans are NOT MRI scans
-* Methods for CT image analysis
+* **Stroke is bad**, and the elderly population is affected
+* **Bigger** stroke volumes are **worse**
+* **Estimation** of the size of a stroke is important
+* **Automatic estimation** of stroke size seems possible
+* CT scans are **NOT MRI** scans
+* **Methods** for CT image analysis
 
 <font size="2">Photo from [http://zombieshootersassociation.com/wp-content/uploads/2011/01/loRes-zombie1.jpg](http://zombieshootersassociation.com/wp-content/uploads/2011/01/loRes-zombie1.jpg)</font>
 

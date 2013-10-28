@@ -33,12 +33,12 @@ strong {
 
 Outline of Talk
 <img src="RIP_SlideDeck_2013Oct28-figure/zombie_brains.jpg" style="width:300px; height:300px; float: right" alt="ZOmbies" >
-* Stroke is bad, and the elderly population is affected
-* Bigger stroke volumes are worse
-* Estimation of the size of a stroke is important
-* Automatic estimation of stroke size seems possible
-* CT scans are NOT MRI scans
-* Methods for CT image analysis
+* **Stroke is bad**, and the elderly population is affected
+* **Bigger** stroke volumes are **worse**
+* **Estimation** of the size of a stroke is important
+* **Automatic estimation** of stroke size seems possible
+* CT scans are **NOT MRI** scans
+* **Methods** for CT image analysis
 
 <font size="2">Photo from [http://zombieshootersassociation.com/wp-content/uploads/2011/01/loRes-zombie1.jpg](http://zombieshootersassociation.com/wp-content/uploads/2011/01/loRes-zombie1.jpg)</font>
 
@@ -205,7 +205,7 @@ From Italian Longitudinal Study of Aging (ILSA) (**N =5,632** individuals aged 6
 ## CT is NOT MRI (specifically not T1/T2)
 
 <!-- html table generated in R 3.0.1 by xtable 1.7-1 package -->
-<!-- Mon Oct 28 14:04:42 2013 -->
+<!-- Mon Oct 28 14:07:35 2013 -->
 <TABLE border=1>
 <TR> <TH>  </TH> <TH> CT </TH> <TH> MRI </TH>  </TR>
   <TR> <TD align="right"> Domain </TD> <TD> Diagnostic </TD> <TD> Diagnostic/Research </TD> </TR>
