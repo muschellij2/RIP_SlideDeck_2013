@@ -5,6 +5,10 @@
 .leftalign {
     float: right;
 }
+body {
+    background-image: url('figure/rplot_loess.png');
+    background-color: #cccccc;
+}
 </style>
 
 Clot Volume Prediction in Stroke

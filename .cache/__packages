@@ -1,0 +1,11 @@
+base
+cttools
+fslr
+ggplot2
+knitr
+matrixStats
+oro.nifti
+scales
+slidify
+stringr
+xtable
