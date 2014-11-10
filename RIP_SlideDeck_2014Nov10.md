@@ -220,7 +220,7 @@ Sensitivity/Specificity
 
 ## What about those "failures"
 
-<img src="figure/SS_fail.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
+<img src="figure/SS_Fail.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 
 --- 
 
