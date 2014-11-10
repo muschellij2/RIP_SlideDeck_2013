@@ -386,10 +386,53 @@ Sensitivity/Specificity
   * Can use these methods for large datasets
 * Use for other diseases with CT imaging
 
----
+--- &twocol w1:50% w2:50%
+
 ## Thanks
 
-* Questions
+*** {name: left}
+
+* Main Collaborators
+
+
+<center><table>
+<tr>
+<td><img src="Hanley.jpg" style="width:150px; height:100px;" alt="Demog"></td>
+<td><img src="Ciprian.jpg" style="width:100px; height:125px;" alt="Demog"></td>
+</tr>
+</table></center>
+
+
+<center><table>
+<tr>
+<img src="Ullman.jpg" style="width:125px; height:125px;" alt="Demog">
+<img src="Sweeney.jpg" style="width:125px; height:125px;" alt="Demog">
+</tr> 
+</table></center>
+
+
+
+
+*** {name: right}
+
+* Groups
+
+<center><table>
+<tr> <td><img src="SMART.png" style="width:200px; height:100px;" alt="Demog"></td> <td> <img src="BIOS.png" style="width:200px; height:100px;" alt="Demog"></td>
+</tr>
+</table></center>
+
+* Funding
+
+<center><table>
+<tr> <td>T32AG000247</td><td> NIA </td></tr>
+<tr> <td>RO1EB012547</td><td> NIBIB</td> </tr>
+<tr> <td>R01NS046309, RO1NS060910, RO1NS085211, R01NS046309, U01NS080824 and U01NS062851</td> <td>NINDS</td> </tr>
+<tr><td>RO1MH095836</td> <td> NIMH </td></tr>
+</table></center>
+
+
+
 
 ---
 
@@ -424,6 +467,5 @@ Sensitivity/Specificity
 
 <img src="RIP_SlideDeck_2013Oct28-figure/clearance.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot">
 
----
 
 
