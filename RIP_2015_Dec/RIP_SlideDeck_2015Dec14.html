@@ -108,9 +108,12 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <div class="columns-2" style="font-size: 28pt;">
 <ul>
-<li>When a blood vessel ruptures into:</li>
-<li>Tissue ⇒ intracerebral hemorrhage (ICH)</li>
+<li>When a blood vessel ruptures into:
+
+<ul>
+<li><strong>Tissue ⇒ intracerebral hemorrhage (ICH)</strong></li>
 <li>Ventricles ⇒ intraventricular hemorrhage (IVH)</li>
+</ul></li>
 <li>≈ 13% of strokes</li>
 </ul>
 
@@ -118,27 +121,28 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <p><a href = "http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm" style ="font-size:10.5px" >http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm</a></p></div>
 
-</article></slide><slide class=''><hgroup><h2>Overall Goal of Clinical Research in Stroke</h2></hgroup><article  id="overall-goal-of-clinical-research-in-stroke">
+<!-- 
+## Overall Goal of Clinical Research in Stroke
 
-<div style="font-size: 30pt;">
-<p>Determine the prognosis of a patient with a hemorrhage:</p>
+<div style='font-size: 30pt;'>
+Determine for a patient with a hemorrhage:
 
-<ul>
-<li>Which treatment is most effective</li>
-<li>The likelihood of a good outcome in a patient</li>
-<li>Which factors are most relevant for prognosis</li>
-</ul></div>
+- Which treatments are effective
+- The likelihood of a good outcome
+- Factors are relevant for prognosis
+</div>
 
-</article></slide><slide class=''><hgroup><h2>Overall Goal of Clinical Research in Stroke</h2></hgroup><article  id="overall-goal-of-clinical-research-in-stroke-1">
+## Overall Goal of Clinical Research in Stroke
 
-<div style="font-size: 30pt;">
-<p>Determine the prognosis of a patient with a hemorrhage:</p>
+<div style='font-size: 30pt;'>
+Determine for a patient with a hemorrhage:
 
-<ul>
-<li>Which treatment is most effective</li>
-<li>The likelihood of a good outcome in a patient</li>
-<li><strong>Which factors are most relevant for prognosis</strong></li>
-</ul></div>
+- Which treatments are effective
+- The likelihood of a good outcome
+- **Factors are relevant for prognosis**
+</div>
+
+-->
 
 </article></slide><slide class=''><hgroup><h2>Overall Goal of My Work</h2></hgroup><article  id="overall-goal-of-my-work">
 
@@ -152,7 +156,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>Estimate <strong>known</strong> factors for prognosis
 
 <ul>
-<li>ICH volume)</li>
+<li>ICH volume</li>
 </ul></li>
 <li>Evaluate <strong>unknown</strong> factors for prognosis
 
@@ -200,7 +204,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>googleCite</li>
 </ul></div></div>
 
-</article></slide><slide class=''><hgroup><h2>Why do things need to be written in R?</h2></hgroup><article  id="why-do-things-need-to-be-written-in-r">
+</article></slide><slide class=''><hgroup><h2>Why do I write packages in R?</h2></hgroup><article  id="why-do-i-write-packages-in-r">
 
 <ul>
 <li>Statistical methods</li>
@@ -225,8 +229,8 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <ul>
 <li>Command-line based - no GUI needed</li>
-<li>Actively developed (first release in 2000)</li>
-<li>Popular: 13.9% of published neuroimaging studies (mainly fMRI) used FSL (Carp, 2012).</li>
+<li>Actively developed (first release in 2000) (Jenkinson, Beckmann, Behrens, et al., 2012)</li>
+<li>Popular: 13.9% of published neuroimaging studies used FSL (Carp, 2012).</li>
 <li><strong>Previous experience with the software</strong></li>
 <li>Open source and free (for academics)</li>
 <li>Community-standard methods/tools</li>
@@ -234,8 +238,8 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 </article></slide><slide class=''><hgroup><h2>Software use: Number of Downloads (as reported by RStudio CRAN)</h2></hgroup><article  id="software-use-number-of-downloads-as-reported-by-rstudio-cran">
 
-<p><div id="htmlwidget-8099" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-8099">{"x":{"data":[["brainR","fslr","matlabr","spm12r","WhiteStripe"],[6583,5703,504,302,3290],[66,89,74,58,52]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All_Time</th>\n      <th>Last_Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
+<p><div id="htmlwidget-6504" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-6504">{"x":{"data":[["brainR","fslr","matlabr","spm12r","WhiteStripe"],[6592,5712,509,306,3295],[64,89,68,56,53]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All_Time</th>\n      <th>Last_Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
 
 </article></slide><slide class=''><hgroup><h2>Segment ICH Volume for Prognostic Models</h2></hgroup><article  id="segment-ich-volume-for-prognostic-models">
 
@@ -247,23 +251,6 @@ To this: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="larger-ich-volume-worse-outcome">
 
 <!-- NEED ABC/2 data-->
-
-</article></slide><slide class=''><hgroup><h2>Easy Alternatives Exist (ABC/2)</h2></hgroup><article  id="easy-alternatives-exist-abc2">
-
-<ul>
-<li>ABC/2 - an ellipsoid approximation based on 3 measurements
-
-<ul>
-<li>Use largest cross section of ICH - measure long axis (A)</li>
-<li>Measure axis orthogonal to it (B)</li>
-<li>Count in the up/down direction how many slices ICH (C)</li>
-</ul></li>
-<li>Has large errors when not contiguous
-
-<ul>
-<li>Also high inter- and intra-reader variability</li>
-</ul></li>
-</ul>
 
 </article></slide><slide class=''><hgroup><h2>Stroke Trial Data</h2></hgroup><article  id="stroke-trial-data">
 
@@ -613,9 +600,36 @@ TP
 
 </article></slide><slide class=''><hgroup><h2>Patient with Median Dice Overlap</h2></hgroup><article  id="patient-with-median-dice-overlap">
 
-<p><img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+<p><img src="figure/Figure_DSI_Quantile_025.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
 
 </article></slide><slide class=''><hgroup><h2><img src="figure/Reseg_Volume_Comparison.png" style="width:600px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="section-1">
+
+</article></slide><slide class=''><hgroup><h2>Easy Alternatives Exist (ABC/2)</h2></hgroup><article  id="easy-alternatives-exist-abc2">
+
+<ul>
+<li>ABC/2 - an ellipsoid approximation based on 3 measurements
+
+<ul>
+<li>Use largest cross section of ICH - measure long axis (A)</li>
+<li>Measure axis orthogonal to it (B)</li>
+<li>Count in the up/down direction how many slices ICH (C)</li>
+</ul></li>
+<li>&quot;Radiologists and non-radiologists alike can estimate ICH size without the need for volumetric 3D analysis from CT or radiology software, which many non-radiologists are unfamiliar with.&quot; - <a href='http://www.mdcalc.com/abc2-formula-for-intracerebral-hemorrhage-volume/' title=''>http://www.mdcalc.com/abc2-formula-for-intracerebral-hemorrhage-volume/</a></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Easy Alternatives Exist (ABC/2)</h2></hgroup><article  id="easy-alternatives-exist-abc2-1">
+
+<ul>
+<li>Has large errors when not contiguous (Divani, Majidi, Luo, et al., 2011)
+
+<ul>
+<li>Can have high inter- and intra-reader variability (Hussein, Tariq, Palesch, et al., 2013)</li>
+<li>ABC/2 also been shown to consistently <strong>over-estimate</strong> infarct volume (Pedraza, Puig, Blasco, et al., 2012)</li>
+<li>AND also <strong>under-estimate</strong> ICH volume (Maeda, Aguiar, Martins, et al., 2013)</li>
+</ul></li>
+<li>Can&#39;t determine location</li>
+<li>Can&#39;t use imaging methods</li>
+</ul>
 
 </article></slide><slide class=''><hgroup><h2><img src="Shiny_Original.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="section-2">
 
@@ -647,18 +661,23 @@ TP
 </article></slide><slide class=''><hgroup><h2>Breakdown of Severity Areas Engaged</h2></hgroup><article  id="breakdown-of-severity-areas-engaged">
 
 <div style="font-size: 12pt">
-<div id="htmlwidget-1819" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-1819">{"x":{"data":[["CSF (ventricular &amp; subarachnoid spaces)","Insula","Superior temporal gyrus","Putamen left","Insular right","External capsule left","Superior corona radiata left","Superior temporal wm left","Superior corona radiata right","Putamen right","Posterior limb of internal capsule left","Thalamus left","Caudate nucleus left","Superior longitudinal fasciculus left","Globus pallidus left","Anterior limb of internal capsule left","Outside brain mask","Anterior limb of internal capsule right","Postcentral wm left","Posterior corona radiata left","Precentral wm left","Supramarginal wm left"],["7.9","4.7","3.8","3.0","2.9","2.3","1.9","1.9","1.8","1.8","","","","","","","","","","","",""],["10.0","","","","","","11.8","","","","10.1","7.6","5.4","4.9","3.7","3.6","3.5","3.0","","","",""],["4.2","","","","","","27.9","","","","3.9","33.9","9.6","5.9","","","","","6.7","3.1","1.3","1.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Area</th>\n      <th>Population Prevalence</th>\n      <th>NIHSS HPR</th>\n      <th>GCS HPR</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":[0,1,2,3]},{"width":"200px","targets":1},{"width":"150px","targets":[2,3]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></div>
+<div id="htmlwidget-3250" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-3250">{"x":{"data":[["CSF (ventricular &amp; subarachnoid spaces)","Insula","Superior temporal gyrus","Putamen left","Insular right","External capsule left","Superior corona radiata left","Superior temporal wm left","Superior corona radiata right","Putamen right","Posterior limb of internal capsule left","Thalamus left","Caudate nucleus left","Superior longitudinal fasciculus left","Globus pallidus left","Anterior limb of internal capsule left","Outside brain mask","Anterior limb of internal capsule right","Postcentral wm left","Posterior corona radiata left","Precentral wm left","Supramarginal wm left"],["7.9","4.7","3.8","3.0","2.9","2.3","1.9","1.9","1.8","1.8","","","","","","","","","","","",""],["10.0","","","","","","11.8","","","","10.1","7.6","5.4","4.9","3.7","3.6","3.5","3.0","","","",""],["4.2","","","","","","27.9","","","","3.9","33.9","9.6","5.9","","","","","6.7","3.1","1.3","1.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Area</th>\n      <th>Population Prevalence</th>\n      <th>NIHSS HPR</th>\n      <th>GCS HPR</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":[0,1,2,3]},{"width":"200px","targets":1},{"width":"150px","targets":[2,3]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></div>
 
 </article></slide><slide class=''><hgroup><h2>ICH Segmentation Conclusions</h2></hgroup><article  id="ich-segmentation-conclusions-1">
 
 <div style="font-size: 24pt">
 <ul>
-<li>Large ICH can be segmented using CT</li>
-<li>Simple methods can be used for voxel-wise segmentation</li>
-<li>A small training set can be used</li>
-<li>Feature selection is important</li>
-<li>All the analysis can be done in R</li>
+<li>Automatic segmentation allow for population-level analysis
+
+<ul>
+<li>Allows for a more quantative description of how &quot;close&quot; 2 trials are with respect to hemorrhage</li>
+</ul></li>
+<li>Voxel-wise regression can show regions associated with severity
+
+<ul>
+<li>These regions need to be validated (MISTIE III)</li>
+</ul></li>
 </ul></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">
