@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed Tomography Scanning</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+  <meta name="date" content="2015-12-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed Tomography Scanning',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'John Muschelli, in collaboration with Elizabeth Sweeney, Daniel Hanley, and Ciprian Crainiceanu' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="john_orals.css" type="text/css" />
+
+  <script src="RIP_SlideDeck_2015Dec14_files/htmlwidgets-0.5/htmlwidgets.js"></script>
+  <script src="RIP_SlideDeck_2015Dec14_files/jquery-1.11.1/jquery.min.js"></script>
+  <script src="RIP_SlideDeck_2015Dec14_files/datatables-binding-0.1/datatables.js"></script>
+  <script src="RIP_SlideDeck_2015Dec14_files/datatables-1.10.7/jquery.dataTables.min.js"></script>
+  <link href="RIP_SlideDeck_2015Dec14_files/datatables-default-1.10.7/dataTables.extra.css" rel="stylesheet" />
+  <link href="RIP_SlideDeck_2015Dec14_files/datatables-default-1.10.7/jquery.dataTables.min.css" rel="stylesheet" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">December 14, 2015</p>
+          </hgroup>
+  </slide>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<slide class=''><hgroup><h2>What is Intracranial/Intracerebral hemorrhage?</h2></hgroup><article  id="what-is-intracranialintracerebral-hemorrhage">
+
+<div class="columns-2" style="font-size: 28pt;">
+<ul>
+<li>When a blood vessel ruptures into:</li>
+<li>Tissue ⇒ intracerebral hemorrhage (ICH)</li>
+<li>Ventricles ⇒ intraventricular hemorrhage (IVH)</li>
+<li>≈ 13% of strokes</li>
+</ul>
+
+<img src='figure/stroke_hem_web.jpg' title=''/>
+
+<p><a href = "http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm" style ="font-size:10.5px" >http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm</a></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Overall Goal of Clinical Research in Stroke</h2></hgroup><article  id="overall-goal-of-clinical-research-in-stroke">
+
+<div style="font-size: 30pt;">
+<p>Determine the prognosis of a patient with a hemorrhage:</p>
+
+<ul>
+<li>Which treatment is most effective</li>
+<li>The likelihood of a good outcome in a patient</li>
+<li>Which factors are most relevant for prognosis</li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Overall Goal of Clinical Research in Stroke</h2></hgroup><article  id="overall-goal-of-clinical-research-in-stroke-1">
+
+<div style="font-size: 30pt;">
+<p>Determine the prognosis of a patient with a hemorrhage:</p>
+
+<ul>
+<li>Which treatment is most effective</li>
+<li>The likelihood of a good outcome in a patient</li>
+<li><strong>Which factors are most relevant for prognosis</strong></li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Overall Goal of My Work</h2></hgroup><article  id="overall-goal-of-my-work">
+
+<div style="font-size: 30pt;">
+<ul>
+<li><strong>Build tools</strong> for analysis and visualization
+
+<ul>
+<li>Software (R packages)</li>
+</ul></li>
+<li>Estimate <strong>known</strong> factors for prognosis
+
+<ul>
+<li>ICH volume)</li>
+</ul></li>
+<li>Evaluate <strong>unknown</strong> factors for prognosis
+
+<ul>
+<li>ICH location</li>
+</ul></li>
+</ul></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Building Tools: <br/>&quot;Vision Without Execution <br/> is Delusion&quot; <br/> - Thomas Edison <br/> <br/> Build Tools You Would Use</h2></hgroup><article  id="building-tools-vision-without-execution-is-delusion---thomas-edison-build-tools-you-would-use">
+
+</article></slide><slide class=''><hgroup><h2>Authored R Packages:</h2></hgroup><article  id="authored-r-packages">
+
+<div id="wrap">
+<div id="left_col">
+<ul>
+<li><strong>fslr</strong>
+
+<p style="font-size: 12pt;">
+
+(Muschelli, John, et al. &quot;fslr: Connecting the FSL Software with R.&quot; R JOURNAL 7.1 (2015): 163-175.)
+
+</p></li>
+<li><strong>brainR</strong>
+
+<p style="font-size: 12pt;">
+
+(Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data.&quot; R JOURNAL 6.1 (2014): 42-48.)
+
+</p></li>
+<li><strong>extrantsr</strong></li>
+<li><strong>cttools</strong></li>
+<li><strong>dcm2niir</strong></li>
+<li><strong>matlabr</strong></li>
+<li><strong>spm12r</strong></li>
+</ul></div>
+
+<div id="right_col">
+<ul>
+<li>drammsr</li>
+<li>itksnapr</li>
+<li>papayar</li>
+<li>WhiteStripe</li>
+<li>oasis</li>
+<li>SuBLIME</li>
+<li>googleCite</li>
+</ul></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Why do things need to be written in R?</h2></hgroup><article  id="why-do-things-need-to-be-written-in-r">
+
+<ul>
+<li>Statistical methods</li>
+<li>State-of-the-art reporting and reproducibility tools</li>
+<li>Open source</li>
+<li>Large community</li>
+<li><strong>Statisticians</strong> use R more than Python</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>fslr: Overview</h2></hgroup><article  id="fslr-overview">
+
+<p><img src="fslr.png" style="width:100%; display: block; margin: auto; vertical-align: middle" alt="fslr"></p>
+
+<br/>
+
+<div style="font-size: 30pt;">
+<ul>
+<li><strong>Seamless integration</strong> is important</li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Why FSL (other choices: AFNI/SPM)?</h2></hgroup><article  id="why-fsl-other-choices-afnispm">
+
+<ul>
+<li>Command-line based - no GUI needed</li>
+<li>Actively developed (first release in 2000)</li>
+<li>Popular: 13.9% of published neuroimaging studies (mainly fMRI) used FSL (Carp, 2012).</li>
+<li><strong>Previous experience with the software</strong></li>
+<li>Open source and free (for academics)</li>
+<li>Community-standard methods/tools</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Software use: Number of Downloads (as reported by RStudio CRAN)</h2></hgroup><article  id="software-use-number-of-downloads-as-reported-by-rstudio-cran">
+
+<p><div id="htmlwidget-8099" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-8099">{"x":{"data":[["brainR","fslr","matlabr","spm12r","WhiteStripe"],[6583,5703,504,302,3290],[66,89,74,58,52]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All_Time</th>\n      <th>Last_Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
+
+</article></slide><slide class=''><hgroup><h2>Segment ICH Volume for Prognostic Models</h2></hgroup><article  id="segment-ich-volume-for-prognostic-models">
+
+<div class="columns-2">
+<p>Want to go from this <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+To this: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="larger-ich-volume-worse-outcome">
+
+<!-- NEED ABC/2 data-->
+
+</article></slide><slide class=''><hgroup><h2>Easy Alternatives Exist (ABC/2)</h2></hgroup><article  id="easy-alternatives-exist-abc2">
+
+<ul>
+<li>ABC/2 - an ellipsoid approximation based on 3 measurements
+
+<ul>
+<li>Use largest cross section of ICH - measure long axis (A)</li>
+<li>Measure axis orthogonal to it (B)</li>
+<li>Count in the up/down direction how many slices ICH (C)</li>
+</ul></li>
+<li>Has large errors when not contiguous
+
+<ul>
+<li>Also high inter- and intra-reader variability</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Stroke Trial Data</h2></hgroup><article  id="stroke-trial-data">
+
+<ul>
+<li><p>Intracerebral (bleeds mainly in tissue, <strong>ICH</strong>) or Intraventricular (bleeds into ventricles, <strong>IVH</strong>) Hemorrhage trials</p></li>
+<li><p>Minimally Invasive Surgery plus rt-PA for ICH Evacuation (<strong>MISTIE</strong>)</p></li>
+<li><p>Multi-center, multi-national Phase II clinical trial</p></li>
+</ul>
+
+<p><img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+<ul>
+<li><a href='http://braininjuryoutcomes.com/mistie-about' title=''>http://braininjuryoutcomes.com/mistie-about</a></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Measure ICH using Computed Tomography (CT)</h2></hgroup><article  id="measure-ich-using-computed-tomography-ct">
+
+<aside class='note'><section>Images are acquired from an X-ray scanner.<br/>x-ray goes around object and detector the other side of the object determines how many x-rays are recovered - fancy transform - Image!</section></aside>
+
+<div style="width:48%;float:left;">
+<img src='figure/CT_diagram2.gif' title=''/> <br> <sub><sup><sub><sup>Image from <a href='http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm' title=''>http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm</a></sup></sub></sup></sub></div>
+
+<div style="margin-left:48%;">
+<img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></div>
+
+</article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
+
+<div class="columns-2">
+<p><img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;"> <br> <img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;"></p>
+
+<p style="font-size: 10pt;">
+
+Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data.&quot; R JOURNAL 6.1 (2014): 42-48.
+
+</p></div>
+
+</article></slide><slide class=''><hgroup><h2>CT scan Characteristics</h2></hgroup><article  id="ct-scan-characteristics">
+
+<aside class='note'><section><ul>
+<li>This is an example of a CT scan of a brain with no pathology</li>
+<li>Note the bone An attenuation coefficient characterizes how easily the X-ray beam penetrated that area of the brain.</li>
+</ul></section></aside>
+
+<div class="columns-2" style="font-size: 22pt;">
+<p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+<ul>
+<li>Voxel intensities are in Hounsfield Units (HU), which are &quot;standardized&quot; \[
+HU(v) = 1000 \times \frac{\mu(v) - \mu_{\text{water}}}{ \mu_{\text{water}}- \mu_{\text{air}}}
+\]</li>
+<li>\(\mu\) is the linear attenuation coefficient and \(v\) denotes voxel.</li>
+<li>\(\mu_{\text{water}}\) and \(\mu_{\text{air}}\) are calibrated from each scanner.</li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>CT scan Characteristics</h2></hgroup><article  id="ct-scan-characteristics-1">
+
+<aside class='note'><section><ul>
+<li>Here are the HU ranges for stuff</li>
+</ul></section></aside>
+
+<div class="columns-2" style="font-size: 22pt;">
+<p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+<p>Standard HU Ranges:</p>
+
+<ul>
+<li>Bone – high intensity (1000 HU)</li>
+<li>Air – low intensity (-1000 HU)</li>
+<li>Water - 0 HU</li>
+<li>Blood 30-80 HU</li>
+<li>White/Gray Matter ≈ 0 - 100 HU</li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>CT scan Characteristics: Measures Human + Room + FOV</h2></hgroup><article  id="ct-scan-characteristics-measures-human-room-fov">
+
+<p><img src="figure/the_room.png" style="width:100%; display: block; margin: auto;" alt="The room"></p>
+
+</article></slide><slide class=''><hgroup><h2>CT is NOT MRI (specifically not T1/T2)</h2></hgroup><article  id="ct-is-not-mri-specifically-not-t1t2">
+
+<table class = 'rmdtable'>
+<col width="20%" />
+<col width="37%" />
+<col width="26%" />
+<tr class="header">
+<th align="center"> </th>
+<th align="center">CT</th>
+<th align="center">MRI</th>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Domain</strong></td>
+<td align="center">Diagnostic</td>
+<td align="center">Diagnostic/Research</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Units</strong></td>
+<td align="center">Houndsfield Units</td>
+<td align="center">Arbitrary</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Template</strong></td>
+<td align="center"><em>One</em> exists</td>
+<td align="center">MNI Standard</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Measures</strong></td>
+<td align="center">Measures humans/rooms/beds</td>
+<td align="center">Measures Humans</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Methods</strong></td>
+<td align="center">Sparse</td>
+<td align="center">Many</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>ICH Prediction - Training data</h2></hgroup><article  id="ich-prediction---training-data">
+
+<ul>
+<li>ICH are manually traced (<strong>gold standard</strong>)</li>
+</ul>
+
+<p><img src="figure/SS_Image_PrePredict_ROI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Problems with Manual Segmentation</h2></hgroup><article  id="problems-with-manual-segmentation">
+
+<ul>
+<li>ICH are manually traced (<strong>gold standard</strong>)</li>
+<li>Time-consuming</li>
+<li>Within and across-rater variability</li>
+<li>Not feasible for for large databases</li>
+<li>Hard to use for enrollment criteria (adaptive randomization)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Preprocessing: CT Skull Stripping</h2></hgroup><article  id="preprocessing-ct-skull-stripping">
+
+<p>Muschelli, John, et al. &quot;Validated automatic brain extraction of head CT images.&quot; NeuroImage 114 (2015): 379-385. <a href='bit.ly/CTBET_RCODE' title=''>R Code to Run It!</a></p>
+
+<div class="columns-2">
+<p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+<img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Imaging Predictors</h2></hgroup><article  id="imaging-predictors">
+
+</article></slide><slide class=''><hgroup><h2>Local Moment Information: Neighborhoods</h2></hgroup><article  id="local-moment-information-neighborhoods">
+
+<div class="columns-2">
+<p><img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;"> <br> <img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;"></p>
+
+</article></slide><slide class=''><hgroup><h2>Local Moment Information: Mean</h2></hgroup><article  id="local-moment-information-mean">
+
+<p>For each voxel, neighborhood \(N(v)\), of all adjacent neighboring voxels in \(3\) dimensions. Let \(x_k(v)\) denote the voxel intensity in HU for voxel neighbor \(k\), where \(k = 1, \dots, 27\). \[
+\begin{equation}
+\bar{x}(v) = \frac{1}{N(v)} \sum_{k \in N(v)} x_k(v) \label{eq:mean}
+\end{equation}
+\] <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_moment1.png" style="width:30%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Local Moment Information: Higher Moments</h2></hgroup><article  id="local-moment-information-higher-moments">
+
+<p><img src="figure/moments.png" style="width:60%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Population Voxel-wise Mean/SD Image</h2></hgroup><article  id="population-voxel-wise-meansd-image">
+
+<p>From \(32\) CT images from Dr. Rorden (personal communication), we created a voxel-wise mean image \(M\) and voxel-wise standard deviation \(S\) image, after registering to a CT template (Rorden, Bonilha, Fridriksson, et al., 2012).</p>
+
+<p><img src="figure/Z_template.png" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Standardized-to-template Intensity</h2></hgroup><article  id="standardized-to-template-intensity">
+
+We created a standardized voxel intensity with respect to the template (\(z_{i,\text{template}}\)) using the following equation:
+
+<div id="wrap">
+<div id="left_col2">
+<p><br> <br></p>
+
+\[
+z_{i,\text{template}}(v) = \frac{x_{i}(v) - M(v)}{S(v)}
+\]</div>
+
+<div id="right_col2">
+<img src="figure/Z_image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Covariates <img src="figure/Covariates2.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="covariates">
+
+</article></slide><slide class=''><hgroup><h2>Model Fitting</h2></hgroup><article  id="model-fitting">
+
+<ul>
+<li>Case-control sample voxels for a fixed percentage (25%) of outcome <img src="figure/Breakdown.png" style="width:650px;height:250px;display: block; margin: auto;"></li>
+</ul>
+
+<p>Let \(y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
+
+<p>General model form: \[
+\text{logit}\left(y_{i}(v)\right) = f(X)
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2>Models Fit on the Training Data</h2></hgroup><article  id="models-fit-on-the-training-data">
+
+<ul>
+<li>Logistic Regression: \(f(X) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\)</li>
+<li>Generalized Additive Models (Hastie and Tibshirani, 1990)</li>
+<li>LASSO (Tibshirani, 1996; Friedman, Hastie, and Tibshirani, 2010): \[ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p}
+\]</li>
+<li>Random Forests (Liaw and Wiener, 2002; Breiman, 2001)
+
+<div class="centerer">
+
+\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO"></li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Assessing Performance</h2></hgroup><article  id="assessing-performance">
+
+<p>For each validation scan we can calculate the following 2-by-2 table, where the cells represent number of voxels and a corresponding Venn diagram:</p>
+
+<div style="width:45%;float: left;">
+<table class="rmdtable" style="font-size: 26px;">
+
+<tr class="header">
+
+<td>
+
+</td>
+
+<td>
+
+</td>
+
+<td colspan="2">
+
+Manual
+
+</td>
+
+</tr>
+
+<tr class="header">
+
+<td>
+
+</td>
+
+<td>
+
+</td>
+
+<td>
+
+0
+
+</td>
+
+<td>
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td rowspan="2">
+
+PitCH
+
+</td>
+
+<td>
+
+0
+
+</td>
+
+<td style="font-size: 40px;">
+
+TN
+
+</td>
+
+<td style="color:blue">
+
+FN
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+1
+
+</td>
+
+<td style="color:red">
+
+FP
+
+</td>
+
+<td style="color:purple">
+
+TP
+
+</td>
+
+</tr>
+
+</table></div>
+
+<div style="margin-left:48%;">
+<img src="figure/Venn_Diagram_labeled.png" style="width:325px;height:325px;display: block; margin: auto;border:5px solid black""></div>
+
+</article></slide><slide class=''><hgroup><h2>Dice Similarity</h2></hgroup><article  id="dice-similarity">
+
+<div style="width:48%;float:left;">
+<p>We calculate the Dice Similarity Index (DSI): \[
+\definecolor{red}{RGB}{255,0,0}
+\definecolor{blue}{RGB}{0,0,255}
+\definecolor{purple}{RGB}{128,0,128}
+\definecolor{blac,}{RGB}{0,0,0}
+\frac{ \color{purple} 2 \times \#  \text{TP} }{ \color{purple}  2 \times \#\text{TP} \color{black} + \color{red} \text{FN} \color{black} + \color{blue} \text{FP}} 
+\]</p>
+
+<ul>
+<li>0 indicates no overlap</li>
+<li>1 means perfect agreement<br/></li>
+</ul></div>
+
+<div style="margin-left:48%;">
+<p><img src="figure/Fraction_Figure.png" style="width:400px;height:460px;display: block; margin: auto;"></p></div>
+
+</article></slide><slide class=''><hgroup><h2><img src="figure/Reseg_Dice_Comparison.png" style="width:600px;  display: block; margin: auto;" alt="DICE"></h2></hgroup><article  id="section">
+
+</article></slide><slide class=''><hgroup><h2>Patient with High Dice: Manual Segmentation</h2></hgroup><article  id="patient-with-high-dice-manual-segmentation">
+
+<p><img src="figure/SS_Image_PrePredict_ROI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Patient with High Dice: Automatic Segmentation</h2></hgroup><article  id="patient-with-high-dice-automatic-segmentation">
+
+<p><img src="figure/SS_Image_PrePredict_Auto.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Patient with High Dice: DSI = 0.90</h2></hgroup><article  id="patient-with-high-dice-dsi-0.90">
+
+<p><img src="figure/Prediction_Figure.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Patient with Median Dice Overlap</h2></hgroup><article  id="patient-with-median-dice-overlap">
+
+<p><img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2><img src="figure/Reseg_Volume_Comparison.png" style="width:600px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="section-1">
+
+</article></slide><slide class=''><hgroup><h2><img src="Shiny_Original.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="section-2">
+
+</article></slide><slide class=''><hgroup><h2><img src="Shiny_SS.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="section-3">
+
+</article></slide><slide class=''><hgroup><h2><img src="Shiny_Registration.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="section-4">
+
+</article></slide><slide class=''><hgroup><h2><img src="Shiny_Predictors.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="section-5">
+
+</article></slide><slide class=''><hgroup><h2>ICH Segmentation Conclusions</h2></hgroup><article  id="ich-segmentation-conclusions">
+
+<div style="font-size: 24pt">
+<ul>
+<li>Large ICH can be segmented using CT</li>
+<li>Simple methods can be used for voxel-wise segmentation</li>
+<li>A small training set can be used</li>
+<li>Feature selection is important</li>
+<li>All the analysis can be done in R</li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Population-level Distribution of ICH</h2></hgroup><article  id="population-level-distribution-of-ich">
+
+<p><img src="figure/Figure4_Proportion_Final.png" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Regress ROIs against stroke severity scores</h2></hgroup><article  id="regress-rois-against-stroke-severity-scores">
+
+<p><img src="figure/Figure2.tiff" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Breakdown of Severity Areas Engaged</h2></hgroup><article  id="breakdown-of-severity-areas-engaged">
+
+<div style="font-size: 12pt">
+<div id="htmlwidget-1819" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-1819">{"x":{"data":[["CSF (ventricular &amp; subarachnoid spaces)","Insula","Superior temporal gyrus","Putamen left","Insular right","External capsule left","Superior corona radiata left","Superior temporal wm left","Superior corona radiata right","Putamen right","Posterior limb of internal capsule left","Thalamus left","Caudate nucleus left","Superior longitudinal fasciculus left","Globus pallidus left","Anterior limb of internal capsule left","Outside brain mask","Anterior limb of internal capsule right","Postcentral wm left","Posterior corona radiata left","Precentral wm left","Supramarginal wm left"],["7.9","4.7","3.8","3.0","2.9","2.3","1.9","1.9","1.8","1.8","","","","","","","","","","","",""],["10.0","","","","","","11.8","","","","10.1","7.6","5.4","4.9","3.7","3.6","3.5","3.0","","","",""],["4.2","","","","","","27.9","","","","3.9","33.9","9.6","5.9","","","","","6.7","3.1","1.3","1.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Area</th>\n      <th>Population Prevalence</th>\n      <th>NIHSS HPR</th>\n      <th>GCS HPR</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":[0,1,2,3]},{"width":"200px","targets":1},{"width":"150px","targets":[2,3]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></div>
+
+</article></slide><slide class=''><hgroup><h2>ICH Segmentation Conclusions</h2></hgroup><article  id="ich-segmentation-conclusions-1">
+
+<div style="font-size: 24pt">
+<ul>
+<li>Large ICH can be segmented using CT</li>
+<li>Simple methods can be used for voxel-wise segmentation</li>
+<li>A small training set can be used</li>
+<li>Feature selection is important</li>
+<li>All the analysis can be done in R</li>
+</ul></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">
+
+</article></slide><slide class=''><hgroup><h2>Subject Data used: 111 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-111-scans-1-per-patient">
+
+<div id="wrap">
+<div id="left_col">
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Overall</th>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Age in Years: Mean (SD)</strong></td>
+<td align="center">60.7 (11.2)</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Male: N (%)</strong></td>
+<td align="center">77 (68.8%)</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Diagnostic ICH Volume in mL: Mean (SD)</strong></td>
+<td align="center">37.7 (20.2)</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Diagnostic IVH Volume in mL: Mean (SD)</strong></td>
+<td align="center">3.2 (6.3)</td>
+</tr>
+</table></div>
+
+<div id="right_col" style="font-size: 24pt;">
+<ul>
+<li>Adults (inclusion criteria 18-80 years old)</li>
+<li>Large ICH areas</li>
+<li>Small Intraventricular Hemorrhages (IVH)</li>
+</ul></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Global Head Information: Smoothed Images</h2></hgroup><article  id="global-head-information-smoothed-images">
+
+<p>Smoothing the original image using large Gaussian kernels (\(\sigma = 5mm^3,10mm^3, 20mm^3\)) can capture any potential homogeneity throughout the scan.</p>
+
+<div class="container">
+<div class="column-center">
+\(\sigma = 10\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth10.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></div>
+
+<div class="column-left">
+\(\sigma = 5\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth5.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></div>
+
+<div class="column-right">
+\(\sigma = 20\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth20.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Larger ICH ⇒ Worse Outcome</h2></hgroup><article  id="larger-ich-worse-outcome">
+
+<div style="font-size: 14pt; color:black;">
+<p><br> J. P. Broderick, T. G. Brott, J. E. Duldner, et al. <strong>&quot;Volume of intracerebral hemorrhage. A powerful and easy-to-use predictor of 30-day mortality.&quot;</strong> In: <em>Stroke</em> 24.7 (1993), pp. 987-993.</p>
+
+<p>S. Davis, J. Broderick, M. Hennerici, et al. <strong>&quot;Hematoma growth is a determinant of mortality and poor outcome after intracerebral hemorrhage&quot;</strong>. In: <em>Neurology</em> 66.8 (2006), pp. 1175-1181.</p>
+
+<p>L. C. Jordan, J. T. Kleinman and A. E. Hillis. <strong>&quot;Intracerebral hemorrhage volume predicts poor neurologic outcome in children&quot;</strong>. In: <em>Stroke</em> 40.5 (2009), pp. 1666-1671.</p>
+
+S. Tuhrim, D. R. Horowitz, M. Sacher, et al. <strong>&quot;Volume of ventricular blood is an important determinant of outcome in supratentorial intracerebral hemorrhage&quot;</strong>. In: <em>Critical care medicine</em> 27.3 (1999), pp. 617-621.</div>
+
+<div class="references">
+</div></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "RIP_SlideDeck_2015Dec14_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

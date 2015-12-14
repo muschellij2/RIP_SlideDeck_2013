@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Advances in CT imaging processing and application</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Advances in CT imaging processing and application">
+  <meta name="author" content="@StrictlyStat (github: muschellij2)">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/prettify/css/hemisu-light.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/slidify.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Advances in CT imaging processing and application</h1>
+    <h2>John Muschelli</h2>
+    <p>@StrictlyStat (github: muschellij2)<br/>Johns Hopkins Bloomberg School of Public Health</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="cover" id="Cover" style="background:;">
+  <article data-timings="" >
+  <p style="color:;">
+    <style>
+em {
+  font-style: italic
+}
+
+strong {
+  font-weight: bold;
+}
+</style>
+
+<h2>Goals: Project Replace RC</h2>
+
+<p>Create a CT image processing pipeline with (at least) these components:</p>
+
+<ul>
+<li>Brain Extraction</li>
+<li>ICH Localization</li>
+<li>ICH Segmentation</li>
+<li>Longitudinal Registration</li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Other goals</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>Edema Segmentation</li>
+<li>Deriving characteristics relevant to outcome</li>
+<li>??</li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>CT Scan Characteristics</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <ul>
+<li>Data are in Hounsfield Units (HU), which are &quot;standardized&quot;</li>
+<li>Bone – high intensity (1000 HU)</li>
+<li>Air – low intensity (-1000 HU)</li>
+<li>Water - 0 HU</li>
+<li>Tissue ≈ 0 - 100 HU</li>
+</ul>
+
+</div>
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>CT is NOT MRI (specifically not T1/T2)</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><br>
+<br></p>
+
+<!-- html table generated in R 3.1.1 by xtable 1.7-4 package -->
+
+<!-- Tue Nov 25 23:45:30 2014 -->
+
+<table border=1>
+<tr> <th>  </th> <th> CT </th> <th> MRI </th>  </tr>
+  <tr> <td align="right"> Domain </td> <td> Diagnostic </td> <td> Diagnostic/Research </td> </tr>
+  <tr> <td align="right"> Units </td> <td> Houndsfield Units </td> <td> Arbitrary </td> </tr>
+  <tr> <td align="right"> Templates </td> <td> One Publicly Available </td> <td> MNI Standard (Many Exist) </td> </tr>
+  <tr> <td align="right"> Measures </td> <td> Measures humans/rooms/beds </td> <td> Measures Humans </td> </tr>
+  <tr> <td align="right"> Methods </td> <td> ? </td> <td> Many </td> </tr>
+   </table>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Neuroimaging Data - voxels = 3D pixels</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="RIP_SlideDeck_2013Oct28-figure/clear_zoom.png" height=308 width=600 alt="Data structure", style="float:left;"></p>
+
+<p><img src="RIP_SlideDeck_2013Oct28-figure/movie_final.gif" style="float:right;" height=350 width=350 alt="Spinning floating brain"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Problem: Human + Room + FOV</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p>All &quot;objects&quot; captured</p>
+
+<p><img src="RIP_SlideDeck_2013Oct28-figure/the_room.png" style="width:100%; display: block; margin: auto;" alt="The room"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>CT Skull Stripping: Goal</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Want to go from this
+<img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p>To This:
+<img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>CT Skull Stripping: Step 1 - Threshold</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Threshold 0- 100 HU:
+<img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p>Result:
+<img src="figure/Thresh_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>CT Skull Stripping: Step 2 - Smooth</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Smooth with 1mm Gaussian
+<img src="figure/Thresh_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p>Result:
+<img src="figure/Smooth_Thresh_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>CT Skull Stripping: Step 3 - Run BET</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p>Run BET from FSL:
+<img src="figure/Smooth_Thresh_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p>Result (Skull Stripped Image):
+<img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</div>
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:#d3d3d3;">
+  <hgroup>
+    <h2>22 Scans: BET vs. Manual Segmentation (aka Natalie)</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/Smoothed_Figure2_Sens.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+<div style='float:left;width:48%;' class='centered'>
+  
+</div>
+<div style='float:right;width:48%;'>
+  
+</div>
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>We ran on 1062 scans (N = 133): MISTIE/ICES</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/Intraclass_Correlation_no_crani_check_day10_black.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Give me some &quot;statistics&quot;</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>Intraclass correlation estimate: 0.93, (95%CI : 0.91, 0.95).</li>
+<li>115 scans for craniotomy or skull stripping failure (9.8%)</li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>ICH Prediction - data</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>ICH are manually traced (<strong>gold standard</strong>)</li>
+</ul>
+
+<p><img src="figure/SS_Image_PrePredict_ROI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>ICH Prediction - data</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>ICH are manually traced (<strong>gold standard</strong>)
+
+<ul>
+<li>Time-consuming (Andrew looks tired)</li>
+<li>Within and across-rater variability (think &quot;interns&quot; tracing)</li>
+</ul></li>
+<li>Can&#39;t do for large databases
+
+<ul>
+<li>Important for some processes, such as image registration</li>
+<li>VISTA-ICH Images</li>
+</ul></li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16">
+<hgroup>
+  <h2>Proposed Solution</h2>
+</hgroup>
+<article class = 'flexbox vcenter'>
+<p><font size="20" style='text-align:center;'><center>Primary Intracerebral Hemorrhage Prediction Employing Regression and Features Extracted from CT:</center></font></p>
+
+<p><font size="40" style='text-align:center;color:black'><strong>PItcHPERFECT</strong></font></p>
+
+</article>
+<!-- Presenter Notes -->
+</slide>
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>PItcHPERFECT</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>Create predictor variables:
+
+<ul>
+<li>Raw intensity</li>
+<li>Z-scores in all 3 planes with only brain image (skull stripped)</li>
+<li>Z-score compared to a template image</li>
+</ul></li>
+</ul>
+
+<p>What is a z-score:
+  If \(\mu\) is a mean, and \(\sigma\) is a standard deviation, then a z-score is:</p>
+
+<p>\[
+z = \frac{x - \mu}{\sigma}
+\]</p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>PItcHPERFECT</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>Create predictor variables:
+
+<ul>
+<li>Raw intensity</li>
+<li>Z-scores in all 3 planes with only brain image (skull stripped)</li>
+<li>Z-score compared to a template image</li>
+<li>Indicator if intensity <strong>\(\geq 40\)</strong> (established threshold) &amp; \(\leq 80\) HU</li>
+<li>Local moments (mean, sd, skew, kurtosis)</li>
+<li>Large smoothers</li>
+</ul></li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>PItcHPERFECT</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>Run a <strong>logistic regression</strong> with these predictors</li>
+<li>Model built on 10 subjects</li>
+<li>All on <strong>SKULL STRIPPED DATA</strong></li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Example Output: Start with Skull Stripped Image</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/SS_Image_PrePredict.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Example Output: Manual Segmentation</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/SS_Image_PrePredict_ROI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Example Output: Automatic Segmentation</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/SS_Image_PrePredict_Auto.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Prediction Comparison</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/Prediction_Figure.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>Prediction Result: 51 &quot;Validation&quot; Patients</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/Modeling_Training_AccPlot_Rigid_zval2.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Prediction Result: 51 &quot;Validation&quot; Patients</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/Modeling_Training_AUC_Rigid_zval2_Final.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Prediction Result: 51 &quot;Validation&quot; Patients</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="figure/Modeling_Training_VolDiff_Rigid_zval2_Final.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>Conclusions and Extensions</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>Skull stripping can be done
+
+<ul>
+<li>Important in many analyses (e.g. image registration)</li>
+<li>May use intracranial volume to standardize ICH volume</li>
+</ul></li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>Conclusions and Extensions</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>ICH Segmentation has high specificity
+
+<ul>
+<li>Good for Localization</li>
+<li>OK for volume estimates</li>
+<li>Good enough for adaptive randomization</li>
+</ul></li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>Conclusions and Extensions</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>Many new problems open and available
+
+<ul>
+<li>Can use these methods for <strong>large datasets</strong></li>
+</ul></li>
+<li>Use for other diseases with CT imaging</li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>Conclusions and Extensions</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li>Virtual International Stroke Trials Archive (VISTA)</li>
+</ul>
+
+<blockquote>
+<p>&quot;The purpose is to create an international consortium of investigators and a repository of source MRI and CT images toward the objectives of standardization and validation of acquisition, analytic, and clinical research methods of image-based stroke research.&quot;</p>
+</blockquote>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>Thanks</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>Main Collaborators</li>
+</ul>
+
+<p><center><table>
+<tr>
+<td><img src="Hanley.jpg" style="width:150px; height:100px;" alt="Demog"></td>
+<td><img src="Ciprian.jpg" style="width:100px; height:125px;" alt="Demog"></td>
+</tr>
+</table></center></p>
+
+<p><center><table>
+<tr>
+<img src="Ullman.jpg" style="width:125px; height:125px;" alt="Demog">
+<img src="Sweeney.jpg" style="width:125px; height:125px;" alt="Demog">
+</tr> 
+</table></center></p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <ul>
+<li>Groups</li>
+</ul>
+
+<p><center><table>
+<tr> <td><img src="SMART.png" style="width:200px; height:100px;" alt="Demog"></td> <td> <img src="BIOS.png" style="width:200px; height:100px;" alt="Demog"></td>
+</tr>
+</table></center></p>
+
+<ul>
+<li>Funding</li>
+</ul>
+
+<p><center><table>
+<tr> <td>T32AG000247</td><td> NIA </td></tr>
+<tr> <td>RO1EB012547</td><td> NIBIB</td> </tr>
+<tr> <td>R01NS046309, RO1NS060910, RO1NS085211, R01NS046309, U01NS080824 and U01NS062851</td> <td>NINDS</td> </tr>
+<tr><td>RO1MH095836</td> <td> NIMH </td></tr>
+</table></center></p>
+
+</div>
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>MISTIE Trial - Intracerebral Hemorrhage</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <ul>
+<li><p>Number of patients: <strong>N = 123</strong>, number randomized: <strong>N = 96</strong></p></li>
+<li><p>Inclusion criteria: age <strong>18-80</strong> years old </p></li>
+</ul>
+
+<p><img src="RIP_SlideDeck_2013Oct28-figure/demog_table_short.png" style="width:500px; height:225px; display: block; margin: auto;" alt="Demog"></p>
+
+<ul>
+<li><strong>Over 65 years old</strong>: 36 (37.5%), Surgical: 18 (33.3%), Medical: 18 (42.9%)</li>
+</ul>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>An &quot;Ideal&quot; MISTIE Patient: ICH Formed</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="RIP_SlideDeck_2013Oct28-figure/bloodclot.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot"></p>
+
+<div style='float:left;width:48%;' class='centered'>
+  
+</div>
+<div style='float:right;width:48%;'>
+  
+</div>
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-34" style="background:;">
+  <hgroup>
+    <h2>An &quot;Ideal&quot;&quot; MISTIE Patient: Catheter Placed</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="RIP_SlideDeck_2013Oct28-figure/catheter.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-35" style="background:;">
+  <hgroup>
+    <h2>An &quot;Ideal&quot; MISTIE Patient: Clearance!</h2>
+  </hgroup>
+  <article data-timings="" >
+  <p style="color:;">
+    <p><img src="RIP_SlideDeck_2013Oct28-figure/clearance.png" style="width:1000px; height:600px; display: block; margin: auto;" alt="Blood Clot"></p>
+
+  </p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=''>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Other goals'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='CT Scan Characteristics'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='CT is NOT MRI (specifically not T1/T2)'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Neuroimaging Data - voxels = 3D pixels'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Problem: Human + Room + FOV'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='CT Skull Stripping: Goal'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='CT Skull Stripping: Step 1 - Threshold'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='CT Skull Stripping: Step 2 - Smooth'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='CT Skull Stripping: Step 3 - Run BET'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='22 Scans: BET vs. Manual Segmentation (aka Natalie)'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='We ran on 1062 scans (N = 133): MISTIE/ICES'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Give me some &quot;statistics&quot;'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='ICH Prediction - data'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='ICH Prediction - data'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Proposed Solution'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='PItcHPERFECT'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='PItcHPERFECT'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='PItcHPERFECT'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Example Output: Start with Skull Stripped Image'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Example Output: Manual Segmentation'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Example Output: Automatic Segmentation'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Prediction Comparison'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='Prediction Result: 51 &quot;Validation&quot; Patients'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Prediction Result: 51 &quot;Validation&quot; Patients'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='Prediction Result: 51 &quot;Validation&quot; Patients'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='Conclusions and Extensions'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='Conclusions and Extensions'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='Conclusions and Extensions'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='Conclusions and Extensions'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='Thanks'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='MISTIE Trial - Intracerebral Hemorrhage'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='An &quot;Ideal&quot; MISTIE Patient: ICH Formed'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='An &quot;Ideal&quot;&quot; MISTIE Patient: Catheter Placed'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='An &quot;Ideal&quot; MISTIE Patient: Clearance!'>
+         35
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- Google Prettify -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+  <script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+  <script>
+    var pres = document.getElementsByTagName("pre");
+    for (var i=0; i < pres.length; ++i) {
+      pres[i].className = "prettyprint linenums";
+    }
+    prettyPrint();
+  </script>
+  <!-- End Google Prettify --> 
+  </html>

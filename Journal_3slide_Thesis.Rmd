@@ -1,0 +1,69 @@
+---
+title: |
+  "Vision Without Execution is Delusion" 
+  - Thomas Edison
+author: "John Muschelli"
+date: "December 7, 2015"
+output:
+  beamer_presentation:
+    includes:
+      in_header: header.tex
+    theme: "default"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+---
+      
+```{r opts, prompt=FALSE, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, comment=""}
+library(knitr)
+opts_chunk$set(echo=FALSE, prompt=FALSE, message=FALSE, warning=FALSE, comment = "", results='hide')
+setwd("~/CT_Registration/RIP_SlideDeck/")
+```
+
+  
+
+### CT Skull Stripping Goals
+\hspace{-1cm}
+\begin{tabular}{@{}c@{}c@{}}
+Want to go from this:& To This:\\ \includegraphics[width=0.55\linewidth]{figure/Original_Image.png} & \includegraphics[width=0.55\linewidth]{figure/SS_Image.png}
+\end{tabular}
+
+
+
+### CT Skull Stripping How?
+
+* Use stuff already out there for MRI
+    * Brain Extraction Tool (BET), with some additional steps
+* Package it in R
+    * [http://bit.ly/CTBET_RCODE](bit.ly/CTBET_RCODE)
+* Put code on Github (Bash code)
+    * [http://bit.ly/CTBET_BASH](bit.ly/CTBET_BASH)
+
+
+### Hemorrhage Segmentation
+\hspace{-1cm}
+\begin{tabular}{@{}c@{}c@{}}
+Want to go from this:& To This:\\ \includegraphics[width=0.55\linewidth]{figure/Original_Image_ROI.png} & \includegraphics[width=0.55\linewidth]{figure/SS_Image_PrePredict_ROI_Mask.png}
+\end{tabular}
+
+### Hemorrhage Segmentation: How
+
+* Make a bunch of predictors
+    * Logistic Regression!
+    * Random Forests!
+    * LASSO!
+    * GAM!
+    * Find out what works!
+* Make a Shiny App
+* [http://162.129.13.127/ich_predict/](http://162.129.13.127/ich_predict/)
+* Make it easy for people (clinicians) to use
+
+
+### Overall
+
+* Find simple methods that work
+* Features matter
+* If other people made something that works, try that first
+
+
+
+
