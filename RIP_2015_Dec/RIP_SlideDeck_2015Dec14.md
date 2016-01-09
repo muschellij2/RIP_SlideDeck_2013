@@ -137,8 +137,8 @@ Determine for a patient with a hemorrhage:
 
 
 
-<!--html_preserve--><div id="htmlwidget-5672" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-5672">{"x":{"data":[["brainR","fslr","matlabr","spm12r","WhiteStripe"],[6592,5712,509,306,3295],[64,89,68,56,53]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All_Time</th>\n      <th>Last_Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-6989" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-6989">{"x":{"data":[["brainR","fslr","matlabr","spm12r","WhiteStripe"],[6592,5712,509,306,3295],[64,89,68,56,53]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All_Time</th>\n      <th>Last_Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
 
 
 
@@ -342,36 +342,9 @@ $$
 ## Covariates <img src="figure/Covariates2.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO">  
 
 
-## Model Fitting 
-
-* Case-control sample voxels for a fixed percentage (25%) of outcome
-<img src="figure/Breakdown.png" style="width:650px;height:250px;display: block; margin: auto;">
-
-
-Let $y_{i}(v)$ be the presence / absence of ICH for voxel $v$ from person $i$.  
-
-General model form: 
-$$
-\text{logit}\left(y_{i}(v)\right) = f(X)
-$$
-
-## Models Fit on the Training Data
-
-- Logistic Regression: \(f(X) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\)
-- Generalized Additive Models (Hastie and Tibshirani, 1990)
-- LASSO (Tibshirani, 1996; Friedman, Hastie, and Tibshirani, 2010): 
-$$ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p}
-$$
-- Random Forests (Liaw and Wiener, 2002; Breiman, 2001)
-<div class="centerer">
-\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO">
-</div>
-
-
-
 
 ## Assessing Performance 
-For each validation scan we can calculate the following 2-by-2 table, where the cells represent number of voxels and a corresponding Venn diagram:
+For each manual and automated segmentation, we can calculate the following 2-by-2 table, where the cells represent number of voxels and a corresponding Venn diagram:
 
 <div style="width:45%;float: left;">
 
@@ -409,6 +382,34 @@ $$
 <img src="figure/Fraction_Figure.png" style="width:400px;height:460px;display: block; margin: auto;">
 
 </div>
+
+## Model Fitting 
+
+* Case-control sample voxels for a fixed percentage (25%) of outcome
+<img src="figure/Breakdown.png" style="width:650px;height:250px;display: block; margin: auto;">
+
+
+Let $y_{i}(v)$ be the presence / absence of ICH for voxel $v$ from person $i$.  
+
+General model form: 
+$$
+\text{logit}\left(y_{i}(v)\right) = f(X)
+$$
+
+## Models Fit on the Training Data
+
+- Logistic Regression: \(f(X) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\)
+- Generalized Additive Models (Hastie and Tibshirani, 1990)
+- LASSO (Tibshirani, 1996; Friedman, Hastie, and Tibshirani, 2010): 
+$$ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p} \left|\beta_{k}\right|
+$$
+- Random Forests (Liaw and Wiener, 2002; Breiman, 2001)
+<div class="centerer">
+\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO">
+</div>
+
+
+
 
 ## <img src="figure/Reseg_Dice_Comparison.png" style="width:600px;  display: block; margin: auto;" alt="DICE">
 
@@ -487,8 +488,8 @@ $$
 ## Breakdown of Severity Areas Engaged 
 
 <div style="font-size: 12pt">
-<!--html_preserve--><div id="htmlwidget-9287" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-9287">{"x":{"data":[["CSF (ventricular &amp; subarachnoid spaces)","Insula","Superior temporal gyrus","Putamen left","Insular right","External capsule left","Superior corona radiata left","Superior temporal wm left","Superior corona radiata right","Putamen right","Posterior limb of internal capsule left","Thalamus left","Caudate nucleus left","Superior longitudinal fasciculus left","Globus pallidus left","Anterior limb of internal capsule left","Outside brain mask","Anterior limb of internal capsule right","Postcentral wm left","Posterior corona radiata left","Precentral wm left","Supramarginal wm left"],["7.9","4.7","3.8","3.0","2.9","2.3","1.9","1.9","1.8","1.8","","","","","","","","","","","",""],["10.0","","","","","","11.8","","","","10.1","7.6","5.4","4.9","3.7","3.6","3.5","3.0","","","",""],["4.2","","","","","","27.9","","","","3.9","33.9","9.6","5.9","","","","","6.7","3.1","1.3","1.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Area</th>\n      <th>Population Prevalence</th>\n      <th>NIHSS HPR</th>\n      <th>GCS HPR</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":[0,1,2,3]},{"width":"200px","targets":1},{"width":"150px","targets":[2,3]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-9770" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-9770">{"x":{"data":[["CSF (ventricular &amp; subarachnoid spaces)","Insula","Superior temporal gyrus","Putamen left","Insular right","External capsule left","Superior corona radiata left","Superior temporal wm left","Superior corona radiata right","Putamen right","Posterior limb of internal capsule left","Thalamus left","Caudate nucleus left","Superior longitudinal fasciculus left","Globus pallidus left","Anterior limb of internal capsule left","Outside brain mask","Anterior limb of internal capsule right","Postcentral wm left","Posterior corona radiata left","Precentral wm left","Supramarginal wm left"],["7.9","4.7","3.8","3.0","2.9","2.3","1.9","1.9","1.8","1.8","","","","","","","","","","","",""],["10.0","","","","","","11.8","","","","10.1","7.6","5.4","4.9","3.7","3.6","3.5","3.0","","","",""],["4.2","","","","","","27.9","","","","3.9","33.9","9.6","5.9","","","","","6.7","3.1","1.3","1.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Area</th>\n      <th>Population Prevalence</th>\n      <th>NIHSS HPR</th>\n      <th>GCS HPR</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":[0,1,2,3]},{"width":"200px","targets":1},{"width":"150px","targets":[2,3]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
 </div>
 
 
@@ -508,6 +509,18 @@ $$
 </div>
 
 
+
+
+
+## Ongoing projects
+
+<div style="font-size: 24pt">
+
+- Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD), (with Dr. Taki Shinohara)
+- Rolling out the Shiny App 
+- Catheter scoring with pre/post-op registration
+
+</div>
 
 
 # Thank You

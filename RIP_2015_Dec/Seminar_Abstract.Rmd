@@ -1,0 +1,15 @@
+---
+title: "Seminar Abstract"
+author: "John Muschelli"
+date: "January 8, 2016"
+output: pdf_document
+---
+
+
+## Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed Tomography Scanning
+
+Intracranial hemorrhage (ICH), or hemorrhagic stroke, is a potentially lethal condition when a  blood vessel ruptures in the brain.  Currently, the location of the hemorrhage is described manually and qualitatively.  I will present a full statistical pipeline to 1) describe the location of hemorrhage quantitatively using X-ray computed tomography (CT) scans, 2) determine the locations associated with stroke severity scores, and 3) compare this quantitative approach to manual description of location.  
+
+All the tools created presented were written using R, using the fslr package and other R packages written during my training for neuroimaging analysis.  I will describe these packages and other processing pipelines for CT image analysis implemented using the Shiny system in R.
+
+
