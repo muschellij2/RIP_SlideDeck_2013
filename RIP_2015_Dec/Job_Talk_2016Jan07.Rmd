@@ -332,7 +332,7 @@ Let $y_{i}(v)$ be the presence / absence of ICH for voxel $v$ from person $i$.
 
 General model form: 
 $$
-\text{logit}\left(y_{i}(v)\right) = f(X_i)
+\text{logit}\left(P(y_{i}(v) = 1)\right) = f(X_i)
 $$
 
 where $X_i = (x_{i, 1} \dots x_{i, 21})$ are the covariates.
@@ -407,7 +407,7 @@ $$
 
   
 ## Voxel-wise Regression/T-tests
-Let $Y_i$ be the NIHSS for patient $i$, voxel $v$.  We fit the following model voxel-wise: <br/><p style ="text-align: center;">$Y_i = \beta_0+\beta_1(v) + \epsilon_{iv}$:</p>
+Let ${\rm NIHSS}_i$ be the NIHSS for patient $i$, voxel $v$. At each voxel, across subjects, we fit the following model: <br/><p style ="text-align: center;">${\rm NIHSS}_i = \beta_0+\beta_{1,v} I({\rm ICH = 1}) + \epsilon_{iv}$:</p>
 
 <img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="display: block; margin: auto; width: 50%">
 
@@ -446,7 +446,7 @@ $$
 Using the adjusted $R^2$, we fit the models for each HPR to select the "best" from the different thresholds:
 
 $$\begin{eqnarray} 
-{\rm Y}_i &=& \beta_0 + \beta_1 {\rm Coverage}_i \\
+{\rm NIHSS}_i &=& \beta_0 + \beta_1 {\rm Coverage}_i \\
 &+& \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
 \end{eqnarray}$$
 
@@ -605,3 +605,6 @@ _Stroke_ 40.5 (2009), pp. 1666-1671.
 S. Tuhrim, D. R. Horowitz, M. Sacher, et al. **"Volume of ventricular blood is an important determinant of outcome in supratentorial intracerebral hemorrhage"**. In: _Critical care medicine_ 27.3 (1999),
 pp. 617-621.
 </div>
+
+# NIHSS 
+# One panel

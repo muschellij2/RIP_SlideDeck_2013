@@ -298,7 +298,7 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 <p>Let \(y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
 
 <p>General model form: \[
-\text{logit}\left(y_{i}(v)\right) = f(X_i)
+\text{logit}\left(P(y_{i}(v) = 1)\right) = f(X_i)
 \]</p>
 
 <p>where \(X_i = (x_{i, 1} \dots x_{i, 21})\) are the covariates.</p>
@@ -368,11 +368,11 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 
 </article></slide><slide class=''><hgroup><h2>Voxel-wise Regression/T-tests</h2></hgroup><article  id="voxel-wise-regressiont-tests">
 
-Let \(Y_i\) be the NIHSS for patient \(i\), voxel \(v\). We fit the following model voxel-wise: <br/>
+Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel, across subjects, we fit the following model: <br/>
 
 <p style="text-align: center;">
 
-\(Y_i = \beta_0+\beta_1(v) + \epsilon_{iv}\):
+\({\rm NIHSS}_i = \beta_0+\beta_{1,v} I({\rm ICH = 1}) + \epsilon_{iv}\):
 
 </p>
 
@@ -413,7 +413,7 @@ Let \(Y_i\) be the NIHSS for patient \(i\), voxel \(v\). We fit the following mo
 <p>Using the adjusted \(R^2\), we fit the models for each HPR to select the &quot;best&quot; from the different thresholds:</p>
 
 <p>\[\begin{eqnarray} 
-{\rm Y}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
 \end{eqnarray}\]</p>
 
@@ -593,6 +593,10 @@ Let \(Y_i\) be the NIHSS for patient \(i\), voxel \(v\). We fit the following mo
 <p>L. C. Jordan, J. T. Kleinman and A. E. Hillis. <strong>&quot;Intracerebral hemorrhage volume predicts poor neurologic outcome in children&quot;</strong>. In: <em>Stroke</em> 40.5 (2009), pp. 1666-1671.</p>
 
 <p>S. Tuhrim, D. R. Horowitz, M. Sacher, et al. <strong>&quot;Volume of ventricular blood is an important determinant of outcome in supratentorial intracerebral hemorrhage&quot;</strong>. In: <em>Critical care medicine</em> 27.3 (1999), pp. 617-621.</p></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>NIHSS</h2></hgroup><article  id="nihss">
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>One panel</h2></hgroup><article  id="one-panel" class="unnumbered">
 
 <div id="refs" class="references">
 </div></article></slide>
