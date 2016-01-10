@@ -12,7 +12,7 @@
 
   <meta name="date" content="2015-12-14" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
   <link rel="stylesheet" media="all" href="RIP_SlideDeck_2015Dec14_files/ioslides-13.5.1/fonts/fonts.css">
@@ -238,15 +238,15 @@ Determine for a patient with a hemorrhage:
 
 </article></slide><slide class=''><hgroup><h2>Software use: Number of Downloads (as reported by RStudio CRAN)</h2></hgroup><article  id="software-use-number-of-downloads-as-reported-by-rstudio-cran">
 
-<p><div id="htmlwidget-6989" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-6989">{"x":{"data":[["brainR","fslr","matlabr","spm12r","WhiteStripe"],[6592,5712,509,306,3295],[64,89,68,56,53]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All_Time</th>\n      <th>Last_Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
+<p><div id="htmlwidget-598" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-598">{"x":{"data":[["brainR","fslr","matlabr","spm12r","WhiteStripe"],[6807,5975,726,459,3442],[67,80,57,51,52]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All_Time</th>\n      <th>Last_Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
 
 </article></slide><slide class=''><hgroup><h2>Segment ICH Volume for Prognostic Models</h2></hgroup><article  id="segment-ich-volume-for-prognostic-models">
 
 <div class="columns-2">
 <p>Want to go from this <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
 
-To this: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></div>
+<p>To this: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="larger-ich-volume-worse-outcome">
 
@@ -268,13 +268,13 @@ To this: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  
 
 </article></slide><slide class=''><hgroup><h2>Measure ICH using Computed Tomography (CT)</h2></hgroup><article  id="measure-ich-using-computed-tomography-ct">
 
-<aside class='note'><section>Images are acquired from an X-ray scanner.<br/>x-ray goes around object and detector the other side of the object determines how many x-rays are recovered - fancy transform - Image!</section></aside>
+<aside class='note'><section><p>Images are acquired from an X-ray scanner.<br/>x-ray goes around object and detector the other side of the object determines how many x-rays are recovered - fancy transform - Image!</p></section></aside>
 
 <div style="width:48%;float:left;">
-<img src='figure/CT_diagram2.gif' title=''/> <br> <sub><sup><sub><sup>Image from <a href='http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm' title=''>http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm</a></sup></sub></sup></sub></div>
+<p><img src='figure/CT_diagram2.gif' title=''/> <br> <sub><sup><sub><sup>Image from <a href='http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm' title=''>http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm</a></sup></sub></sup></sub></p></div>
 
 <div style="margin-left:48%;">
-<img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></div>
+<p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 </article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
 
@@ -391,7 +391,7 @@ HU(v) = 1000 \times \frac{\mu(v) - \mu_{\text{water}}}{ \mu_{\text{water}}- \mu_
 <div class="columns-2">
 <p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
 
-<img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></div>
+<p><img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Imaging Predictors</h2></hgroup><article  id="imaging-predictors">
 
@@ -426,12 +426,12 @@ We created a standardized voxel intensity with respect to the template (\(z_{i,\
 <div id="left_col2">
 <p><br> <br></p>
 
-\[
+<p>\[
 z_{i,\text{template}}(v) = \frac{x_{i}(v) - M(v)}{S(v)}
-\]</div>
+\]</p></div>
 
 <div id="right_col2">
-<img src="figure/Z_image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></div></div>
+<p><img src="figure/Z_image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div></div>
 
 </article></slide><slide class=''><hgroup><h2>Covariates <img src="figure/Covariates2.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="covariates">
 
@@ -537,7 +537,7 @@ TP
 </table></div>
 
 <div style="margin-left:48%;">
-<img src="figure/Venn_Diagram_labeled.png" style="width:325px;height:325px;display: block; margin: auto;border:5px solid black""></div>
+<p>&lt;img src=&quot;figure/Venn_Diagram_labeled.png&quot; style=&quot;width:325px;height:325px;display: block; margin: auto;border:5px solid black&quot;&quot;&gt;</p></div>
 
 </article></slide><slide class=''><hgroup><h2>Dice Similarity</h2></hgroup><article  id="dice-similarity">
 
@@ -658,13 +658,17 @@ TP
 
 </article></slide><slide class=''><hgroup><h2>Regress ROIs against stroke severity scores</h2></hgroup><article  id="regress-rois-against-stroke-severity-scores">
 
-<p><img src="figure/Figure2.tiff" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+<div style="width:48%;float:left;">
+<img src='figure/Top_19047_pvalues.png' title=''/></div>
+
+<div style="margin-left:48%;">
+<p><img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
 
 </article></slide><slide class=''><hgroup><h2>Breakdown of Severity Areas Engaged</h2></hgroup><article  id="breakdown-of-severity-areas-engaged">
 
 <div style="font-size: 12pt">
-<div id="htmlwidget-9770" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-9770">{"x":{"data":[["CSF (ventricular &amp; subarachnoid spaces)","Insula","Superior temporal gyrus","Putamen left","Insular right","External capsule left","Superior corona radiata left","Superior temporal wm left","Superior corona radiata right","Putamen right","Posterior limb of internal capsule left","Thalamus left","Caudate nucleus left","Superior longitudinal fasciculus left","Globus pallidus left","Anterior limb of internal capsule left","Outside brain mask","Anterior limb of internal capsule right","Postcentral wm left","Posterior corona radiata left","Precentral wm left","Supramarginal wm left"],["7.9","4.7","3.8","3.0","2.9","2.3","1.9","1.9","1.8","1.8","","","","","","","","","","","",""],["10.0","","","","","","11.8","","","","10.1","7.6","5.4","4.9","3.7","3.6","3.5","3.0","","","",""],["4.2","","","","","","27.9","","","","3.9","33.9","9.6","5.9","","","","","6.7","3.1","1.3","1.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Area</th>\n      <th>Population Prevalence</th>\n      <th>NIHSS HPR</th>\n      <th>GCS HPR</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":[0,1,2,3]},{"width":"200px","targets":1},{"width":"150px","targets":[2,3]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></div>
+<p><div id="htmlwidget-1354" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-1354">{"x":{"data":[["CSF (ventricular &amp; subarachnoid spaces)","Insula","Superior temporal gyrus","Putamen left","Insular right","External capsule left","Superior corona radiata left","Superior temporal wm left","Superior corona radiata right","Putamen right","Posterior limb of internal capsule left","Thalamus left","Caudate nucleus left","Superior longitudinal fasciculus left","Globus pallidus left","Anterior limb of internal capsule left","Outside brain mask","Anterior limb of internal capsule right","Postcentral wm left","Posterior corona radiata left","Precentral wm left","Supramarginal wm left"],["7.9","4.7","3.8","3.0","2.9","2.3","1.9","1.9","1.8","1.8","","","","","","","","","","","",""],["10.0","","","","","","11.8","","","","10.1","7.6","5.4","4.9","3.7","3.6","3.5","3.0","","","",""],["4.2","","","","","","27.9","","","","3.9","33.9","9.6","5.9","","","","","6.7","3.1","1.3","1.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Area</th>\n      <th>Population Prevalence</th>\n      <th>NIHSS HPR</th>\n      <th>GCS HPR</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":[0,1,2,3]},{"width":"200px","targets":1},{"width":"150px","targets":[2,3]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p></div>
 
 </article></slide><slide class=''><hgroup><h2>ICH Segmentation Conclusions</h2></hgroup><article  id="ich-segmentation-conclusions-1">
 
@@ -733,10 +737,10 @@ TP
 
 <div class="container">
 <div class="column-center">
-\(\sigma = 10\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth10.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></div>
+<p>\(\sigma = 10\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth10.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 <div class="column-left">
-\(\sigma = 5\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth5.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></div>
+<p>\(\sigma = 5\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth5.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 <div class="column-right">
 \(\sigma = 20\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth20.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></div></div>
@@ -750,9 +754,9 @@ TP
 
 <p>L. C. Jordan, J. T. Kleinman and A. E. Hillis. <strong>&quot;Intracerebral hemorrhage volume predicts poor neurologic outcome in children&quot;</strong>. In: <em>Stroke</em> 40.5 (2009), pp. 1666-1671.</p>
 
-S. Tuhrim, D. R. Horowitz, M. Sacher, et al. <strong>&quot;Volume of ventricular blood is an important determinant of outcome in supratentorial intracerebral hemorrhage&quot;</strong>. In: <em>Critical care medicine</em> 27.3 (1999), pp. 617-621.</div>
+<p>S. Tuhrim, D. R. Horowitz, M. Sacher, et al. <strong>&quot;Volume of ventricular blood is an important determinant of outcome in supratentorial intracerebral hemorrhage&quot;</strong>. In: <em>Critical care medicine</em> 27.3 (1999), pp. 617-621.</p></div>
 
-<div class="references">
+<div id="refs" class="references">
 </div></article></slide>
 
 

@@ -200,11 +200,14 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </article></slide><slide class=''><hgroup><h2>The MISTIE Stroke Trial</h2></hgroup><article  id="the-mistie-stroke-trial">
 
 <ul>
-<li><p>Minimally Invasive Surgery plus r-tPA for Intracerebral Hemorrhage Evacuation (<strong>MISTIE</strong>)</p>
+<li>Minimally Invasive Surgery plus r-tPA for Intracerebral Hemorrhage Evacuation (<strong>MISTIE</strong>)
 
 <ul>
 <li>Multi-center, multi-national Phase II clinical trial</li>
 </ul></li>
+<li>111 baseline CT scans from 112 subjects from 26 centers</li>
+<li>Lobar and deep hemorrhages with volume ≥ 20cc</li>
+<li>Stroke-related impairment measured by NIH Stroke Scale (NIHSS,higher is worse)</li>
 </ul>
 
 <p><img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO"></p>
@@ -272,7 +275,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>ICH Segmentation and ICH Volume Estimation: <br/> <br/> Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="ich-segmentation-and-ich-volume-estimation-larger-ich-volume-worse-outcome">
 
-</article></slide><slide class=''><hgroup><h2>Segmenting ICH Volume</h2></hgroup><article  id="segmenting-ich-volume">
+</article></slide><slide class=''><hgroup><h2>ICH Segmentation, Volume/Location Estimation</h2></hgroup><article  id="ich-segmentation-volumelocation-estimation">
 
 <div class="columns-2">
 <p>Want to go from this <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To this: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
@@ -288,9 +291,9 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 </p></div>
 
-</article></slide><slide class=''><hgroup><h2>Covariates <img src="figure/Covariates2.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="covariates">
+</article></slide><slide class=''><hgroup><h2>Step 1: Create Covariates <img src="figure/Covariates2.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="step-1-create-covariates">
 
-</article></slide><slide class=''><hgroup><h2>Model Fitting</h2></hgroup><article  id="model-fitting">
+</article></slide><slide class=''><hgroup><h2>Step 2: Fit Models</h2></hgroup><article  id="step-2-fit-models">
 
 <p>Let \(y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
 
@@ -317,34 +320,35 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 <p><img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
 
-</article></slide><slide class=''><hgroup><h2><img src="figure/Reseg_Volume_Comparison.png" style="width:600px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="section">
+</article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <br/> <br/> <img src="figure/Reseg_Volume_Comparison_Long.png" style="width:105%;  display: block; margin: 0;" alt="MISTIE LOGO"></h2></hgroup><article  id="compare-estimated-to-true-volume">
 
-</article></slide><slide class=''><hgroup><h2><a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_Original.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="httpbit.lyich_seg">
+</article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="compare-estimated-to-true-volume-1">
 
-</article></slide><slide class=''><hgroup><h2><img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="section-1">
+</article></slide><slide class=''><hgroup><h2>Shiny App: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-app-httpbit.lyich_seg">
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Quantitative hemorrhage localization</h2></hgroup><article  id="quantitative-hemorrhage-localization">
 
 </article></slide><slide class=''><hgroup><h2>Localization Goals</h2></hgroup><article  id="localization-goals">
 
 <ol>
-<li>Create a 3-dimensional (3D) density map of hemorrhages</li>
+<li>Create a 3-dimensional (3D) density map of hemorrhages in MISTIE population</li>
 <li>Quantify of hemorrhage engagement of regions in the brain</li>
 <li>Determine if differences in location relate to NIHSS</li>
 <li>Generate a stroke region of engagement (ROI) using within-sample validation.</li>
 </ol>
 
-</article></slide><slide class=''><hgroup><h2>Registration</h2></hgroup><article  id="registration">
+</article></slide><slide class=''><hgroup><h2>Localization Processing Steps</h2></hgroup><article  id="localization-processing-steps">
+
+<ol>
+<li>Image spatially registered to a CT template (Rorden, Bonilha, Fridriksson, et al., 2012) using SPM (Wellcome Trust)</li>
+<li>Hemorrhage mask/regions of interest (ROI) mapped to the template</li>
+<li>Visual inspection of registered images: no exclusions</li>
+<li>ICH distribution (proportion of subjects who have ICH at that voxel location in template space)
 
 <ul>
-<li>Chris Rorden has released a <a href='http://www.mccauslandcenter.sc.edu/CRNL/clinical-toolbox' title=''>Clinical Toolbox</a></li>
-<li>Has a <strong>CT Template</strong>!
-
-<ul>
-<li>Uses SPM to do spatial co-registration &quot;Normalization&quot;.</li>
+<li>Take the average of masks in template space</li>
 </ul></li>
-<li>Must mask out the lesion / stroke.</li>
-</ul>
+</ol>
 
 </article></slide><slide class=''><hgroup><h2>Registered Images and Masks/Regions of Interest (ROI)</h2></hgroup><article  id="registered-images-and-masksregions-of-interest-roi">
 
@@ -364,462 +368,158 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 
 </article></slide><slide class=''><hgroup><h2>Voxel-wise Regression/T-tests</h2></hgroup><article  id="voxel-wise-regressiont-tests">
 
-<p>Let \(Y_i\) be the NIHSS for patient \(i\), and \(v\) denote voxel: \[
-  Y_i = \beta_0+\beta_1(v) + \epsilon_{iv}, 
-\] <img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="display: block; margin: auto; width: 50%"></p>
+Let \(Y_i\) be the NIHSS for patient \(i\), voxel \(v\). We fit the following model voxel-wise: <br/>
 
-</article></slide><slide class=''><hgroup><h2>Creating a Mask from P-values</h2></hgroup><article  id="creating-a-mask-from-p-values">
+<p style="text-align: center;">
 
-<p>Due to a large number of test (\(V = 166202\)), Bonferroni did not result in any singificant p-values.</p>
+\(Y_i = \beta_0+\beta_1(v) + \epsilon_{iv}\):
 
-<p>Create a Mask based 6 different thresholds: - raw p-value threshold (\(0.05\), \(0.01\), \(0.001\)) - select top-ranked voxels based on p-value (top \(1000\), \(2000\), \(3000\) voxels)</p>
+</p>
+
+<p><img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="display: block; margin: auto; width: 50%"></p>
+
+<ul>
+<li>Focus on template space voxels where at least \(10\) subjects had stroke (\(V = 166,202\))</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Voxel-wise P-value Map</h2></hgroup><article  id="voxel-wise-p-value-map">
+
+<p><img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="display: block; margin: auto; width: 55%"></p>
+
+</article></slide><slide class=''><hgroup><h2>High Predictive Regions</h2></hgroup><article  id="high-predictive-regions">
+
+<p>Due to a large number of tests, a Bonferroni correction (or FDR) did not result in singificant p-values.</p>
+
+<p>Create a High Predictive Region (HPR) based 6 different thresholds:</p>
+
+<ul>
+<li>Raw p-value threshold (\(0.05\), \(0.01\), \(0.001\))</li>
+<li>Select top-ranked voxels based on p-value (top \(1000\), \(2000\), \(3000\) voxels)</li>
+<li>Calculated the overlap of the HPR for each scan \(i\) \[
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+\]</li>
+</ul>
 
 </article></slide><slide class=''><hgroup><h2>Mask from P-value Threshold of \(0.01\)</h2></hgroup><article  id="mask-from-p-value-threshold-of-0.01">
 
-<p><img src="figure/Top_19047_pvalues.png" style="width: 55%; display: block; margin: auto;"></p>
-
-</article></slide><slide class=''><hgroup><h2>Regressing on ROI Coverage</h2></hgroup><article  id="regressing-on-roi-coverage">
-
-<p><img src="figure/ROI_Results.png" style="width: 55%; display: block; margin: auto;"></p>
-
-</article></slide><slide class=''><hgroup><h2>ICH Segmentation Conclusions</h2></hgroup><article  id="ich-segmentation-conclusions">
-
-<div style="font-size: 24pt">
-<ul>
-<li>Automatic segmentation allow for population-level analysis
-
-<ul>
-<li>Allows for a more quantative description of how &quot;close&quot; 2 trials are with respect to hemorrhage</li>
-</ul></li>
-<li>Voxel-wise regression can show regions associated with severity
-
-<ul>
-<li>These regions need to be validated (MISTIE III)</li>
-</ul></li>
-</ul></div>
-
-</article></slide><slide class=''><hgroup><h2>Ongoing projects</h2></hgroup><article  id="ongoing-projects">
-
-<div style="font-size: 24pt">
-<ul>
-<li>Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD), (with Dr. Taki Shinohara)</li>
-<li>Rolling out the Shiny App</li>
-<li>Catheter scoring with pre/post-op registration</li>
-</ul></div>
-
-</article></slide><slide class=''><hgroup><h2>Overall Goal of My Work</h2></hgroup><article  id="overall-goal-of-my-work">
-
-<div style="font-size: 30pt;">
-<ul>
-<li><strong>Build tools</strong> for analysis and visualization
-
-<ul>
-<li>Software (R packages)</li>
-</ul></li>
-<li>Estimate <strong>known</strong> factors for prognosis
-
-<ul>
-<li>ICH volume</li>
-</ul></li>
-<li>Evaluate <strong>unknown</strong> factors for prognosis
-
-<ul>
-<li>ICH location</li>
-</ul></li>
-</ul></div>
-
-<!-- NEED ABC/2 data-->
-
-</article></slide><slide class=''><hgroup><h2>Stroke Trial Data</h2></hgroup><article  id="stroke-trial-data">
-
-<ul>
-<li><p>Intracerebral (bleeds mainly in tissue, <strong>ICH</strong>) or Intraventricular (bleeds into ventricles, <strong>IVH</strong>) Hemorrhage trials</p></li>
-<li><p>Minimally Invasive Surgery plus rt-PA for ICH Evacuation (<strong>MISTIE</strong>)</p></li>
-<li><p>Multi-center, multi-national Phase II clinical trial</p></li>
-</ul>
-
-<p><img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-<ul>
-<li><a href='http://braininjuryoutcomes.com/mistie-about' title=''>http://braininjuryoutcomes.com/mistie-about</a></li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>CT scan Characteristics</h2></hgroup><article  id="ct-scan-characteristics">
-
-<aside class='note'><section><ul>
-<li>This is an example of a CT scan of a brain with no pathology</li>
-<li>Note the bone An attenuation coefficient characterizes how easily the X-ray beam penetrated that area of the brain.</li>
-</ul></section></aside>
-
-<div class="columns-2" style="font-size: 22pt;">
-<p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-<ul>
-<li>Voxel intensities are in Hounsfield Units (HU), which are &quot;standardized&quot; \[
-HU(v) = 1000 \times \frac{\mu(v) - \mu_{\text{water}}}{ \mu_{\text{water}}- \mu_{\text{air}}}
-\]</li>
-<li>\(\mu\) is the linear attenuation coefficient and \(v\) denotes voxel.</li>
-<li>\(\mu_{\text{water}}\) and \(\mu_{\text{air}}\) are calibrated from each scanner.</li>
-</ul></div>
-
-</article></slide><slide class=''><hgroup><h2>CT scan Characteristics</h2></hgroup><article  id="ct-scan-characteristics-1">
-
-<aside class='note'><section><ul>
-<li>Here are the HU ranges for stuff</li>
-</ul></section></aside>
-
-<div class="columns-2" style="font-size: 22pt;">
-<p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-<p>Standard HU Ranges:</p>
-
-<ul>
-<li>Bone – high intensity (1000 HU)</li>
-<li>Air – low intensity (-1000 HU)</li>
-<li>Water - 0 HU</li>
-<li>Blood 30-80 HU</li>
-<li>White/Gray Matter ≈ 0 - 100 HU</li>
-</ul></div>
-
-</article></slide><slide class=''><hgroup><h2>CT is NOT MRI (specifically not T1/T2)</h2></hgroup><article  id="ct-is-not-mri-specifically-not-t1t2">
-
-<table class = 'rmdtable'>
-<col width="20%" />
-<col width="37%" />
-<col width="26%" />
-<tr class="header">
-<th align="center"> </th>
-<th align="center">CT</th>
-<th align="center">MRI</th>
-</tr>
-<tr class="odd">
-<td align="center"><strong>Domain</strong></td>
-<td align="center">Diagnostic</td>
-<td align="center">Diagnostic/Research</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>Units</strong></td>
-<td align="center">Houndsfield Units</td>
-<td align="center">Arbitrary</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>Template</strong></td>
-<td align="center"><em>One</em> exists</td>
-<td align="center">MNI Standard</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>Measures</strong></td>
-<td align="center">Measures humans/rooms/beds</td>
-<td align="center">Measures Humans</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>Methods</strong></td>
-<td align="center">Sparse</td>
-<td align="center">Many</td>
-</tr>
-</table>
-
-</article></slide><slide class=''><hgroup><h2>ICH Prediction - Training data</h2></hgroup><article  id="ich-prediction---training-data">
-
-<ul>
-<li>ICH are manually traced (<strong>gold standard</strong>)</li>
-</ul>
-
-<p><img src="figure/SS_Image_PrePredict_ROI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-</article></slide><slide class=''><hgroup><h2>Problems with Manual Segmentation</h2></hgroup><article  id="problems-with-manual-segmentation">
-
-<ul>
-<li>ICH are manually traced (<strong>gold standard</strong>)</li>
-<li>Time-consuming</li>
-<li>Within and across-rater variability</li>
-<li>Not feasible for for large databases</li>
-<li>Hard to use for enrollment criteria (adaptive randomization)</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Local Moment Information: Mean</h2></hgroup><article  id="local-moment-information-mean">
-
-<p>For each voxel, neighborhood \(N(v)\), of all adjacent neighboring voxels in \(3\) dimensions. Let \(x_k(v)\) denote the voxel intensity in HU for voxel neighbor \(k\), where \(k = 1, \dots, 27\). \[
-\begin{equation}
-\bar{x}(v) = \frac{1}{N(v)} \sum_{k \in N(v)} x_k(v) \label{eq:mean}
-\end{equation}
-\] <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_moment1.png" style="width:30%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-</article></slide><slide class=''><hgroup><h2>Local Moment Information: Higher Moments</h2></hgroup><article  id="local-moment-information-higher-moments">
-
-<p><img src="figure/moments.png" style="width:60%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-</article></slide><slide class=''><hgroup><h2>Population Voxel-wise Mean/SD Image</h2></hgroup><article  id="population-voxel-wise-meansd-image">
-
-<p>From \(32\) CT images from Dr. Rorden (personal communication), we created a voxel-wise mean image \(M\) and voxel-wise standard deviation \(S\) image, after registering to a CT template (Rorden, Bonilha, Fridriksson, et al., 2012).</p>
-
-<p><img src="figure/Z_template.png" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-</article></slide><slide class=''><hgroup><h2>Standardized-to-template Intensity</h2></hgroup><article  id="standardized-to-template-intensity">
-
-We created a standardized voxel intensity with respect to the template (\(z_{i,\text{template}}\)) using the following equation:
-
-<div id="wrap">
-<div id="left_col2">
-<p><br> <br></p>
-
-<p>\[
-z_{i,\text{template}}(v) = \frac{x_{i}(v) - M(v)}{S(v)}
-\]</p></div>
-
-<div id="right_col2">
-<p><img src="figure/Z_image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div></div>
-
-</article></slide><slide class=''><hgroup><h2>Covariates <img src="figure/Covariates2.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="covariates-1">
-
-</article></slide><slide class=''><hgroup><h2>Assessing Performance</h2></hgroup><article  id="assessing-performance">
-
-<p>For each manual and automated segmentation, we can calculate the following 2-by-2 table, where the cells represent number of voxels and a corresponding Venn diagram:</p>
-
-<div style="width:45%;float: left;">
-<table class="rmdtable" style="font-size: 26px;">
-
-<tr class="header">
-
-<td>
-
-</td>
-
-<td>
-
-</td>
-
-<td colspan="2">
-
-Manual
-
-</td>
-
-</tr>
-
-<tr class="header">
-
-<td>
-
-</td>
-
-<td>
-
-</td>
-
-<td>
-
-0
-
-</td>
-
-<td>
-
-1
-
-</td>
-
-</tr>
-
-<tr>
-
-<td rowspan="2">
-
-PitCH
-
-</td>
-
-<td>
-
-0
-
-</td>
-
-<td style="font-size: 40px;">
-
-TN
-
-</td>
-
-<td style="color:blue">
-
-FN
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-1
-
-</td>
-
-<td style="color:red">
-
-FP
-
-</td>
-
-<td style="color:purple">
-
-TP
-
-</td>
-
-</tr>
-
-</table></div>
-
-<div style="margin-left:48%;">
-<p><img src="figure/Venn_Diagram_labeled.png" style="width:325px;height:325px;display: block; margin: auto;border:5px solid black"></p></div>
-
-</article></slide><slide class=''><hgroup><h2>Dice Similarity</h2></hgroup><article  id="dice-similarity">
-
 <div style="width:48%;float:left;">
-<p>We calculate the Dice Similarity Index (DSI): \[
-\definecolor{red}{RGB}{255,0,0}
-\definecolor{blue}{RGB}{0,0,255}
-\definecolor{purple}{RGB}{128,0,128}
-\definecolor{blac,}{RGB}{0,0,0}
-\frac{ \color{purple} 2 \times \#  \text{TP} }{ \color{purple}  2 \times \#\text{TP} \color{black} + \color{red} \text{FN} \color{black} + \color{blue} \text{FP}} 
-\]</p>
-
-<ul>
-<li>0 indicates no overlap</li>
-<li>1 means perfect agreement<br/></li>
-</ul></div>
+<img src='figure/Top_19047_pvalues.png' title=''/></div>
 
 <div style="margin-left:48%;">
-<p><img src="figure/Fraction_Figure.png" style="width:400px;height:460px;display: block; margin: auto;"></p></div>
+<p><img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
 
-</article></slide><slide class=''><hgroup><h2>Model Fitting</h2></hgroup><article  id="model-fitting-1">
+</article></slide><slide class=''><hgroup><h2>Selecting an HPR</h2></hgroup><article  id="selecting-an-hpr">
 
-<ul>
-<li>Case-control sample voxels for a fixed percentage (25%) of outcome <img src="figure/Breakdown.png" style="width:650px;height:250px;display: block; margin: auto;"></li>
-</ul>
+<p>Using the adjusted \(R^2\), we fit the models for each HPR to select the &quot;best&quot; from the different thresholds:</p>
 
-<p>Let \(y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
-
-<p>General model form: \[
-\text{logit}\left(y_{i}(v)\right) = f(X)
-\]</p>
-
-</article></slide><slide class=''><hgroup><h2>Models Fit on the Training Data</h2></hgroup><article  id="models-fit-on-the-training-data-1">
-
-<ul>
-<li>Logistic Regression: \(f(X) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\)</li>
-<li>Generalized Additive Models (Hastie and Tibshirani, 1990)</li>
-<li>LASSO (Tibshirani, 1996; Friedman, Hastie, and Tibshirani, 2010): \[ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p} \left|\beta_{k}\right|
-\]</li>
-<li>Random Forests (Liaw and Wiener, 2002; Breiman, 2001)
-
-<div class="centerer">
-<p>\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO"></p></div></li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2><img src="figure/Reseg_Dice_Comparison.png" style="width:600px;  display: block; margin: auto;" alt="DICE"></h2></hgroup><article  id="section-2">
-
-</article></slide><slide class=''><hgroup><h2>Patient with High Dice: Manual Segmentation</h2></hgroup><article  id="patient-with-high-dice-manual-segmentation">
-
-<p><img src="figure/SS_Image_PrePredict_ROI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-</article></slide><slide class=''><hgroup><h2>Patient with High Dice: Automatic Segmentation</h2></hgroup><article  id="patient-with-high-dice-automatic-segmentation">
-
-<p><img src="figure/SS_Image_PrePredict_Auto.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-</article></slide><slide class=''><hgroup><h2>Patient with High Dice: DSI = 0.90</h2></hgroup><article  id="patient-with-high-dice-dsi-0.90">
-
-<p><img src="figure/Prediction_Figure.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-</article></slide><slide class=''><hgroup><h2>Patient with Median Dice Overlap</h2></hgroup><article  id="patient-with-median-dice-overlap">
-
-<p><img src="figure/Figure_DSI_Quantile_025.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
-</article></slide><slide class=''><hgroup><h2><img src="figure/Reseg_Volume_Comparison.png" style="width:600px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="section-3">
-
-</article></slide><slide class=''><hgroup><h2>Easy Alternatives Exist (ABC/2)</h2></hgroup><article  id="easy-alternatives-exist-abc2">
-
-<ul>
-<li>ABC/2 - an ellipsoid approximation based on 3 measurements
-
-<ul>
-<li>Use largest cross section of ICH - measure long axis (A)</li>
-<li>Measure axis orthogonal to it (B)</li>
-<li>Count in the up/down direction how many slices ICH (C)</li>
-</ul></li>
-<li>&quot;Radiologists and non-radiologists alike can estimate ICH size without the need for volumetric 3D analysis from CT or radiology software, which many non-radiologists are unfamiliar with.&quot; - <a href='http://www.mdcalc.com/abc2-formula-for-intracerebral-hemorrhage-volume/' title=''>http://www.mdcalc.com/abc2-formula-for-intracerebral-hemorrhage-volume/</a></li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Easy Alternatives Exist (ABC/2)</h2></hgroup><article  id="easy-alternatives-exist-abc2-1">
-
-<ul>
-<li>Has large errors when not contiguous (Divani, Majidi, Luo, et al., 2011)
-
-<ul>
-<li>Can have high inter- and intra-reader variability (Hussein, Tariq, Palesch, et al., 2013)</li>
-<li>ABC/2 also been shown to consistently <strong>over-estimate</strong> infarct volume (Pedraza, Puig, Blasco, et al., 2012)</li>
-<li>AND also <strong>under-estimate</strong> ICH volume (Maeda, Aguiar, Martins, et al., 2013)</li>
-</ul></li>
-<li>Can&#39;t determine location</li>
-<li>Can&#39;t use imaging methods</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>ICH Segmentation Conclusions</h2></hgroup><article  id="ich-segmentation-conclusions-1">
-
-<div style="font-size: 24pt">
-<ul>
-<li>Large ICH can be segmented using CT</li>
-<li>Simple methods can be used for voxel-wise segmentation</li>
-<li>A small training set can be used</li>
-<li>Feature selection is important</li>
-<li>All the analysis can be done in R</li>
-</ul></div>
-
-</article></slide><slide class=''><hgroup><h2>Population-level Distribution of ICH</h2></hgroup><article  id="population-level-distribution-of-ich">
-
-<p><img src="figure/Figure4_Proportion_Final.png" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+<p>\[\begin{eqnarray} 
+{\rm Y}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
+&amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
+\end{eqnarray}\]</p>
 
 </article></slide><slide class=''><hgroup><h2>Regress ROIs against stroke severity scores</h2></hgroup><article  id="regress-rois-against-stroke-severity-scores">
 
-<p><img src="figure/Figure2.tiff" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+<div style="width:48%;float:left;">
+<img src='figure/Top_19047_pvalues.png' title=''/></div>
 
-</article></slide><slide class=''><hgroup><h2>Breakdown of Severity Areas Engaged</h2></hgroup><article  id="breakdown-of-severity-areas-engaged">
+<div style="margin-left:48%;">
+<p><img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
 
-<div style="font-size: 12pt">
-<p><div id="htmlwidget-1683" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-1683">{"x":{"data":[["CSF (ventricular &amp; subarachnoid spaces)","Insula","Superior temporal gyrus","Putamen left","Insular right","External capsule left","Superior corona radiata left","Superior temporal wm left","Superior corona radiata right","Putamen right","Posterior limb of internal capsule left","Thalamus left","Caudate nucleus left","Superior longitudinal fasciculus left","Globus pallidus left","Anterior limb of internal capsule left","Outside brain mask","Anterior limb of internal capsule right","Postcentral wm left","Posterior corona radiata left","Precentral wm left","Supramarginal wm left"],["7.9","4.7","3.8","3.0","2.9","2.3","1.9","1.9","1.8","1.8","","","","","","","","","","","",""],["10.0","","","","","","11.8","","","","10.1","7.6","5.4","4.9","3.7","3.6","3.5","3.0","","","",""],["4.2","","","","","","27.9","","","","3.9","33.9","9.6","5.9","","","","","6.7","3.1","1.3","1.1"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Area</th>\n      <th>Population Prevalence</th>\n      <th>NIHSS HPR</th>\n      <th>GCS HPR</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":[0,1,2,3]},{"width":"200px","targets":1},{"width":"150px","targets":[2,3]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p></div>
+</article></slide><slide class=''><hgroup><h2>Compare HPR to using Locations</h2></hgroup><article  id="compare-hpr-to-using-locations">
 
-</article></slide><slide class=''><hgroup><h2>ICH Segmentation Conclusions</h2></hgroup><article  id="ich-segmentation-conclusions-2">
+<p>Using the adjusted \(R^2\), we compared the models:</p>
+
+<p>\[\begin{eqnarray} 
+{\rm Y}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
+&amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
+\end{eqnarray}\] to that of the categorical indicator of location: \[\begin{eqnarray} 
+{\rm Y}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
+&amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}\] where \(I(k)\) represents the indicator that ICH location was \(k\)</p>
+
+</article></slide><slide class=''><hgroup><h2>How do we test whether HPR coverage performs better?</h2></hgroup><article  id="how-do-we-test-whether-hpr-coverage-performs-better">
+
+<ul>
+<li>Recall: data-based algorithm for defining the HPR</li>
+</ul>
+
+<p>Procedure (P):</p>
+
+<ul>
+<li>Fit voxel-wise models</li>
+<li>Collect the most predictive voxels</li>
+<li>Produce subject-level predictors by coalescing voxels</li>
+</ul>
+
+<p>Problems:</p>
+
+<ul>
+<li>Multiplicity</li>
+<li>Double-dipping</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Using the outcome twice! Double Dipping</h2></hgroup><article  id="using-the-outcome-twice-double-dipping">
+
+<ul>
+<li>Dip: look at the data, construct predictors</li>
+<li>Double-dip: are the new predictors predictive?</li>
+<li>This violates one of the basic principles of Statistics: the separation between the exploratory and confirmatory phases of the analysis</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>One Possible Solution: Permutation Testing</h2></hgroup><article  id="one-possible-solution-permutation-testing">
+
+<p>Permutation procedure:</p>
+
+<ol>
+<li>Permute outcomes</li>
+<li>Apply selection procedure P and obtain HPR</li>
+<li>Calculate adjusted \(R^2\)</li>
+</ol>
+
+<p>Compare adjusted \(R^2\) from the original data with its permutation distribution</p>
+
+<p>Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome</p>
+
+<p>Result: Permutation test p-value \(&lt;0.01\)</p>
+
+</article></slide><slide class=''><hgroup><h2>Conclusions of Stroke Analyses</h2></hgroup><article  id="conclusions-of-stroke-analyses">
 
 <div style="font-size: 24pt">
 <ul>
-<li>Automatic segmentation allow for population-level analysis
+<li>We can segment ICH volume from CT scans <br/><br/></li>
+<li>Voxel-wise regression can show regions associated with severity <br/><br/></li>
+<li></li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Future Work of Stroke Analyses</h2></hgroup><article  id="future-work-of-stroke-analyses">
+
+<div style="font-size: 24pt">
+<ul>
+<li>We can segment ICH volume from CT scans
 
 <ul>
-<li>Allows for a more quantative description of how &quot;close&quot; 2 trials are with respect to hemorrhage</li>
+<li><strong>Incorporate variability of estimated volume</strong></li>
 </ul></li>
 <li>Voxel-wise regression can show regions associated with severity
 
 <ul>
-<li>These regions need to be validated (MISTIE III)</li>
+<li><strong>Validate these regions (MISTIE III)</strong></li>
 </ul></li>
+<li></li>
 </ul></div>
 
-</article></slide><slide class=''><hgroup><h2>Ongoing projects</h2></hgroup><article  id="ongoing-projects-1">
+</article></slide><slide class=''><hgroup><h2>Other Work</h2></hgroup><article  id="other-work">
 
 <div style="font-size: 24pt">
 <ul>
 <li>Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD), (with Dr. Taki Shinohara)</li>
-<li>Rolling out the Shiny App</li>
-<li>Catheter scoring with pre/post-op registration</li>
+<li>Catheter scoring with pre/post-op registration for ICH</li>
+<li>Creating Department-level indices of publication (with Dr. Jeff Leek)</li>
 </ul></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">
 
-</article></slide><slide class=''><hgroup><h2>Subject Data used: 111 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-111-scans-1-per-patient">
+</article></slide><slide class=''><hgroup><h2>Subject Data used: 112 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-112-scans-1-per-patient">
 
 <div id="wrap">
 <div id="left_col">
@@ -837,12 +537,28 @@ TP
 <td align="center">77 (68.8%)</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>Diagnostic ICH Volume in mL: Mean (SD)</strong></td>
-<td align="center">37.7 (20.2)</td>
+<td align="center"><strong>Clot Location RC (%)</strong></td>
+<td align="center"></td>
 </tr>
 <tr class="even">
-<td align="center"><strong>Diagnostic IVH Volume in mL: Mean (SD)</strong></td>
-<td align="center">3.2 (6.3)</td>
+<td align="center"><strong>Putamen</strong></td>
+<td align="center">69 (61.6)</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Lobar</strong></td>
+<td align="center">33 (29.5)</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Globus Palidus</strong></td>
+<td align="center">6 ( 5.4)</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Thalamus</strong></td>
+<td align="center">4 ( 3.6)</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Diagnostic ICH Volume in mL: Mean (SD)</strong></td>
+<td align="center">37.7 (20.2)</td>
 </tr>
 </table></div>
 

@@ -605,7 +605,18 @@ dev.off()
 
 ## Regress ROIs against stroke severity scores 
 
-<img src="figure/Figure2.tiff" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO">
+<div style="width:48%;float:left;">
+![inline fill](figure/Top_19047_pvalues.png)
+</div>
+<div style="margin-left:48%;">
+<img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline">
+</div>
+
+For each HPR, we calculated the HPR ``coverage" for scan $i$: 
+$$
+\text{HPR Coverage}_i = \frac{\text{\# Voxels classified ICH in HPR for scan } i}{\text{\# Voxels in HPR}} \times 100\% \nonumber
+$$
+
 
 ## Breakdown of Severity Areas Engaged 
 
