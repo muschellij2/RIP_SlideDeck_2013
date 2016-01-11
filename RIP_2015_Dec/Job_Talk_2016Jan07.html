@@ -109,7 +109,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div style="font-size: 28pt;">
 <ul>
 <li>Neuroimaging and R</li>
-<li>Segmentation of Computed Tomography (CT) scans
+<li>Segmentation/Classification of Computed Tomography (CT) scans
 
 <ul>
 <li>Brain segmentation</li>
@@ -123,7 +123,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div style="font-size: 28pt;">
 <ul>
 <li>Neuroimaging and R</li>
-<li>Segmentation of Computed Tomography (CT) scans
+<li>Segmentation/Classification of Computed Tomography (CT) scans
 
 <ul>
 <li>Brain segmentation</li>
@@ -207,7 +207,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <ul>
 <li>Multi-center, multi-national Phase II clinical trial</li>
 </ul></li>
-<li>Hemorrhages with volume ≥ 20 millilters (mL or cc)</li>
+<li>Patients with intracerebral hemorrhages (≥ 20 millilters)</li>
 </ul>
 
 <p><img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO"></p>
@@ -335,14 +335,14 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div id="right_col" style="font-size: 24pt;">
 <ul>
 <li>Adults (inclusion criteria 18-80 years old)</li>
-<li>Large ICH areas</li>
-<li>Small Intraventricular Hemorrhages (IVH)</li>
+<li>Mostly males</li>
+<li>Reader-classified Location of Hemorrhage</li>
 </ul></div></div>
 
 </article></slide><slide class=''><hgroup><h2>ICH Segmentation, Volume/Location Estimation</h2></hgroup><article  id="ich-segmentation-volumelocation-estimation">
 
 <div class="columns-2">
-<p>Want to go from a brain image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a hemorrhage mask: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+<p>Want to go from a brain image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a binary hemorrhage mask: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 </article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
 
@@ -358,6 +358,20 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 </article></slide><slide class=''><hgroup><h2>Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="step-1-create-predictors-of-ich">
 
 </article></slide><slide class=''><hgroup><h2>Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="data-structure-for-one-patient">
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<div class="container">
+<div id="left_col2">
+<p>Training Data Structure</p>
+
+<ul>
+<li>Stack together 10 randomly selected patients</li>
+<li>Train model/classifier on this design matrix</li>
+</ul></div>
+
+<div id="right_col2">
+<img src="figure/Large_Design_Matrix.png" style="width:20%;  display: block; margin: auto;" alt="MISTIE LOGO"><br/></div></div>
 
 </article></slide><slide class=''><hgroup><h2>Step 2: Fit Models</h2></hgroup><article  id="step-2-fit-models">
 
@@ -388,9 +402,9 @@ P(y_{i}(v) = 1) = f(X_i(v))
 
 </article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="compare-estimated-to-true-volume-1">
 
-</article></slide><slide class=''><hgroup><h2>Patient with Median Overlap in 102 Patients</h2></hgroup><article  id="patient-with-median-overlap-in-102-patients">
+</article></slide><slide class=''><hgroup><h2>Patient with Median Overlap in Validation Set</h2></hgroup><article  id="patient-with-median-overlap-in-validation-set">
 
-<p><img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+<p><img src="figure/Reseg_Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
 
 </article></slide><slide class=''><hgroup><h2>Shiny Application: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-application-httpbit.lyich_seg">
 

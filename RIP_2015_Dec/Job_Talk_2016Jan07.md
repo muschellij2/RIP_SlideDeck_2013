@@ -21,7 +21,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <div style='font-size: 28pt;'>
 - Neuroimaging and R
-- Segmentation of Computed Tomography (CT) scans
+- Segmentation/Classification of Computed Tomography (CT) scans
     - Brain segmentation
     - Hemorrhage segmentation
 - Quantitative hemorrhage localization
@@ -31,7 +31,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <div style='font-size: 28pt;'>
 - Neuroimaging and R
-- Segmentation of Computed Tomography (CT) scans
+- Segmentation/Classification of Computed Tomography (CT) scans
     - Brain segmentation
     - Hemorrhage segmentation
 - **Quantitative hemorrhage localization**
@@ -109,7 +109,7 @@ From the `cranlogs` R package:
 
 * Minimally Invasive Surgery plus r-tPA for Intracerebral Hemorrhage Evacuation (<strong>MISTIE</strong>) 
     - Multi-center, multi-national Phase II clinical trial
-* Hemorrhages with volume ≥ 20 millilters (mL or cc)
+* Patients with intracerebral hemorrhages (≥ 20 millilters)
 
 <img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO">
 
@@ -234,8 +234,9 @@ Mean (SD)
 
 
 - Adults (inclusion criteria 18-80 years old)
-- Large ICH areas
-- Small Intraventricular Hemorrhages (IVH)
+- Mostly males
+- Reader-classified Location of Hemorrhage
+
 </div>
 
 </div>
@@ -246,7 +247,7 @@ Mean (SD)
 Want to go from a brain image:
 <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 <br/>
-To a hemorrhage mask:
+To a binary hemorrhage mask:
 <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 </div>
 
@@ -265,6 +266,20 @@ To a hemorrhage mask:
 
 ## Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO">  
 
+---
+<div class="container"> 
+  <div id="left_col2"> 
+  Training Data Structure
+  
+  * Stack together 10 randomly selected patients
+  * Train model/classifier on this design matrix
+
+  
+  </div>    
+  <div id="right_col2">
+  <img src="figure/Large_Design_Matrix.png" style="width:20%;  display: block; margin: auto;" alt="MISTIE LOGO">  
+  </div> 
+</div>
 
 ## Step 2: Fit Models 
 
@@ -297,9 +312,9 @@ $$
 
 ## Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO">
 
-## Patient with Median Overlap in 102 Patients
+## Patient with Median Overlap in Validation Set
 
-<img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"> 
+<img src="figure/Reseg_Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"> 
 
 ## Shiny Application: http://bit.ly/ICH_SEG <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig">
 
