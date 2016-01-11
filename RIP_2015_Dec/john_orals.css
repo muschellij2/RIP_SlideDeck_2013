@@ -36,8 +36,16 @@ table.rmdtable tr, table.rmdtable td {
 }*/
 
 strong { 
-    font-weight: bold;
+    font-weight: bolder;
     color: black;
+}
+
+p { 
+    color: black;
+}
+
+li {
+  color: black;
 }
 
 #wrap {
@@ -55,6 +63,7 @@ strong {
 
 
 #left_col2 {
+   color: black;
    float:left;
    width:35%;
 }
@@ -102,4 +111,9 @@ h2 {
 }
 .column-center{ 
   display: inline-block; width: 33%; 
+}
+
+
+div {
+  color: black;
 }

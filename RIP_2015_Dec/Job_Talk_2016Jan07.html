@@ -106,6 +106,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <slide class=''><hgroup><h2>Overview of Work/Research</h2></hgroup><article  id="overview-of-workresearch">
 
+<div style="font-size: 28pt;">
 <ul>
 <li>Neuroimaging and R</li>
 <li>Segmentation of Computed Tomography (CT) scans
@@ -115,10 +116,11 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>Hemorrhage segmentation</li>
 </ul></li>
 <li>Quantitative hemorrhage localization</li>
-</ul>
+</ul></div>
 
 </article></slide><slide class=''><hgroup><h2>Overview of Work/Research</h2></hgroup><article  id="overview-of-workresearch-1">
 
+<div style="font-size: 28pt;">
 <ul>
 <li>Neuroimaging and R</li>
 <li>Segmentation of Computed Tomography (CT) scans
@@ -128,7 +130,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>Hemorrhage segmentation</li>
 </ul></li>
 <li><strong>Quantitative hemorrhage localization</strong></li>
-</ul>
+</ul></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Neuroimaging and R: <br/> <br/> Creating Tools I Would Use</h2></hgroup><article  id="neuroimaging-and-r-creating-tools-i-would-use">
 
@@ -137,7 +139,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div id="wrap">
 <div id="left_col">
 <ul>
-<li>fslr
+<li><strong>fslr</strong>
 
 <p style="font-size: 12pt;">
 
@@ -183,7 +185,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <ul>
 <li>Full neuroimaging suite of analysis and preprocessing tools</li>
-<li>Actively developed (first release in 2000) (Jenkinson, Beckmann, Behrens, et al., 2012)</li>
+<li>Actively developed (first release in 2000) (Jenkinson, et al., 2012)</li>
 <li>Popular: 13.9% of published neuroimaging studies used FSL (Carp, 2012).</li>
 <li>Open source and free (for academics)</li>
 </ul>
@@ -205,9 +207,8 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <ul>
 <li>Multi-center, multi-national Phase II clinical trial</li>
 </ul></li>
-<li>111 baseline CT scans from 112 subjects from 26 centers</li>
-<li>Lobar and deep hemorrhages with volume ≥ 20cc</li>
-<li>Stroke-related impairment measured by NIH Stroke Scale (NIHSS,higher is worse)</li>
+<li>111 baseline CT scans from 111 subjects from 26 centers</li>
+<li>Hemorrhages with volume ≥ 20 millilters (mL or cc)</li>
 </ul>
 
 <p><img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO"></p>
@@ -247,19 +248,31 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div style="margin-left:48%;">
 <p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Brain Segmentation of CT Scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans">
+
+</article></slide><slide class=''><hgroup><h2>Terminology: Neuroimaging to Data/Statistics</h2></hgroup><article  id="terminology-neuroimaging-to-datastatistics">
+
+<div style="font-size: 26pt">
+<ul>
+<li>Segmentation ⇔ classification</li>
+<li>Image ⇔ 3-dimensional array</li>
+<li>Mask/Region of Interest ⇔ binary (0/1) image</li>
+<li>Registration ⇔ Spatial Normalization/Standarization</li>
+</ul></div>
+
 </article></slide><slide class=''><hgroup><h2>Problem: CT Scans Capture <strong>Everything</strong></h2></hgroup><article  id="problem-ct-scans-capture-everything">
 
 <p><img src="figure/the_room.png" style="width:100%; display: block; margin: auto;" alt="The room"></p>
 
-</article></slide><slide class=''><hgroup><h2>Brain Segmentation of (CT) scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans">
+</article></slide><slide class=''><hgroup><h2>Brain Segmentation of CT Scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans-1">
 
 <div class="columns-2">
-<p>Want to go from this: <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> <img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+<p>Want to go from an image: <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> <img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
-</article></slide><slide class=''><hgroup><h2>Brain Segmentation of (CT) scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans-1">
+</article></slide><slide class=''><hgroup><h2>Brain Segmentation of (CT) scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans-2">
 
 <div class="columns-2">
-<p>Want to go from this: <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To this: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+<p>Want to go from an image: <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a brain-extracted image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 </article></slide><slide class=''><hgroup><h2>Publicly Available code</h2></hgroup><article  id="publicly-available-code">
 
@@ -278,7 +291,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </article></slide><slide class=''><hgroup><h2>ICH Segmentation, Volume/Location Estimation</h2></hgroup><article  id="ich-segmentation-volumelocation-estimation">
 
 <div class="columns-2">
-<p>Want to go from this <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To this: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+<p>Want to go from a brain image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a hemorrhage mask: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 </article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
 
@@ -291,26 +304,30 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 </p></div>
 
-</article></slide><slide class=''><hgroup><h2>Step 1: Create Covariates <img src="figure/Covariates2.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="step-1-create-covariates">
+</article></slide><slide class=''><hgroup><h2>Step 1: Create Covariates <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="step-1-create-covariates">
+
+</article></slide><slide class=''><hgroup><h2>Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="data-structure-for-one-patient">
 
 </article></slide><slide class=''><hgroup><h2>Step 2: Fit Models</h2></hgroup><article  id="step-2-fit-models">
 
 <p>Let \(y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
 
 <p>General model form: \[
-\text{logit}\left(P(y_{i}(v) = 1)\right) = f(X_i)
-\]</p>
+P(y_{i}(v) = 1) = f(X_i(v))
+\] where \(X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))\) are the covariates.</p>
 
-<p>where \(X_i = (x_{i, 1} \dots x_{i, 21})\) are the covariates.</p>
+<ul>
+<li>For models, we&#39;ll use the \(\text{logit}\) link function.</li>
+</ul>
 
 </article></slide><slide class=''><hgroup><h2>Models Fit on the Training Data</h2></hgroup><article  id="models-fit-on-the-training-data">
 
 <ul>
 <li>Logistic Regression: \(f(X) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\)</li>
-<li>Generalized Additive Models (Hastie and Tibshirani, 1990)</li>
-<li>LASSO (Tibshirani, 1996; Friedman, Hastie, and Tibshirani, 2010): \[ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p} \left|\beta_{k}\right|
+<li>Generalized Additive Models (Hastie, et al., 1990)</li>
+<li>LASSO (Tibshirani, 1996; Friedman, et al., 2010): \[ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p} \left|\beta_{k}\right|
 \]</li>
-<li>Random Forests (Liaw and Wiener, 2002; Breiman, 2001)
+<li>Random Forests (Liaw, et al., 2002; Breiman, 2001)
 
 <div class="centerer">
 <p>\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO"></p></div></li>
@@ -320,37 +337,25 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 <p><img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
 
-</article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <br/> <br/> <img src="figure/Reseg_Volume_Comparison_Long.png" style="width:105%;  display: block; margin: 0;" alt="MISTIE LOGO"></h2></hgroup><article  id="compare-estimated-to-true-volume">
+</article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="compare-estimated-to-true-volume">
 
 </article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="compare-estimated-to-true-volume-1">
 
-</article></slide><slide class=''><hgroup><h2>Shiny App: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-app-httpbit.lyich_seg">
+</article></slide><slide class=''><hgroup><h2>Shiny Application: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-application-httpbit.lyich_seg">
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Quantitative hemorrhage localization</h2></hgroup><article  id="quantitative-hemorrhage-localization">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Quantitative Hemorrhage Localization</h2></hgroup><article  id="quantitative-hemorrhage-localization">
 
 </article></slide><slide class=''><hgroup><h2>Localization Goals</h2></hgroup><article  id="localization-goals">
 
+<div style="font-size: 24pt">
 <ol>
 <li>Create a 3-dimensional (3D) density map of hemorrhages in MISTIE population</li>
 <li>Quantify of hemorrhage engagement of regions in the brain</li>
-<li>Determine if differences in location relate to NIHSS</li>
-<li>Generate a stroke region of engagement (ROI) using within-sample validation.</li>
-</ol>
+<li>Determine if differences in location relate to stroke severity</li>
+<li>Generate a stroke region of engagement using within-sample validation.</li>
+</ol></div>
 
-</article></slide><slide class=''><hgroup><h2>Localization Processing Steps</h2></hgroup><article  id="localization-processing-steps">
-
-<ol>
-<li>Image spatially registered to a CT template (Rorden, Bonilha, Fridriksson, et al., 2012) using SPM (Wellcome Trust)</li>
-<li>Hemorrhage mask/regions of interest (ROI) mapped to the template</li>
-<li>Visual inspection of registered images: no exclusions</li>
-<li>ICH distribution (proportion of subjects who have ICH at that voxel location in template space)
-
-<ul>
-<li>Take the average of masks in template space</li>
-</ul></li>
-</ol>
-
-</article></slide><slide class=''><hgroup><h2>Registered Images and Masks/Regions of Interest (ROI)</h2></hgroup><article  id="registered-images-and-masksregions-of-interest-roi">
+</article></slide><slide class=''><hgroup><h2>Registered Images and Masks/Regions of Interest</h2></hgroup><article  id="registered-images-and-masksregions-of-interest">
 
 <div class="container">
 <div class="column-left">
@@ -362,25 +367,78 @@ Registered Image:<br/><img src="figure/raw_spm_100-362_20100126_1926_CT_2_CT_ROU
 <div class="column-right">
 Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="ROI"></div></div>
 
-</article></slide><slide class=''><hgroup><h2>Average ROIs ⇒ Population ICH Distribution</h2></hgroup><article  id="average-rois-population-ich-distribution">
+</article></slide><slide class=''><hgroup><h2>Aggregating Multiple Hemorrhage Masks</h2></hgroup><article  id="aggregating-multiple-hemorrhage-masks">
+
+<p>N - number of patients, V - number of voxels</p>
+
+<p><img src="figure/hemorrhage_stacking.png" style="width:100%; display: block; margin: auto;" alt="pipeline"></p>
+
+</article></slide><slide class=''><hgroup><h2>Creating a Population-level ICH Distribution</h2></hgroup><article  id="creating-a-population-level-ich-distribution">
+
+<p><img src="figure/3d_hist.png" style="width:45%; display: block; margin: auto;" alt="pipeline"></p>
+
+</article></slide><slide class=''><hgroup><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution">
 
 <p><img src="figure/Figure4_Proportion_Final.png" style="width:50%; display: block; margin: auto;" alt="The room"></p>
 
-</article></slide><slide class=''><hgroup><h2>Voxel-wise Regression/T-tests</h2></hgroup><article  id="voxel-wise-regressiont-tests">
-
-Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel, across subjects, we fit the following model: <br/>
-
-<p style="text-align: center;">
-
-\({\rm NIHSS}_i = \beta_0+\beta_{1,v} I({\rm ICH = 1}) + \epsilon_{iv}\):
-
-</p>
-
-<p><img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="display: block; margin: auto; width: 50%"></p>
+</article></slide><slide class=''><hgroup><h2>Measuring Stroke Severity</h2></hgroup><article  id="measuring-stroke-severity">
 
 <ul>
-<li>Focus on template space voxels where at least \(10\) subjects had stroke (\(V = 166,202\))</li>
+<li>Stroke-related impairment measured by NIH Stroke Scale (NIHSS) (Brott, et al., 1989)
+
+<ul>
+<li>Multiple sub-domains</li>
+<li>Higher is worse (higher stroke severity)</li>
+</ul></li>
 </ul>
+
+<table class = 'rmdtable'>
+<col width="19%" />
+<col width="34%" />
+<tr class="header">
+<th align="center">NIHSS Score</th>
+<th align="center">Stroke Severity</th>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">No Stroke Symptoms</td>
+</tr>
+<tr class="even">
+<td align="center">1-4</td>
+<td align="center">Minor Stroke</td>
+</tr>
+<tr class="odd">
+<td align="center">5-15</td>
+<td align="center">Moderate Stroke</td>
+</tr>
+<tr class="even">
+<td align="center">16-20</td>
+<td align="center">Moderate to Severe Stroke</td>
+</tr>
+<tr class="odd">
+<td align="center">21-42</td>
+<td align="center">Severe Stroke</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Voxel-wise Regression/T-tests</h2></hgroup><article  id="voxel-wise-regressiont-tests">
+
+<div class="container">
+
+<div id="left_col2">
+<p>Let \(v\) be voxel</p>
+
+<ul>
+<li>\(\mu_{1}(v)\): mean NIHSS score in patients where \(ICH(v){=}1\)</li>
+<li>Similarly for \(\mu_{0}(v)\).</li>
+<li>At each voxel, ran a t-test: \(H_{0}(v):\mu_{1}(v)=\mu_{0}(v)\)</li>
+<li><p>Only voxels where \(&gt;10\) subjects had ICH \((V=166202)\)</p>
+
+</div>
+
+<div id="right_col2">
+<p><img src="figure/Pvalue_Figure.png" alt="Data structure" style="display: block; margin: auto; width: 100%"></p></div></li>
+</ul></div>
 
 </article></slide><slide class=''><hgroup><h2>Voxel-wise P-value Map</h2></hgroup><article  id="voxel-wise-p-value-map">
 
@@ -390,15 +448,18 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 
 <p>Due to a large number of tests, a Bonferroni correction (or FDR) did not result in singificant p-values.</p>
 
-<p>Create a High Predictive Region (HPR) based 6 different thresholds:</p>
+<ul>
+<li>Create a High Predictive Region (HPR) based on a threshold:
 
 <ul>
-<li>Raw p-value threshold (\(0.05\), \(0.01\), \(0.001\))</li>
-<li>Select top-ranked voxels based on p-value (top \(1000\), \(2000\), \(3000\) voxels)</li>
-<li>Calculated the overlap of the HPR for each scan \(i\) \[
+<li>For example, \(p &lt; 0.01\)<br/></li>
+<li>Calculate the overlap of the HPR for each scan \(i\) \[
 \text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
 \]</li>
+</ul></li>
 </ul>
+
+</article></slide><slide class=''><hgroup><h2><img src="figure/hpr_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="section">
 
 </article></slide><slide class=''><hgroup><h2>Mask from P-value Threshold of \(0.01\)</h2></hgroup><article  id="mask-from-p-value-threshold-of-0.01">
 
@@ -408,16 +469,15 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 <div style="margin-left:48%;">
 <p><img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
 
-</article></slide><slide class=''><hgroup><h2>Selecting an HPR</h2></hgroup><article  id="selecting-an-hpr">
+</article></slide><slide class=''><hgroup><h2>Mask using P-value Threshold of \(0.01\)</h2></hgroup><article  id="mask-using-p-value-threshold-of-0.01">
 
-<p>Using the adjusted \(R^2\), we fit the models for each HPR to select the &quot;best&quot; from the different thresholds:</p>
+<div style="width:49%;float:left;">
+<p><img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="width: 100%"></p></div>
 
-<p>\[\begin{eqnarray} 
-{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
-&amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
-\end{eqnarray}\]</p>
+<div style="margin-left:48%;">
+<img src='figure/Top_19047_pvalues.png' title=''/></div>
 
-</article></slide><slide class=''><hgroup><h2>Regress ROIs against stroke severity scores</h2></hgroup><article  id="regress-rois-against-stroke-severity-scores">
+</article></slide><slide class=''><hgroup><h2>HPR Coverage Relationship with NIHSS</h2></hgroup><article  id="hpr-coverage-relationship-with-nihss">
 
 <div style="width:48%;float:left;">
 <img src='figure/Top_19047_pvalues.png' title=''/></div>
@@ -425,19 +485,35 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 <div style="margin-left:48%;">
 <p><img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
 
-</article></slide><slide class=''><hgroup><h2>Compare HPR to using Locations</h2></hgroup><article  id="compare-hpr-to-using-locations">
+</article></slide><slide class=''><hgroup><h2>Compare HPR to using Reader-Based Locations</h2></hgroup><article  id="compare-hpr-to-using-reader-based-locations">
 
 <p>Using the adjusted \(R^2\), we compared the models:</p>
 
 <p>\[\begin{eqnarray} 
-{\rm Y}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
 \end{eqnarray}\] to that of the categorical indicator of location: \[\begin{eqnarray} 
-{\rm Y}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
 \end{eqnarray}\] where \(I(k)\) represents the indicator that ICH location was \(k\)</p>
 
-</article></slide><slide class=''><hgroup><h2>How do we test whether HPR coverage performs better?</h2></hgroup><article  id="how-do-we-test-whether-hpr-coverage-performs-better">
+</article></slide><slide class=''><hgroup><h2>Testing whether HPR is more Predictive than Location</h2></hgroup><article  id="testing-whether-hpr-is-more-predictive-than-location">
+
+<ul>
+<li>Adjusted \(R^2\), Location model: 0.129 vs. HPR coverage Model: 0.254</li>
+</ul>
+
+<p>Null Model \[\begin{eqnarray} 
+{\rm Y}_i &amp;=&amp; \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}\]</p>
+
+<ul>
+<li>Likelihood ratio test (LRT) comparing HPR coverage model to null model: p &lt; 0.001</li>
+<li><p>LRT: Location model vs. null model: p = 0.1844</p></li>
+<li><p>LRT: Location+HPR model vs. Location-only model: p &lt; 0.001</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Test whether HPR coverage performs better than chance?</h2></hgroup><article  id="test-whether-hpr-coverage-performs-better-than-chance">
 
 <ul>
 <li>Recall: data-based algorithm for defining the HPR</li>
@@ -460,11 +536,12 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 
 </article></slide><slide class=''><hgroup><h2>Using the outcome twice! Double Dipping</h2></hgroup><article  id="using-the-outcome-twice-double-dipping">
 
+<div style="font-size: 24pt">
 <ul>
 <li>Dip: look at the data, construct predictors</li>
 <li>Double-dip: are the new predictors predictive?</li>
 <li>This violates one of the basic principles of Statistics: the separation between the exploratory and confirmatory phases of the analysis</li>
-</ul>
+</ul></div>
 
 </article></slide><slide class=''><hgroup><h2>One Possible Solution: Permutation Testing</h2></hgroup><article  id="one-possible-solution-permutation-testing">
 
@@ -488,7 +565,6 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 <ul>
 <li>We can segment ICH volume from CT scans <br/><br/></li>
 <li>Voxel-wise regression can show regions associated with severity <br/><br/></li>
-<li></li>
 </ul></div>
 
 </article></slide><slide class=''><hgroup><h2>Future Work of Stroke Analyses</h2></hgroup><article  id="future-work-of-stroke-analyses">
@@ -504,22 +580,22 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 
 <ul>
 <li><strong>Validate these regions (MISTIE III)</strong></li>
+<li><strong>Scalar on image regression</strong></li>
 </ul></li>
-<li></li>
 </ul></div>
 
 </article></slide><slide class=''><hgroup><h2>Other Work</h2></hgroup><article  id="other-work">
 
 <div style="font-size: 24pt">
 <ul>
-<li>Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD), (with Dr. Taki Shinohara)</li>
+<li>Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD)</li>
 <li>Catheter scoring with pre/post-op registration for ICH</li>
-<li>Creating Department-level indices of publication (with Dr. Jeff Leek)</li>
+<li>Creating Department-level indices of publication</li>
 </ul></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">
 
-</article></slide><slide class=''><hgroup><h2>Subject Data used: 112 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-112-scans-1-per-patient">
+</article></slide><slide class=''><hgroup><h2>Subject Data used: 111 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-111-scans-1-per-patient">
 
 <div id="wrap">
 <div id="left_col">
@@ -530,11 +606,11 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 </tr>
 <tr class="odd">
 <td align="center"><strong>Age in Years: Mean (SD)</strong></td>
-<td align="center">60.7 (11.2)</td>
+<td align="center">60.8 (11.2)</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>Male: N (%)</strong></td>
-<td align="center">77 (68.8%)</td>
+<td align="center">76 (68.5%)</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>Clot Location RC (%)</strong></td>
@@ -542,11 +618,11 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 </tr>
 <tr class="even">
 <td align="center"><strong>Putamen</strong></td>
-<td align="center">69 (61.6)</td>
+<td align="center">68 (61.3)</td>
 </tr>
 <tr class="odd">
 <td align="center"><strong>Lobar</strong></td>
-<td align="center">33 (29.5)</td>
+<td align="center">33 (29.7)</td>
 </tr>
 <tr class="even">
 <td align="center"><strong>Globus Palidus</strong></td>
@@ -558,7 +634,7 @@ Let \({\rm NIHSS}_i\) be the NIHSS for patient \(i\), voxel \(v\). At each voxel
 </tr>
 <tr class="even">
 <td align="center"><strong>Diagnostic ICH Volume in mL: Mean (SD)</strong></td>
-<td align="center">37.7 (20.2)</td>
+<td align="center">37.4 (20.1)</td>
 </tr>
 </table></div>
 

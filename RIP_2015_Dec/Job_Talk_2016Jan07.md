@@ -19,19 +19,23 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 ## Overview of Work/Research
 
+<div style='font-size: 28pt;'>
 - Neuroimaging and R
 - Segmentation of Computed Tomography (CT) scans
     - Brain segmentation
     - Hemorrhage segmentation
 - Quantitative hemorrhage localization
+</div>
 
 ## Overview of Work/Research
 
+<div style='font-size: 28pt;'>
 - Neuroimaging and R
 - Segmentation of Computed Tomography (CT) scans
     - Brain segmentation
     - Hemorrhage segmentation
 - **Quantitative hemorrhage localization**
+</div>
 
 # Neuroimaging and R: <br/> <br/> Creating Tools I Would Use 
 
@@ -40,7 +44,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div id="wrap">
 <div id="left_col">
 
-- fslr <p style='font-size: 12pt;'>(Muschelli, John, et al. "fslr: Connecting the FSL Software with R." R JOURNAL 7.1 (2015): 163-175.)</p>
+- **fslr** <p style='font-size: 12pt;'>(Muschelli, John, et al. "fslr: Connecting the FSL Software with R." R JOURNAL 7.1 (2015): 163-175.)</p>
 - brainR <p style='font-size: 12pt;'>(Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. "brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data." R JOURNAL 6.1 (2014): 42-48.)</p>
 - extrantsr
 - cttools
@@ -75,7 +79,7 @@ fslr
 FSL 
 
 - Full neuroimaging suite of analysis and preprocessing tools
-- Actively developed (first release in 2000) (Jenkinson, Beckmann, Behrens, et al., 2012)
+- Actively developed (first release in 2000) (Jenkinson, et al., 2012)
 - Popular: 13.9% of published neuroimaging studies used FSL (Carp, 2012).
 - Open source and free (for academics)
 
@@ -105,9 +109,8 @@ From the `cranlogs` R package:
 
 * Minimally Invasive Surgery plus r-tPA for Intracerebral Hemorrhage Evacuation (<strong>MISTIE</strong>) 
     - Multi-center, multi-national Phase II clinical trial
-* 111 baseline CT scans from 112 subjects from 26 centers
-* Lobar and deep hemorrhages with volume ≥ 20cc
-* Stroke-related impairment measured by NIH Stroke Scale (NIHSS,higher is worse) 
+* 111 baseline CT scans from 111 subjects from 26 centers
+* Hemorrhages with volume ≥ 20 millilters (mL or cc)
 
 <img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO">
 
@@ -131,7 +134,6 @@ From the `cranlogs` R package:
 </div>
 
 
-
 ## X-ray Computed Tomography (CT) Scans
 <div class="notes">
 Images are acquired from an X-ray scanner.  
@@ -148,16 +150,29 @@ x-ray goes around object and detector the other side of the object determines ho
 <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 </div>
 
+
+
+# Brain Segmentation of CT Scans
+
+## Terminology: Neuroimaging to Data/Statistics
+
+<div style="font-size: 26pt">
+* Segmentation ⇔ classification 
+* Image ⇔ 3-dimensional array
+* Mask/Region of Interest ⇔ binary (0/1) image 
+* Registration ⇔  Spatial Normalization/Standarization
+</div>
+
 ## Problem: CT Scans Capture **Everything**
 
 <img src="figure/the_room.png" style="width:100%; display: block; margin: auto;" alt="The room">
 
 
-## Brain Segmentation of (CT) scans
+## Brain Segmentation of CT Scans
 
 
 <div class="columns-2">
-Want to go from this:
+Want to go from an image:
 <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 <br/>
 <img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
@@ -167,10 +182,10 @@ Want to go from this:
 
 
 <div class="columns-2">
-Want to go from this:
+Want to go from an image:
 <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 <br/>
-To this:
+To a brain-extracted image:
 <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 </div>
 
@@ -190,10 +205,10 @@ To this:
 ## ICH Segmentation, Volume/Location Estimation 
 
 <div class="columns-2">
-Want to go from this
-<img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
+Want to go from a brain image:
+<img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 <br/>
-To this:
+To a hemorrhage mask:
 <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 </div>
 
@@ -208,7 +223,10 @@ To this:
 </div>
 
 
-## Step 1: Create Covariates <img src="figure/Covariates2.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO">  
+## Step 1: Create Covariates <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO">  
+
+## Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO">  
+
 
 ## Step 2: Fit Models 
 
@@ -216,19 +234,21 @@ Let $y_{i}(v)$ be the presence / absence of ICH for voxel $v$ from person $i$.
 
 General model form: 
 $$
-\text{logit}\left(P(y_{i}(v) = 1)\right) = f(X_i)
+P(y_{i}(v) = 1) = f(X_i(v))
 $$
+where $X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))$ are the covariates.  
 
-where $X_i = (x_{i, 1} \dots x_{i, 21})$ are the covariates.
+* For models, we'll use the $\text{logit}$ link function.
+
 
 ## Models Fit on the Training Data
 
 - Logistic Regression: \(f(X) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\)
-- Generalized Additive Models (Hastie and Tibshirani, 1990)
-- LASSO (Tibshirani, 1996; Friedman, Hastie, and Tibshirani, 2010): 
+- Generalized Additive Models (Hastie, et al., 1990)
+- LASSO (Tibshirani, 1996; Friedman, et al., 2010): 
 $$ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p} \left|\beta_{k}\right|
 $$
-- Random Forests (Liaw and Wiener, 2002; Breiman, 2001)
+- Random Forests (Liaw, et al., 2002; Breiman, 2001)
 <div class="centerer">
 \(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO">
 </div>
@@ -238,36 +258,29 @@ $$
 
 <img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO">  
 
-## Compare Estimated to True Volume <br/> <br/> <img src="figure/Reseg_Volume_Comparison_Long.png" style="width:105%;  display: block; margin: 0;" alt="MISTIE LOGO">
+## Compare Estimated to True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg">
 
 ## Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO">
 
 
-## Shiny App: http://bit.ly/ICH_SEG <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig">
+## Shiny Application: http://bit.ly/ICH_SEG <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig">
 
 
 
-# Quantitative hemorrhage localization
+# Quantitative Hemorrhage Localization
+
 
 ## Localization Goals
 
+<div style="font-size: 24pt">
+
 2. Create a 3-dimensional (3D) density map of hemorrhages in MISTIE population
 3. Quantify of hemorrhage engagement of regions in the brain
-4. Determine if differences in location relate to NIHSS
-5. Generate a stroke region of engagement (ROI) using within-sample validation.
+4. Determine if differences in location relate to stroke severity
+5. Generate a stroke region of engagement using within-sample validation.
+</div>
 
-
-## Localization Processing Steps 
-  
-1. Image spatially registered to a CT template (Rorden, Bonilha, Fridriksson, et al., 2012) using SPM (Wellcome Trust)
-2. Hemorrhage mask/regions of interest (ROI) mapped to the template
-3. Visual inspection of registered images: no exclusions
-4. ICH distribution (proportion of subjects who have ICH at that voxel location in template space)
-    - Take the average of masks in template space
-  
-
-
-## Registered Images and Masks/Regions of Interest (ROI)
+## Registered Images and Masks/Regions of Interest
 
 <div class="container">
    <div class="column-left">
@@ -284,19 +297,59 @@ $$
    </div>
 </div>
 
+## Aggregating Multiple Hemorrhage Masks
 
-## Average ROIs ⇒ Population ICH Distribution
+N - number of patients, V - number of voxels
+
+<img src="figure/hemorrhage_stacking.png" style="width:100%; display: block; margin: auto;" alt="pipeline">
+
+## Creating a Population-level ICH Distribution
+<img src="figure/3d_hist.png" style="width:45%; display: block; margin: auto;" alt="pipeline">
+
+
+## Population ICH Distribution
 
 <img src="figure/Figure4_Proportion_Final.png" style="width:50%; display: block; margin: auto;" alt="The room">
 
-  
+
+## Measuring Stroke Severity
+
+* Stroke-related impairment measured by NIH Stroke Scale (NIHSS) (Brott, et al., 1989)
+    * Multiple sub-domains
+    * Higher is worse (higher stroke severity)
+
+
+
+
+---------------------------------------
+ NIHSS Score       Stroke Severity     
+------------- -------------------------
+      0          No Stroke Symptoms    
+
+     1-4            Minor Stroke       
+
+    5-15           Moderate Stroke     
+
+    16-20     Moderate to Severe Stroke
+
+    21-42           Severe Stroke      
+---------------------------------------
+
 ## Voxel-wise Regression/T-tests
-Let ${\rm NIHSS}_i$ be the NIHSS for patient $i$, voxel $v$. At each voxel, across subjects, we fit the following model: <br/><p style ="text-align: center;">${\rm NIHSS}_i = \beta_0+\beta_{1,v} I({\rm ICH = 1}) + \epsilon_{iv}$:</p>
 
-<img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="display: block; margin: auto; width: 50%">
-
-- Focus on template space voxels where at least $10$ subjects had stroke ($V = 166,202$)
-
+<div class="container">
+   <div id="left_col2">
+  Let $v$ be voxel
+  
+  * $\mu_{1}(v)$: mean NIHSS score in patients where $ICH(v){=}1$
+  * Similarly for $\mu_{0}(v)$. 
+  * At each voxel, ran a t-test: $H_{0}(v):\mu_{1}(v)=\mu_{0}(v)$ 
+  * Only voxels where $>10$ subjects had ICH $(V=166202)$
+    </div>
+   <div id="right_col2">
+<img src="figure/Pvalue_Figure.png" alt="Data structure" style="display: block; margin: auto; width: 100%">
+    </div>
+</div>    
 
 ## Voxel-wise P-value Map
 
@@ -305,14 +358,14 @@ Let ${\rm NIHSS}_i$ be the NIHSS for patient $i$, voxel $v$. At each voxel, acro
 ## High Predictive Regions
 Due to a large number of tests, a Bonferroni correction (or FDR) did not result in singificant p-values.  
 
-Create a High Predictive Region (HPR) based 6 different thresholds: 
-
-   - Raw p-value threshold ($0.05$, $0.01$, $0.001$) 
-   - Select top-ranked voxels based on p-value (top $1000$, $2000$, $3000$ voxels)
-   - Calculated the overlap of the HPR for each scan $i$
+- Create a High Predictive Region (HPR) based on a threshold: 
+    - For example, $p < 0.01$    
+    - Calculate the overlap of the HPR for each scan $i$
 $$
 \text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
 $$
+
+## <img src="figure/hpr_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
 
 ## Mask from P-value Threshold of $0.01$
 
@@ -323,19 +376,17 @@ $$
 <img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="Regline">
 </div>
 
+## Mask using P-value Threshold of $0.01$
+
+<div style="width:49%;float:left;">
+<img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="width: 100%">
+</div>
+<div style="margin-left:48%;">
+![inline fill](figure/Top_19047_pvalues.png)
+</div>
 
 
-## Selecting an HPR 
-
-Using the adjusted $R^2$, we fit the models for each HPR to select the "best" from the different thresholds:
-
-$$\begin{eqnarray} 
-{\rm NIHSS}_i &=& \beta_0 + \beta_1 {\rm Coverage}_i \\
-&+& \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
-\end{eqnarray}$$
-
-
-## Regress ROIs against stroke severity scores 
+## HPR Coverage Relationship with NIHSS
 
 <div style="width:48%;float:left;">
 ![inline fill](figure/Top_19047_pvalues.png)
@@ -344,23 +395,37 @@ $$\begin{eqnarray}
 <img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline">
 </div>
 
-## Compare HPR to using Locations
+## Compare HPR to using Reader-Based Locations
 
 Using the adjusted $R^2$, we compared the models:
 
 $$\begin{eqnarray} 
-{\rm Y}_i &=& \beta_0 + \beta_1 {\rm Coverage}_i \\
+{\rm NIHSS}_i &=& \beta_0 + \beta_1 {\rm Coverage}_i \\
 &+& \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
 \end{eqnarray}$$
 to that of the categorical indicator of location:
 $$\begin{eqnarray} 
-{\rm Y}_i &=& \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
+{\rm NIHSS}_i &=& \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
 &+& \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
 \end{eqnarray}$$
 where $I(k)$ represents the indicator that ICH location was $k$
 
+## Testing whether HPR is more Predictive than Location
 
-## How do we test whether HPR coverage performs better?
+* Adjusted $R^2$, Location model: 0.129 vs. HPR coverage Model: 0.254 
+
+Null Model
+$$\begin{eqnarray} 
+{\rm Y}_i &=& \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}$$
+
+* Likelihood ratio test (LRT) comparing HPR coverage model to null model: p < 0.001
+* LRT: Location model vs. null model: p = 0.1844
+
+
+* LRT: Location+HPR model vs. Location-only model: p < 0.001
+
+## Test whether HPR coverage performs better than chance?
 
 - Recall: data-based algorithm for defining the HPR
 
@@ -378,9 +443,12 @@ Problems:
 
 ## Using the outcome twice! Double Dipping
 
+
+<div style="font-size: 24pt">
 - Dip: look at the data, construct predictors
 - Double-dip: are the new predictors predictive?
 - This violates one of the basic principles of Statistics: the separation between the exploratory and confirmatory phases of the analysis
+</div>
 
 ## One Possible Solution: Permutation Testing 
 
@@ -402,7 +470,7 @@ Result: Permutation test p-value $<0.01$
 <div style="font-size: 24pt">
 - We can segment ICH volume from CT scans <br/><br/>
 - Voxel-wise regression can show regions associated with severity <br/><br/>
-- 
+
 </div>
 
 
@@ -414,7 +482,7 @@ Result: Permutation test p-value $<0.01$
     - **Incorporate variability of estimated volume**
 - Voxel-wise regression can show regions associated with severity
     - **Validate these regions (MISTIE III)**
-- 
+    - **Scalar on image regression**
 
 </div>
 
@@ -422,9 +490,9 @@ Result: Permutation test p-value $<0.01$
 
 <div style="font-size: 24pt">
 
-- Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD), (with Dr. Taki Shinohara)
+- Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD)
 - Catheter scoring with pre/post-op registration for ICH 
-- Creating Department-level indices of publication (with Dr. Jeff Leek)
+- Creating Department-level indices of publication
 
 </div>
 
@@ -434,21 +502,21 @@ Result: Permutation test p-value $<0.01$
 
 
 
-## Subject Data used: 112 scans (1 per patient)
+## Subject Data used: 111 scans (1 per patient)
 <div id="wrap">
 <div id="left_col">
 
 
 |                    &nbsp;                    |   Overall   |
 |:--------------------------------------------:|:-----------:|
-|         **Age in Years: Mean (SD)**          | 60.7 (11.2) |
-|               **Male: N (%)**                | 77 (68.8%)  |
+|         **Age in Years: Mean (SD)**          | 60.8 (11.2) |
+|               **Male: N (%)**                | 76 (68.5%)  |
 |           **Clot Location RC (%)**           |             |
-|                 **Putamen**                  |  69 (61.6)  |
-|                  **Lobar**                   |  33 (29.5)  |
+|                 **Putamen**                  |  68 (61.3)  |
+|                  **Lobar**                   |  33 (29.7)  |
 |              **Globus Palidus**              |  6 ( 5.4)   |
 |                 **Thalamus**                 |  4 ( 3.6)   |
-|  **Diagnostic ICH Volume in mL: Mean (SD)**  | 37.7 (20.2) |
+|  **Diagnostic ICH Volume in mL: Mean (SD)**  | 37.4 (20.1) |
 
 </div>
 <div id="right_col"  style='font-size: 24pt;'>
