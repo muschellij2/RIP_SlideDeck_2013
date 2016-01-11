@@ -1,6 +1,6 @@
 ---
 title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed Tomography Scanning'
-author: 'John Muschelli'
+author: 'John Muschelli<br/> http://bit.ly/JOBTALK'
 date: 'January 14, 2016'
 bibliography: "Oral_Proposal.bib"
 output:
