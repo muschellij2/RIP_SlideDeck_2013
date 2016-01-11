@@ -207,7 +207,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <ul>
 <li>Multi-center, multi-national Phase II clinical trial</li>
 </ul></li>
-<li>111 baseline CT scans from 111 subjects from 26 centers</li>
 <li>Hemorrhages with volume ≥ 20 millilters (mL or cc)</li>
 </ul>
 
@@ -348,7 +347,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
 
 <div class="columns-2">
-<p><img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;"> <br> <img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;"></p>
+<p><img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;"> <br> <img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;" loop=infinite></p>
 
 <p style="font-size: 10pt;">
 
@@ -356,7 +355,7 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 </p></div>
 
-</article></slide><slide class=''><hgroup><h2>Step 1: Create Covariates <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="step-1-create-covariates">
+</article></slide><slide class=''><hgroup><h2>Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="step-1-create-predictors-of-ich">
 
 </article></slide><slide class=''><hgroup><h2>Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="data-structure-for-one-patient">
 
@@ -366,7 +365,7 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 <p>General model form: \[
 P(y_{i}(v) = 1) = f(X_i(v))
-\] where \(X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))\) are the covariates.</p>
+\] where \(X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))\) are the predictors.</p>
 
 <ul>
 <li>For models, we&#39;ll use the \(\text{logit}\) link function.</li>
@@ -385,13 +384,13 @@ P(y_{i}(v) = 1) = f(X_i(v))
 <p>\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO"></p></div></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Patient with Median Dice Overlap in 102 Patients</h2></hgroup><article  id="patient-with-median-dice-overlap-in-102-patients">
-
-<p><img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
-
 </article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="compare-estimated-to-true-volume">
 
 </article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="compare-estimated-to-true-volume-1">
+
+</article></slide><slide class=''><hgroup><h2>Patient with Median Overlap in 102 Patients</h2></hgroup><article  id="patient-with-median-overlap-in-102-patients">
+
+<p><img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
 
 </article></slide><slide class=''><hgroup><h2>Shiny Application: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-application-httpbit.lyich_seg">
 
@@ -639,6 +638,12 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 <li>Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD)</li>
 <li>Catheter scoring with pre/post-op registration for ICH</li>
 <li>Creating Department-level indices of publication</li>
+<li>Teaching Neuroimaging and R
+
+<ul>
+<li>Mathematical and Statistical Challenges in Neuroimaging Data Analysis</li>
+<li>JSM 2016</li>
+</ul></li>
 </ul></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">

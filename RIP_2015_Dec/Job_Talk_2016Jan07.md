@@ -109,7 +109,6 @@ From the `cranlogs` R package:
 
 * Minimally Invasive Surgery plus r-tPA for Intracerebral Hemorrhage Evacuation (<strong>MISTIE</strong>) 
     - Multi-center, multi-national Phase II clinical trial
-* 111 baseline CT scans from 111 subjects from 26 centers
 * Hemorrhages with volume ≥ 20 millilters (mL or cc)
 
 <img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO">
@@ -256,13 +255,13 @@ To a hemorrhage mask:
 <div class="columns-2">
 <img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;">
 <br>
-<img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;">
+<img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;" loop=infinite>
 
 <p style='font-size: 10pt;'>Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. "brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data." R JOURNAL 6.1 (2014): 42-48.</p>
 </div>
 
 
-## Step 1: Create Covariates <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO">  
+## Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO">  
 
 ## Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO">  
 
@@ -275,7 +274,7 @@ General model form:
 $$
 P(y_{i}(v) = 1) = f(X_i(v))
 $$
-where $X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))$ are the covariates.  
+where $X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))$ are the predictors.  
 
 * For models, we'll use the $\text{logit}$ link function.
 
@@ -292,15 +291,15 @@ $$
 \(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO">
 </div>
 
-
-## Patient with Median Dice Overlap in 102 Patients
-
-<img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO">  
+ 
 
 ## Compare Estimated to True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg">
 
 ## Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO">
 
+## Patient with Median Overlap in 102 Patients
+
+<img src="figure/Figure_DSI_Quantile_050.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"> 
 
 ## Shiny Application: http://bit.ly/ICH_SEG <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig">
 
@@ -530,6 +529,10 @@ Result: Permutation test p-value $<0.01$
 - Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD)
 - Catheter scoring with pre/post-op registration for ICH 
 - Creating Department-level indices of publication
+- Teaching Neuroimaging and R 
+    - Mathematical and Statistical Challenges in Neuroimaging Data Analysis 
+    - JSM 2016
+
 
 </div>
 
