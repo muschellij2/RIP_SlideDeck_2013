@@ -77,8 +77,12 @@ fdf = fdf[ fdf$id %in% pt.ids, ]
 library(tableone)
 library(stargazer)
 library(pander)
+library(plyr)
 alldemog = read.csv("All_180_FollowUp_wDemographics.csv", as.is = TRUE)
 alldemog = alldemog[, c("patientName", "Clot_Location_RC")]
+alldemog$Clot_Location_RC = plyr::revalue(
+  alldemog$Clot_Location_RC,
+  c("Globus Palidus" = "Globus Pallidus"))
 n.ids = length(unique(fdf$id))
 demog = fdf$id 
 
@@ -201,7 +205,6 @@ if (!require(cranlogs)) {
   library(devtools)
   install_github("metacran/cranlogs")
 }
-library(plyr)
 first_date = "2014-01-10"
 today = Sys.Date()
 long_today = format(Sys.time(), "%B %d, %Y")
@@ -214,7 +217,7 @@ dl = cran_downloads( from = first_date, to = today,
                      packages = packs)
 dl = ddply(dl, .(package), summarise, All_Time = sum(count))
 dl = merge(dl, last_week)
-dl = arrange(dl, desc(All_Time))
+dl = plyr::arrange(dl, desc(All_Time))
 colnames(dl) = c("Package", "All Time", "Last Week")
 ```
 
@@ -423,7 +426,7 @@ $$ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \su
 $$
 - Random Forests `r citep(c("randomForest", "breiman2001random"))`
 <div class="centerer">
-\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO">
+\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="Random Forest">
 </div>
 
  
@@ -450,7 +453,7 @@ $$
 2. Create a 3-dimensional (3D) density map of hemorrhages in MISTIE population
 3. Quantify of hemorrhage engagement of regions in the brain
 4. Determine if differences in location relate to stroke severity
-5. Generate a stroke region of engagement using within-sample validation.
+5. Generate a stroke region of engagement using within-sample validation
 </div>
 
 ## Registered Images and Masks/Regions of Interest
@@ -529,21 +532,9 @@ Due to a large number of tests, a Bonferroni correction (or FDR) did not result 
 
 - Create a High Predictive Region (HPR) based on a threshold: 
     - For example, $p < 0.01$    
-    - Calculate the overlap of the HPR for each scan $i$
-$$
-\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
-$$
-
-## HPR <img src="figure/hpr_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
-
-## Patient ICH <img src="figure/ich_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
 
 
-## Coverage is 10%: <img src="figure/both_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
-
-
-
-## Mask using P-value Threshold of $0.01$
+## Threshold P-value Map $0.01$ ⇒ HPR
 
 <div style="width:49%;float:left;">
 <img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="width: 100%">
@@ -551,6 +542,33 @@ $$
 <div style="margin-left:48%;">
 ![inline fill](figure/Top_19047_pvalues.png)
 </div>
+
+
+## HPR Coverage
+Calculate the overlap of the HPR for each scan $i$
+$$
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+$$
+<img src="figure/hpr_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob">
+
+
+## HPR Coverage
+Calculate the overlap of the HPR for each scan $i$
+$$
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+$$
+<img src="figure/ich_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob">
+
+## HPR Coverage
+Calculate the overlap of the HPR for each scan $i$
+$$
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+$$
+<img src="figure/both_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob">
+
+
+## Coverage is 2000/20000 * 100 = 10%: <img src="figure/both_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
+
 
 
 ## HPR Coverage Relationship with NIHSS
@@ -562,15 +580,36 @@ $$
 <img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline">
 </div>
 
+## Reader-Based Locations
+
+```{r, results='asis'}
+tb1[,1] = gsub("&nbsp;&nbsp;&nbsp;(.*)", "&nbsp;&nbsp;&nbsp;**\\1**", tb1[,1])
+ind = grepl("Clot Location", tb1[,1])
+tb1[ind,1] = paste0("**", tb1[ind,1], "**")
+pander(tb1, justify = c("lr"))
+```
+
+## Known predictors of NIHSS
+
+* Age
+* ICH Volume (ICHVol)
+* Sex
+
+
+$$\begin{eqnarray} 
+{\rm NIHSS}_i &=& \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}$$
+
+
 ## Compare HPR to using Reader-Based Locations
 
-Using the adjusted $R^2$, we compared the models:
+Using the adjusted $R^2$, we compared the **HPR model**:
 
 $$\begin{eqnarray} 
 {\rm NIHSS}_i &=& \beta_0 + \beta_1 {\rm Coverage}_i \\
 &+& \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
 \end{eqnarray}$$
-to that of the categorical indicator of location:
+to the **reader-based model**:
 $$\begin{eqnarray} 
 {\rm NIHSS}_i &=& \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
 &+& \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
@@ -581,16 +620,10 @@ where $I(k)$ represents the indicator that ICH location was $k$
 
 * Adjusted $R^2$, Location model: 0.129 vs. HPR coverage Model: 0.254 
 
-Null Model
-$$\begin{eqnarray} 
-{\rm Y}_i &=& \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
-\end{eqnarray}$$
+* Likelihood ratio test (LRT) comparing HPR coverage model to null model: $p < 0.001$
+* LRT: Location model vs. null model: $p = 0.1844$
 
-* Likelihood ratio test (LRT) comparing HPR coverage model to null model: p < 0.001
-* LRT: Location model vs. null model: p = 0.1844
-
-
-* LRT: Location+HPR model vs. Location-only model: p < 0.001
+* LRT: Location+HPR model vs. Location-only model: $p < 0.001$
 
 ## Test whether HPR coverage performs better than chance?
 

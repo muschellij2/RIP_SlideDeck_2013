@@ -194,8 +194,8 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <p>From the <code>cranlogs</code> R package:</p>
 
-<p><div id="htmlwidget-6855" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-6855">{"x":{"data":[["brainR","fslr","WhiteStripe","matlabr","spm12r","diffr","oasis"],[6807,5975,3442,726,459,376,89],[67,80,52,57,51,60,61]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
+<p><div id="htmlwidget-3811" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-3811">{"x":{"data":[["brainR","fslr","WhiteStripe","matlabr","spm12r","diffr","oasis"],[6815,5984,3451,739,466,384,103],[63,75,52,59,48,56,65]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Neuroimaging Analysis in Stroke</h2></hgroup><article  id="neuroimaging-analysis-in-stroke">
 
@@ -319,7 +319,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <td align="right">33 (29.7)</td>
 </tr>
 <tr class="even">
-<td align="left">   Globus Palidus</td>
+<td align="left">   Globus Pallidus</td>
 <td align="right">6 ( 5.4)</td>
 </tr>
 <tr class="odd">
@@ -395,7 +395,7 @@ P(y_{i}(v) = 1) = f(X_i(v))
 <li>Random Forests (Liaw, et al., 2002; Breiman, 2001)
 
 <div class="centerer">
-<p>\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO"></p></div></li>
+<p>\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="Random Forest"></p></div></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="compare-estimated-to-true-volume">
@@ -417,7 +417,7 @@ P(y_{i}(v) = 1) = f(X_i(v))
 <li>Create a 3-dimensional (3D) density map of hemorrhages in MISTIE population</li>
 <li>Quantify of hemorrhage engagement of regions in the brain</li>
 <li>Determine if differences in location relate to stroke severity</li>
-<li>Generate a stroke region of engagement using within-sample validation.</li>
+<li>Generate a stroke region of engagement using within-sample validation</li>
 </ol></div>
 
 </article></slide><slide class=''><hgroup><h2>Registered Images and Masks/Regions of Interest</h2></hgroup><article  id="registered-images-and-masksregions-of-interest">
@@ -517,26 +517,37 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 <li>Create a High Predictive Region (HPR) based on a threshold:
 
 <ul>
-<li>For example, \(p &lt; 0.01\)<br/></li>
-<li>Calculate the overlap of the HPR for each scan \(i\) \[
-\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
-\]</li>
+<li>For example, \(p &lt; 0.01\)</li>
 </ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>HPR <img src="figure/hpr_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="hpr">
-
-</article></slide><slide class=''><hgroup><h2>Patient ICH <img src="figure/ich_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="patient-ich">
-
-</article></slide><slide class=''><hgroup><h2>Coverage is 10%: <img src="figure/both_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="coverage-is-10">
-
-</article></slide><slide class=''><hgroup><h2>Mask using P-value Threshold of \(0.01\)</h2></hgroup><article  id="mask-using-p-value-threshold-of-0.01">
+</article></slide><slide class=''><hgroup><h2>Threshold P-value Map \(0.01\) ⇒ HPR</h2></hgroup><article  id="threshold-p-value-map-0.01-hpr">
 
 <div style="width:49%;float:left;">
 <p><img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="width: 100%"></p></div>
 
 <div style="margin-left:48%;">
 <img src='figure/Top_19047_pvalues.png' title=''/></div>
+
+</article></slide><slide class=''><hgroup><h2>HPR Coverage</h2></hgroup><article  id="hpr-coverage">
+
+<p>Calculate the overlap of the HPR for each scan \(i\) \[
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+\] <img src="figure/hpr_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob"></p>
+
+</article></slide><slide class=''><hgroup><h2>HPR Coverage</h2></hgroup><article  id="hpr-coverage-1">
+
+<p>Calculate the overlap of the HPR for each scan \(i\) \[
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+\] <img src="figure/ich_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob"></p>
+
+</article></slide><slide class=''><hgroup><h2>HPR Coverage</h2></hgroup><article  id="hpr-coverage-2">
+
+<p>Calculate the overlap of the HPR for each scan \(i\) \[
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+\] <img src="figure/both_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob"></p>
+
+</article></slide><slide class=''><hgroup><h2>Coverage is 2000/20000 * 100 = 10%: <img src="figure/both_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="coverage-is-200020000-100-10">
 
 </article></slide><slide class=''><hgroup><h2>HPR Coverage Relationship with NIHSS</h2></hgroup><article  id="hpr-coverage-relationship-with-nihss">
 
@@ -546,14 +557,69 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 <div style="margin-left:48%;">
 <p><img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
 
+</article></slide><slide class=''><hgroup><h2>Reader-Based Locations</h2></hgroup><article  id="reader-based-locations">
+
+<table class = 'rmdtable'>
+<col width="43%" />
+<col width="15%" />
+<tr class="header">
+<th align="left"> </th>
+<th align="right">Overall</th>
+</tr>
+<tr class="odd">
+<td align="left">Age in Years: Mean (SD)</td>
+<td align="right">60.8 (11.2)</td>
+</tr>
+<tr class="even">
+<td align="left">Male: N (%)</td>
+<td align="right">76 (68.5%)</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Clot Location RC (%)</strong></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">   <strong>Putamen</strong></td>
+<td align="right">68 (61.3)</td>
+</tr>
+<tr class="odd">
+<td align="left">   <strong>Lobar</strong></td>
+<td align="right">33 (29.7)</td>
+</tr>
+<tr class="even">
+<td align="left">   <strong>Globus Pallidus</strong></td>
+<td align="right">6 ( 5.4)</td>
+</tr>
+<tr class="odd">
+<td align="left">   <strong>Thalamus</strong></td>
+<td align="right">4 ( 3.6)</td>
+</tr>
+<tr class="even">
+<td align="left">Diagnostic ICH Volume in mL: Mean (SD)</td>
+<td align="right">37.4 (20.1)</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Known predictors of NIHSS</h2></hgroup><article  id="known-predictors-of-nihss">
+
+<ul>
+<li>Age</li>
+<li>ICH Volume (ICHVol)</li>
+<li>Sex</li>
+</ul>
+
+<p>\[\begin{eqnarray} 
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}\]</p>
+
 </article></slide><slide class=''><hgroup><h2>Compare HPR to using Reader-Based Locations</h2></hgroup><article  id="compare-hpr-to-using-reader-based-locations">
 
-<p>Using the adjusted \(R^2\), we compared the models:</p>
+<p>Using the adjusted \(R^2\), we compared the <strong>HPR model</strong>:</p>
 
 <p>\[\begin{eqnarray} 
 {\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
-\end{eqnarray}\] to that of the categorical indicator of location: \[\begin{eqnarray} 
+\end{eqnarray}\] to the <strong>reader-based model</strong>: \[\begin{eqnarray} 
 {\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
 \end{eqnarray}\] where \(I(k)\) represents the indicator that ICH location was \(k\)</p>
@@ -561,17 +627,10 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 </article></slide><slide class=''><hgroup><h2>Testing if HPR is more Predictive than Location</h2></hgroup><article  id="testing-if-hpr-is-more-predictive-than-location">
 
 <ul>
-<li>Adjusted \(R^2\), Location model: 0.129 vs. HPR coverage Model: 0.254</li>
-</ul>
-
-<p>Null Model \[\begin{eqnarray} 
-{\rm Y}_i &amp;=&amp; \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
-\end{eqnarray}\]</p>
-
-<ul>
-<li>Likelihood ratio test (LRT) comparing HPR coverage model to null model: p &lt; 0.001</li>
-<li><p>LRT: Location model vs. null model: p = 0.1844</p></li>
-<li><p>LRT: Location+HPR model vs. Location-only model: p &lt; 0.001</p></li>
+<li><p>Adjusted \(R^2\), Location model: 0.129 vs. HPR coverage Model: 0.254</p></li>
+<li>Likelihood ratio test (LRT) comparing HPR coverage model to null model: \(p &lt; 0.001\)</li>
+<li><p>LRT: Location model vs. null model: \(p = 0.1844\)</p></li>
+<li><p>LRT: Location+HPR model vs. Location-only model: \(p &lt; 0.001\)</p></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Test whether HPR coverage performs better than chance?</h2></hgroup><article  id="test-whether-hpr-coverage-performs-better-than-chance">
