@@ -288,6 +288,58 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>ICH Segmentation and ICH Volume Estimation: <br/> <br/> Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="ich-segmentation-and-ich-volume-estimation-larger-ich-volume-worse-outcome">
 
+</article></slide><slide class=''><hgroup><h2>Subject Data used: 111 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-111-scans-1-per-patient">
+
+<div id="wrap">
+<div id="left_col">
+<table class = 'rmdtable'>
+<col width="40%" />
+<col width="15%" />
+<tr class="header">
+<th align="left"> </th>
+<th align="right">Overall</th>
+</tr>
+<tr class="odd">
+<td align="left">Age in Years: Mean (SD)</td>
+<td align="right">60.8 (11.2)</td>
+</tr>
+<tr class="even">
+<td align="left">Male: N (%)</td>
+<td align="right">76 (68.5%)</td>
+</tr>
+<tr class="odd">
+<td align="left">Clot Location RC (%)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">   Putamen</td>
+<td align="right">68 (61.3)</td>
+</tr>
+<tr class="odd">
+<td align="left">   Lobar</td>
+<td align="right">33 (29.7)</td>
+</tr>
+<tr class="even">
+<td align="left">   Globus Palidus</td>
+<td align="right">6 ( 5.4)</td>
+</tr>
+<tr class="odd">
+<td align="left">   Thalamus</td>
+<td align="right">4 ( 3.6)</td>
+</tr>
+<tr class="even">
+<td align="left">Diagnostic ICH Volume in mL: Mean (SD)</td>
+<td align="right">37.4 (20.1)</td>
+</tr>
+</table></div>
+
+<div id="right_col" style="font-size: 24pt;">
+<ul>
+<li>Adults (inclusion criteria 18-80 years old)</li>
+<li>Large ICH areas</li>
+<li>Small Intraventricular Hemorrhages (IVH)</li>
+</ul></div></div>
+
 </article></slide><slide class=''><hgroup><h2>ICH Segmentation, Volume/Location Estimation</h2></hgroup><article  id="ich-segmentation-volumelocation-estimation">
 
 <div class="columns-2">
@@ -459,15 +511,11 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 </ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2><img src="figure/hpr_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="section">
+</article></slide><slide class=''><hgroup><h2>HPR <img src="figure/hpr_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="hpr">
 
-</article></slide><slide class=''><hgroup><h2>Mask from P-value Threshold of \(0.01\)</h2></hgroup><article  id="mask-from-p-value-threshold-of-0.01">
+</article></slide><slide class=''><hgroup><h2>Patient ICH <img src="figure/ich_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="patient-ich">
 
-<div style="width:48%;float:left;">
-<img src='figure/Top_19047_pvalues.png' title=''/></div>
-
-<div style="margin-left:48%;">
-<p><img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
+</article></slide><slide class=''><hgroup><h2>Coverage is 10%: <img src="figure/both_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="coverage-is-10">
 
 </article></slide><slide class=''><hgroup><h2>Mask using P-value Threshold of \(0.01\)</h2></hgroup><article  id="mask-using-p-value-threshold-of-0.01">
 
@@ -497,7 +545,7 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
 \end{eqnarray}\] where \(I(k)\) represents the indicator that ICH location was \(k\)</p>
 
-</article></slide><slide class=''><hgroup><h2>Testing whether HPR is more Predictive than Location</h2></hgroup><article  id="testing-whether-hpr-is-more-predictive-than-location">
+</article></slide><slide class=''><hgroup><h2>Testing if HPR is more Predictive than Location</h2></hgroup><article  id="testing-if-hpr-is-more-predictive-than-location">
 
 <ul>
 <li>Adjusted \(R^2\), Location model: 0.129 vs. HPR coverage Model: 0.254</li>
@@ -594,56 +642,6 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 </ul></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">
-
-</article></slide><slide class=''><hgroup><h2>Subject Data used: 111 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-111-scans-1-per-patient">
-
-<div id="wrap">
-<div id="left_col">
-<table class = 'rmdtable'>
-<tr class="header">
-<th align="center"> </th>
-<th align="center">Overall</th>
-</tr>
-<tr class="odd">
-<td align="center"><strong>Age in Years: Mean (SD)</strong></td>
-<td align="center">60.8 (11.2)</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>Male: N (%)</strong></td>
-<td align="center">76 (68.5%)</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>Clot Location RC (%)</strong></td>
-<td align="center"></td>
-</tr>
-<tr class="even">
-<td align="center"><strong>Putamen</strong></td>
-<td align="center">68 (61.3)</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>Lobar</strong></td>
-<td align="center">33 (29.7)</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>Globus Palidus</strong></td>
-<td align="center">6 ( 5.4)</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>Thalamus</strong></td>
-<td align="center">4 ( 3.6)</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>Diagnostic ICH Volume in mL: Mean (SD)</strong></td>
-<td align="center">37.4 (20.1)</td>
-</tr>
-</table></div>
-
-<div id="right_col" style="font-size: 24pt;">
-<ul>
-<li>Adults (inclusion criteria 18-80 years old)</li>
-<li>Large ICH areas</li>
-<li>Small Intraventricular Hemorrhages (IVH)</li>
-</ul></div></div>
 
 </article></slide><slide class=''><hgroup><h2>Global Head Information: Smoothed Images</h2></hgroup><article  id="global-head-information-smoothed-images">
 

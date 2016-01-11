@@ -202,6 +202,45 @@ To a brain-extracted image:
 
 
 
+
+## Subject Data used: 111 scans (1 per patient)
+<div id="wrap">
+<div id="left_col">
+
+
+----------------------------------------
+&nbsp;                           Overall
+---------------------------- -----------
+Age in Years: Mean (SD)      60.8 (11.2)
+
+Male: N (%)                   76 (68.5%)
+
+Clot Location RC (%)                    
+
+&nbsp;&nbsp;&nbsp;Putamen      68 (61.3)
+
+&nbsp;&nbsp;&nbsp;Lobar        33 (29.7)
+
+&nbsp;&nbsp;&nbsp;Globus        6 ( 5.4)
+Palidus                                 
+
+&nbsp;&nbsp;&nbsp;Thalamus      4 ( 3.6)
+
+Diagnostic ICH Volume in mL: 37.4 (20.1)
+Mean (SD)                               
+----------------------------------------
+
+</div>
+<div id="right_col"  style='font-size: 24pt;'>
+
+
+- Adults (inclusion criteria 18-80 years old)
+- Large ICH areas
+- Small Intraventricular Hemorrhages (IVH)
+</div>
+
+</div>
+
 ## ICH Segmentation, Volume/Location Estimation 
 
 <div class="columns-2">
@@ -365,16 +404,14 @@ $$
 \text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
 $$
 
-## <img src="figure/hpr_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
+## HPR <img src="figure/hpr_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
 
-## Mask from P-value Threshold of $0.01$
+## Patient ICH <img src="figure/ich_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
 
-<div style="width:48%;float:left;">
-![inline fill](figure/Top_19047_pvalues.png)
-</div>
-<div style="margin-left:48%;">
-<img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="Regline">
-</div>
+
+## Coverage is 10%: <img src="figure/both_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob">
+
+
 
 ## Mask using P-value Threshold of $0.01$
 
@@ -410,7 +447,7 @@ $$\begin{eqnarray}
 \end{eqnarray}$$
 where $I(k)$ represents the indicator that ICH location was $k$
 
-## Testing whether HPR is more Predictive than Location
+## Testing if HPR is more Predictive than Location
 
 * Adjusted $R^2$, Location model: 0.129 vs. HPR coverage Model: 0.254 
 
@@ -502,32 +539,6 @@ Result: Permutation test p-value $<0.01$
 
 
 
-## Subject Data used: 111 scans (1 per patient)
-<div id="wrap">
-<div id="left_col">
-
-
-|                    &nbsp;                    |   Overall   |
-|:--------------------------------------------:|:-----------:|
-|         **Age in Years: Mean (SD)**          | 60.8 (11.2) |
-|               **Male: N (%)**                | 76 (68.5%)  |
-|           **Clot Location RC (%)**           |             |
-|                 **Putamen**                  |  68 (61.3)  |
-|                  **Lobar**                   |  33 (29.7)  |
-|              **Globus Palidus**              |  6 ( 5.4)   |
-|                 **Thalamus**                 |  4 ( 3.6)   |
-|  **Diagnostic ICH Volume in mL: Mean (SD)**  | 37.4 (20.1) |
-
-</div>
-<div id="right_col"  style='font-size: 24pt;'>
-
-
-- Adults (inclusion criteria 18-80 years old)
-- Large ICH areas
-- Small Intraventricular Hemorrhages (IVH)
-</div>
-
-</div>
 
 
 ## Global Head Information: Smoothed Images
