@@ -150,9 +150,6 @@ x-ray goes around object and detector the other side of the object determines ho
 </div>
 
 
-
-# Brain Segmentation of CT Scans
-
 ## Terminology: Neuroimaging to Data/Statistics
 
 <div style="font-size: 26pt">
@@ -161,6 +158,9 @@ x-ray goes around object and detector the other side of the object determines ho
 * Mask/Region of Interest ⇔ binary (0/1) image 
 * Registration ⇔  Spatial Normalization/Standarization
 </div>
+
+
+# Brain Segmentation of CT Scans
 
 ## Problem: CT Scans Capture **Everything**
 
@@ -197,9 +197,20 @@ To a brain-extracted image:
 
 
 
-# ICH Segmentation and ICH Volume Estimation: <br/> <br/> Larger ICH Volume ⇒ Worse Outcome
+# Larger ICH Volume ⇒ Worse Outcome
 
 
+
+
+## ICH Segmentation, Volume/Location Estimation 
+
+<div class="columns-2">
+Want to go from a brain image:
+<img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
+<br/>
+To a binary hemorrhage mask:
+<img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
+</div>
 
 
 ## Subject Data used: 111 scans (1 per patient)
@@ -241,16 +252,6 @@ Mean (SD)
 
 </div>
 
-## ICH Segmentation, Volume/Location Estimation 
-
-<div class="columns-2">
-Want to go from a brain image:
-<img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
-<br/>
-To a binary hemorrhage mask:
-<img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
-</div>
-
 
 ## Image Representation: voxels (3D pixels)
 <div class="columns-2">
@@ -283,11 +284,11 @@ To a binary hemorrhage mask:
 
 ## Step 2: Fit Models 
 
-Let $y_{i}(v)$ be the presence / absence of ICH for voxel $v$ from person $i$.  
+Let $Y_{i}(v)$ be the presence / absence of ICH for voxel $v$ from person $i$.  
 
 General model form: 
 $$
-P(y_{i}(v) = 1) = f(X_i(v))
+P(Y_{i}(v) = 1) = f(X_i(v))
 $$
 where $X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))$ are the predictors.  
 
@@ -335,7 +336,7 @@ $$
 
 # Population ICH Distribution
 
-## Register Images 
+## Register CT Image to Template
 
 <div class="container">
    <div class="left-half">
@@ -556,54 +557,44 @@ $$\begin{eqnarray}
 \end{eqnarray}$$
 where $I(k)$ represents the indicator that ICH location was $k$
 
-## Testing if HPR is more Predictive than Location
+## Testing if HPR is more Predictive than Reader
 
-* Adjusted $R^2$, Location model: 0.129 vs. HPR coverage Model: 0.254 
 
 * Likelihood ratio test (LRT) comparing HPR coverage model to null model: $p < 0.001$
-* LRT: Location model vs. null model: $p = 0.1844$
 
-* LRT: Location+HPR model vs. Location-only model: $p < 0.001$
+* LRT: Reader model vs. null model: $p = 0.1844$
 
-## Test whether HPR coverage performs better than chance?
+* Adjusted $R^2$, Reader model: 0.129 vs. HPR coverage Model: 0.254 
 
-- Recall: data-based algorithm for defining the HPR
+Nested Model Comparison:
+
+* LRT: Reader+HPR model vs. Reader-only model: $p < 0.001$
+
+## Does HPR coverage perform better than chance?
 
 Procedure (P):
 
-- Fit voxel-wise models
-- Collect the most predictive voxels
-- Produce subject-level predictors by coalescing voxels
+1. Fit voxel-wise models
+2. Collect the most predictive voxels
+3. Produce subject-level predictors by coalescing voxels
 
 Problems:
 
 - Multiplicity
-- Double-dipping
-
-
-## Using the outcome twice! Double Dipping
-
-
-<div style="font-size: 24pt">
-- Dip: look at the data, construct predictors
-- Double-dip: are the new predictors predictive?
-- This violates one of the basic principles of Statistics: the separation between the exploratory and confirmatory phases of the analysis
-</div>
+- Double-dipping: Using the data twice
+    - Violates separation of exploratory and confirmatory analyses
 
 ## One Possible Solution: Permutation Testing 
-
-
-Compare adjusted $R^2$ from the original data with its permutation distribution
 
 Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
 
 Permutation procedure:
 
-1.  Permute outcomes
-2.  Apply selection procedure P and obtain HPR
-3.  Calculate adjusted $R^2$
+1.  Permute NIHSS
+2.  Apply selection procedure and obtain HPR on permuted NIHSS
+3.  Calculate adjusted $R^2$ on true NIHSS
 
-## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:100%; display: block; margin: auto;" alt="Perm fig">
+## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig">
 
 
 
@@ -611,6 +602,7 @@ Permutation procedure:
 ## Conclusions of Stroke Analyses
 <div style="font-size: 24pt">
 - We can segment ICH volume from CT scans <br/><br/>
+- We can create population-level ICH distributions <br/><br/>
 - Voxel-wise regression can show regions associated with severity <br/><br/>
 
 </div>
@@ -622,6 +614,8 @@ Permutation procedure:
 
 - We can segment ICH volume from CT scans
     - **Incorporate variability of estimated volume**
+- We can create population-level ICH distributions
+    - **Uncertainty measures of this**
 - Voxel-wise regression can show regions associated with severity
     - **Validate these regions (MISTIE III)**
     - **Scalar on image regression**
@@ -646,44 +640,3 @@ Permutation procedure:
 # Thank You
 
 
-
-
-
-
-## Global Head Information: Smoothed Images
-
-Smoothing the original image using large Gaussian kernels ($\sigma = 5mm^3,10mm^3, 20mm^3$) can capture any potential homogeneity throughout the scan.  
-
-<div class="container">
-   <div class="column-center">
-   $\sigma = 10$
-<img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth10.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO">
-</div>
-   <div class="column-left">
-   $\sigma = 5$
-<img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth5.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO">
-</div>
-   <div class="column-right">
-   $\sigma = 20$
-<img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth20.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO">
-   </div>
-</div>
-
-
-
-## Larger ICH ⇒ Worse Outcome
-<div style="font-size: 14pt; color:black;">
-<br>
-J. P. Broderick, T. G. Brott, J. E. Duldner, et al. **"Volume of intracerebral hemorrhage. A powerful and easy-to-use predictor of 30-day mortality."** In: _Stroke_ 24.7 (1993), pp. 987-993.
-
-S. Davis, J. Broderick, M. Hennerici, et al. **"Hematoma growth is a determinant of mortality and poor outcome after intracerebral hemorrhage"**. In: _Neurology_ 66.8 (2006), pp. 1175-1181.
-
-L. C. Jordan, J. T. Kleinman and A. E. Hillis. **"Intracerebral hemorrhage volume predicts poor neurologic outcome in children"**. In:
-_Stroke_ 40.5 (2009), pp. 1666-1671.
-
-S. Tuhrim, D. R. Horowitz, M. Sacher, et al. **"Volume of ventricular blood is an important determinant of outcome in supratentorial intracerebral hemorrhage"**. In: _Critical care medicine_ 27.3 (1999),
-pp. 617-621.
-</div>
-
-# NIHSS 
-# One panel

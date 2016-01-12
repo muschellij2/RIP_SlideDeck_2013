@@ -247,8 +247,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div style="margin-left:48%;">
 <p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Brain Segmentation of CT Scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans">
-
 </article></slide><slide class=''><hgroup><h2>Terminology: Neuroimaging to Data/Statistics</h2></hgroup><article  id="terminology-neuroimaging-to-datastatistics">
 
 <div style="font-size: 26pt">
@@ -258,6 +256,8 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>Mask/Region of Interest ⇔ binary (0/1) image</li>
 <li>Registration ⇔ Spatial Normalization/Standarization</li>
 </ul></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Brain Segmentation of CT Scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans">
 
 </article></slide><slide class=''><hgroup><h2>Problem: CT Scans Capture <strong>Everything</strong></h2></hgroup><article  id="problem-ct-scans-capture-everything">
 
@@ -285,7 +285,12 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>bash code: <a href='http://bit.ly/CTBET_BASH' title=''>http://bit.ly/CTBET_BASH</a></li>
 </ul>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>ICH Segmentation and ICH Volume Estimation: <br/> <br/> Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="ich-segmentation-and-ich-volume-estimation-larger-ich-volume-worse-outcome">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="larger-ich-volume-worse-outcome">
+
+</article></slide><slide class=''><hgroup><h2>ICH Segmentation, Volume/Location Estimation</h2></hgroup><article  id="ich-segmentation-volumelocation-estimation">
+
+<div class="columns-2">
+<p>Want to go from a brain image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a binary hemorrhage mask: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
 </article></slide><slide class=''><hgroup><h2>Subject Data used: 111 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-111-scans-1-per-patient">
 
@@ -339,11 +344,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>Reader-classified Location of Hemorrhage</li>
 </ul></div></div>
 
-</article></slide><slide class=''><hgroup><h2>ICH Segmentation, Volume/Location Estimation</h2></hgroup><article  id="ich-segmentation-volumelocation-estimation">
-
-<div class="columns-2">
-<p>Want to go from a brain image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a binary hemorrhage mask: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
-
 </article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
 
 <div class="columns-2">
@@ -375,10 +375,10 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 </article></slide><slide class=''><hgroup><h2>Step 2: Fit Models</h2></hgroup><article  id="step-2-fit-models">
 
-<p>Let \(y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
+<p>Let \(Y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
 
 <p>General model form: \[
-P(y_{i}(v) = 1) = f(X_i(v))
+P(Y_{i}(v) = 1) = f(X_i(v))
 \] where \(X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))\) are the predictors.</p>
 
 <ul>
@@ -422,7 +422,7 @@ P(y_{i}(v) = 1) = f(X_i(v))
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution">
 
-</article></slide><slide class=''><hgroup><h2>Register Images</h2></hgroup><article  id="register-images">
+</article></slide><slide class=''><hgroup><h2>Register CT Image to Template</h2></hgroup><article  id="register-ct-image-to-template">
 
 <div class="container">
 <div class="left-half">
@@ -675,66 +675,61 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
 \end{eqnarray}\] where \(I(k)\) represents the indicator that ICH location was \(k\)</p>
 
-</article></slide><slide class=''><hgroup><h2>Testing if HPR is more Predictive than Location</h2></hgroup><article  id="testing-if-hpr-is-more-predictive-than-location">
+</article></slide><slide class=''><hgroup><h2>Testing if HPR is more Predictive than Reader</h2></hgroup><article  id="testing-if-hpr-is-more-predictive-than-reader">
 
 <ul>
-<li><p>Adjusted \(R^2\), Location model: 0.129 vs. HPR coverage Model: 0.254</p></li>
-<li>Likelihood ratio test (LRT) comparing HPR coverage model to null model: \(p &lt; 0.001\)</li>
-<li><p>LRT: Location model vs. null model: \(p = 0.1844\)</p></li>
-<li><p>LRT: Location+HPR model vs. Location-only model: \(p &lt; 0.001\)</p></li>
+<li><p>Likelihood ratio test (LRT) comparing HPR coverage model to null model: \(p &lt; 0.001\)</p></li>
+<li><p>LRT: Reader model vs. null model: \(p = 0.1844\)</p></li>
+<li><p>Adjusted \(R^2\), Reader model: 0.129 vs. HPR coverage Model: 0.254</p></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Test whether HPR coverage performs better than chance?</h2></hgroup><article  id="test-whether-hpr-coverage-performs-better-than-chance">
+<p>Nested Model Comparison:</p>
 
 <ul>
-<li>Recall: data-based algorithm for defining the HPR</li>
+<li>LRT: Reader+HPR model vs. Reader-only model: \(p &lt; 0.001\)</li>
 </ul>
+
+</article></slide><slide class=''><hgroup><h2>Does HPR coverage perform better than chance?</h2></hgroup><article  id="does-hpr-coverage-perform-better-than-chance">
 
 <p>Procedure (P):</p>
 
-<ul>
+<ol>
 <li>Fit voxel-wise models</li>
 <li>Collect the most predictive voxels</li>
 <li>Produce subject-level predictors by coalescing voxels</li>
-</ul>
+</ol>
 
 <p>Problems:</p>
 
 <ul>
 <li>Multiplicity</li>
-<li>Double-dipping</li>
+<li>Double-dipping: Using the data twice
+
+<ul>
+<li>Violates separation of exploratory and confirmatory analyses</li>
+</ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Using the outcome twice! Double Dipping</h2></hgroup><article  id="using-the-outcome-twice-double-dipping">
-
-<div style="font-size: 24pt">
-<ul>
-<li>Dip: look at the data, construct predictors</li>
-<li>Double-dip: are the new predictors predictive?</li>
-<li>This violates one of the basic principles of Statistics: the separation between the exploratory and confirmatory phases of the analysis</li>
-</ul></div>
-
 </article></slide><slide class=''><hgroup><h2>One Possible Solution: Permutation Testing</h2></hgroup><article  id="one-possible-solution-permutation-testing">
-
-<p>Compare adjusted \(R^2\) from the original data with its permutation distribution</p>
 
 <p>Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome</p>
 
 <p>Permutation procedure:</p>
 
 <ol>
-<li>Permute outcomes</li>
-<li>Apply selection procedure P and obtain HPR</li>
-<li>Calculate adjusted \(R^2\)</li>
+<li>Permute NIHSS</li>
+<li>Apply selection procedure and obtain HPR on permuted NIHSS</li>
+<li>Calculate adjusted \(R^2\) on true NIHSS</li>
 </ol>
 
-</article></slide><slide class=''><hgroup><h2>Result: Permutation test p-value \(&lt;0.01\) <img src="figure/NIHSS_Permutation_Figure.png" style="width:100%; display: block; margin: auto;" alt="Perm fig"></h2></hgroup><article  id="result-permutation-test-p-value-0.01">
+</article></slide><slide class=''><hgroup><h2>Result: Permutation test p-value \(&lt;0.01\) <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig"></h2></hgroup><article  id="result-permutation-test-p-value-0.01">
 
 </article></slide><slide class=''><hgroup><h2>Conclusions of Stroke Analyses</h2></hgroup><article  id="conclusions-of-stroke-analyses">
 
 <div style="font-size: 24pt">
 <ul>
 <li>We can segment ICH volume from CT scans <br/><br/></li>
+<li>We can create population-level ICH distributions <br/><br/></li>
 <li>Voxel-wise regression can show regions associated with severity <br/><br/></li>
 </ul></div>
 
@@ -746,6 +741,11 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 
 <ul>
 <li><strong>Incorporate variability of estimated volume</strong></li>
+</ul></li>
+<li>We can create population-level ICH distributions
+
+<ul>
+<li><strong>Uncertainty measures of this</strong></li>
 </ul></li>
 <li>Voxel-wise regression can show regions associated with severity
 
@@ -770,36 +770,7 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 </ul></li>
 </ul></div>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">
-
-</article></slide><slide class=''><hgroup><h2>Global Head Information: Smoothed Images</h2></hgroup><article  id="global-head-information-smoothed-images">
-
-<p>Smoothing the original image using large Gaussian kernels (\(\sigma = 5mm^3,10mm^3, 20mm^3\)) can capture any potential homogeneity throughout the scan.</p>
-
-<div class="container">
-<div class="column-center">
-<p>\(\sigma = 10\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth10.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
-
-<div class="column-left">
-<p>\(\sigma = 5\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth5.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
-
-<div class="column-right">
-\(\sigma = 20\) <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_smooth20.png" style="width:100%; display: block; margin: auto;" alt="MISTIE LOGO"></div></div>
-
-</article></slide><slide class=''><hgroup><h2>Larger ICH ⇒ Worse Outcome</h2></hgroup><article  id="larger-ich-worse-outcome">
-
-<div style="font-size: 14pt; color:black;">
-<p><br> J. P. Broderick, T. G. Brott, J. E. Duldner, et al. <strong>&quot;Volume of intracerebral hemorrhage. A powerful and easy-to-use predictor of 30-day mortality.&quot;</strong> In: <em>Stroke</em> 24.7 (1993), pp. 987-993.</p>
-
-<p>S. Davis, J. Broderick, M. Hennerici, et al. <strong>&quot;Hematoma growth is a determinant of mortality and poor outcome after intracerebral hemorrhage&quot;</strong>. In: <em>Neurology</em> 66.8 (2006), pp. 1175-1181.</p>
-
-<p>L. C. Jordan, J. T. Kleinman and A. E. Hillis. <strong>&quot;Intracerebral hemorrhage volume predicts poor neurologic outcome in children&quot;</strong>. In: <em>Stroke</em> 40.5 (2009), pp. 1666-1671.</p>
-
-<p>S. Tuhrim, D. R. Horowitz, M. Sacher, et al. <strong>&quot;Volume of ventricular blood is an important determinant of outcome in supratentorial intracerebral hemorrhage&quot;</strong>. In: <em>Critical care medicine</em> 27.3 (1999), pp. 617-621.</p></div>
-
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>NIHSS</h2></hgroup><article  id="nihss">
-
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>One panel</h2></hgroup><article  id="one-panel" class="unnumbered">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you" class="unnumbered">
 
 <div id="refs" class="references">
 </div></article></slide>
