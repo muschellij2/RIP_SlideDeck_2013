@@ -1,6 +1,6 @@
 # Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed Tomography Scanning
-John Muschelli<br/> http://bit.ly/JOBTALK  
-January 14, 2016  
+John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/JOBTALK  
+January 12, 2016  
 
 
 <script type="text/x-mathjax-config">
