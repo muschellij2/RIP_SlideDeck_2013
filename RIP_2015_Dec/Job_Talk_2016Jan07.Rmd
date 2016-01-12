@@ -4,13 +4,13 @@ title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray 
 author: "John Muschelli<br/> http://bit.ly/JOBTALK"
 date: "January 14, 2016"
 output:
-  beamer_presentation: default
   ioslides_presentation:
     css: john_orals.css
     keep_md: yes
     mathjax: local
     self_contained: no
     widescreen: yes
+  beamer_presentation: default
   slidy_presentation:
     css: john_orals.css
     keep_md: yes
@@ -661,6 +661,7 @@ pander(tb1, justify = c("lr"))
 * ICH Volume (ICHVol)
 * Sex
 
+Null Model:
 
 $$\begin{eqnarray} 
 {\rm NIHSS}_i &=& \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}

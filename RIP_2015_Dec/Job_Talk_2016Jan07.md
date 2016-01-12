@@ -536,6 +536,7 @@ Mean (SD)
 * ICH Volume (ICHVol)
 * Sex
 
+Null Model:
 
 $$\begin{eqnarray} 
 {\rm NIHSS}_i &=& \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
