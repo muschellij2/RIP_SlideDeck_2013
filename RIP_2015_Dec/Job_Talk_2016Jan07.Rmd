@@ -456,20 +456,31 @@ $$
 5. Generate a stroke region of engagement using within-sample validation
 </div>
 
-## Registered Images and Masks/Regions of Interest
+# Population ICH Distribution
+
+## Register Images 
 
 <div class="container">
-   <div class="column-left">
-   Raw Image:
-   <img src="figure/native_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="Native">
+   <div class="left-half">
+   Original Image with Hemorrhage:
+   <img src="figure/native_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%;" alt="Native">
    </div>
-   <div class="column-center">
-   Registered Image:   
-<img src="figure/raw_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="Raw">   
+   <div class="right-half">
+   Template Image:   
+<img src="figure/Template.png" style="width:100%; float:left;" alt="template">   
    </div>
-   <div class="column-right">
-   Registered ROI:
-   <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="ROI">
+</div>
+
+## Transformed Masks in Template Space 
+
+<div class="container">
+   <div class="left-half">
+   Registered Image with Hemorrhage:
+   <img src="figure/raw_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%;" alt="Native">
+   </div>
+   <div class="right-half">
+   Registered Hemorrhage Mask:   
+<img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%; float:left;" alt="template">   
    </div>
 </div>
 
@@ -487,6 +498,58 @@ N - number of patients, V - number of voxels
 
 <img src="figure/Figure4_Proportion_Final.png" style="width:50%; display: block; margin: auto;" alt="The room">
 
+# Hemorrhage Engagement of Regions in the Brain
+
+## What Brain Areas have Hemorrhage?
+
+Use the "Eve" segmentation map `r citep("oishi_human_2008")`, which outlines structures, we can calculate:
+$$
+\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
+$$
+
+
+```{r}
+n = 5
+load("Population_Table.Rda")
+pop.tab = head(col.dfs$EVE_1, n)
+pop.tab = pop.tab[, c("Area", "EVE_1")]
+pop.tab$EVE_1 = sprintf("%02.1f", pop.tab$EVE_1)
+
+names(pop.tab) = c("Area", "Population Prevalence")
+pop.tab$Area = revalue(pop.tab$Area, c("Ventricles" = "Background"))
+df = pop.tab
+# df = merge(pop.tab, nihss.tab, sort=FALSE, all = TRUE)
+# df = merge(df, gcs.tab, sort=FALSE, all = TRUE)
+
+
+proper = function(x){
+  substring(x, 1, 1) <- toupper(substring(x, 1, 1))
+  substring(x, 2) <- tolower(substring(x, 2))
+  x
+}
+
+df$Area = proper(df$Area)
+df$Area = revalue(df$Area, c("Background" = "CSF (ventricular & subarachnoid spaces)"))
+df$Area = revalue(df$Area, c("Csf" = "CSF (ventricular & subarachnoid spaces)"))
+df$Area = gsub("_", " ", df$Area)
+df$Area = gsub(" wm( |)", " WM ", df$Area)
+df$Area = str_trim(df$Area)
+df = df[order(as.numeric(df$"Population Prevalence"), 
+#              as.numeric(df[, "NIHSS HPR"]), 
+#              as.numeric(df[, "GCS HPR"]), 
+              decreasing = TRUE),]
+df[sapply(df, is.na)] = ""
+rownames(df) = NULL
+```
+
+## What Brain Areas have Hemorrhage?
+
+Top 5 regions
+```{r, results='asis'}
+pander(df)
+```
+
+# What Areas Affect Stroke Severity
 
 ## Measuring Stroke Severity
 
@@ -652,17 +715,19 @@ Problems:
 
 ## One Possible Solution: Permutation Testing 
 
+
+Compare adjusted $R^2$ from the original data with its permutation distribution
+
+Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
+
 Permutation procedure:
 
 1.  Permute outcomes
 2.  Apply selection procedure P and obtain HPR
 3.  Calculate adjusted $R^2$
 
-Compare adjusted $R^2$ from the original data with its permutation distribution
+## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:100%; display: block; margin: auto;" alt="Perm fig">
 
-Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
-
-Result: Permutation test p-value $<0.01$
 
 
 

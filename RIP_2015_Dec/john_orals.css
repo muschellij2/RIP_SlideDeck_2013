@@ -114,6 +114,14 @@ h2 {
 }
 
 
+.left-half{ 
+  float: left; width: 48%; 
+}
+.right-half{ 
+  float: right; width: 48%; 
+}
+
+
 div {
   color: black;
 }

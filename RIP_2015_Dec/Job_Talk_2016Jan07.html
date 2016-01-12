@@ -420,17 +420,25 @@ P(y_{i}(v) = 1) = f(X_i(v))
 <li>Generate a stroke region of engagement using within-sample validation</li>
 </ol></div>
 
-</article></slide><slide class=''><hgroup><h2>Registered Images and Masks/Regions of Interest</h2></hgroup><article  id="registered-images-and-masksregions-of-interest">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution">
+
+</article></slide><slide class=''><hgroup><h2>Register Images</h2></hgroup><article  id="register-images">
 
 <div class="container">
-<div class="column-left">
-Raw Image: <img src="figure/native_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="Native"></div>
+<div class="left-half">
+Original Image with Hemorrhage: <img src="figure/native_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%;" alt="Native"></div>
 
-<div class="column-center">
-Registered Image:<br/><img src="figure/raw_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="Raw"><br/></div>
+<div class="right-half">
+Template Image:<br/><img src="figure/Template.png" style="width:100%; float:left;" alt="template"><br/></div></div>
 
-<div class="column-right">
-Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="ROI"></div></div>
+</article></slide><slide class=''><hgroup><h2>Transformed Masks in Template Space</h2></hgroup><article  id="transformed-masks-in-template-space">
+
+<div class="container">
+<div class="left-half">
+Registered Image with Hemorrhage: <img src="figure/raw_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%;" alt="Native"></div>
+
+<div class="right-half">
+Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%; float:left;" alt="template"><br/></div></div>
 
 </article></slide><slide class=''><hgroup><h2>Aggregating Multiple Hemorrhage Masks</h2></hgroup><article  id="aggregating-multiple-hemorrhage-masks">
 
@@ -442,9 +450,52 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 
 <p><img src="figure/3d_hist.png" style="width:45%; display: block; margin: auto;" alt="pipeline"></p>
 
-</article></slide><slide class=''><hgroup><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution">
+</article></slide><slide class=''><hgroup><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution-1">
 
 <p><img src="figure/Figure4_Proportion_Final.png" style="width:50%; display: block; margin: auto;" alt="The room"></p>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Hemorrhage Engagement of Regions in the Brain</h2></hgroup><article  id="hemorrhage-engagement-of-regions-in-the-brain">
+
+</article></slide><slide class=''><hgroup><h2>What Brain Areas have Hemorrhage?</h2></hgroup><article  id="what-brain-areas-have-hemorrhage">
+
+<p>Use the &quot;Eve&quot; segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate: \[
+\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2>What Brain Areas have Hemorrhage?</h2></hgroup><article  id="what-brain-areas-have-hemorrhage-1">
+
+<p>Top 5 regions</p>
+
+<table class = 'rmdtable'>
+<col width="33%" />
+<col width="33%" />
+<tr class="header">
+<th align="center">Area</th>
+<th align="center">Population Prevalence</th>
+</tr>
+<tr class="odd">
+<td align="center">CSF (ventricular &amp; subarachnoid spaces)</td>
+<td align="center">7.9</td>
+</tr>
+<tr class="even">
+<td align="center">Insular</td>
+<td align="center">7.6</td>
+</tr>
+<tr class="odd">
+<td align="center">Superior temporal gyrus</td>
+<td align="center">5.5</td>
+</tr>
+<tr class="even">
+<td align="center">Putamen</td>
+<td align="center">4.8</td>
+</tr>
+<tr class="odd">
+<td align="center">External capsule</td>
+<td align="center">3.9</td>
+</tr>
+</table>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>What Areas Affect Stroke Severity</h2></hgroup><article  id="what-areas-affect-stroke-severity">
 
 </article></slide><slide class=''><hgroup><h2>Measuring Stroke Severity</h2></hgroup><article  id="measuring-stroke-severity">
 
@@ -665,6 +716,10 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 
 </article></slide><slide class=''><hgroup><h2>One Possible Solution: Permutation Testing</h2></hgroup><article  id="one-possible-solution-permutation-testing">
 
+<p>Compare adjusted \(R^2\) from the original data with its permutation distribution</p>
+
+<p>Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome</p>
+
 <p>Permutation procedure:</p>
 
 <ol>
@@ -673,11 +728,7 @@ Registered ROI: <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.p
 <li>Calculate adjusted \(R^2\)</li>
 </ol>
 
-<p>Compare adjusted \(R^2\) from the original data with its permutation distribution</p>
-
-<p>Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome</p>
-
-<p>Result: Permutation test p-value \(&lt;0.01\)</p>
+</article></slide><slide class=''><hgroup><h2>Result: Permutation test p-value \(&lt;0.01\) <img src="figure/NIHSS_Permutation_Figure.png" style="width:100%; display: block; margin: auto;" alt="Perm fig"></h2></hgroup><article  id="result-permutation-test-p-value-0.01">
 
 </article></slide><slide class=''><hgroup><h2>Conclusions of Stroke Analyses</h2></hgroup><article  id="conclusions-of-stroke-analyses">
 

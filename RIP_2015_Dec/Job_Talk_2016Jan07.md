@@ -333,20 +333,31 @@ $$
 5. Generate a stroke region of engagement using within-sample validation
 </div>
 
-## Registered Images and Masks/Regions of Interest
+# Population ICH Distribution
+
+## Register Images 
 
 <div class="container">
-   <div class="column-left">
-   Raw Image:
-   <img src="figure/native_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="Native">
+   <div class="left-half">
+   Original Image with Hemorrhage:
+   <img src="figure/native_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%;" alt="Native">
    </div>
-   <div class="column-center">
-   Registered Image:   
-<img src="figure/raw_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="Raw">   
+   <div class="right-half">
+   Template Image:   
+<img src="figure/Template.png" style="width:100%; float:left;" alt="template">   
    </div>
-   <div class="column-right">
-   Registered ROI:
-   <img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:300px; float:left;" alt="ROI">
+</div>
+
+## Transformed Masks in Template Space 
+
+<div class="container">
+   <div class="left-half">
+   Registered Image with Hemorrhage:
+   <img src="figure/raw_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%;" alt="Native">
+   </div>
+   <div class="right-half">
+   Registered Hemorrhage Mask:   
+<img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%; float:left;" alt="template">   
    </div>
 </div>
 
@@ -364,6 +375,38 @@ N - number of patients, V - number of voxels
 
 <img src="figure/Figure4_Proportion_Final.png" style="width:50%; display: block; margin: auto;" alt="The room">
 
+# Hemorrhage Engagement of Regions in the Brain
+
+## What Brain Areas have Hemorrhage?
+
+Use the "Eve" segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate:
+$$
+\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
+$$
+
+
+
+
+## What Brain Areas have Hemorrhage?
+
+Top 5 regions
+
+-----------------------------------------------
+         Area            Population Prevalence 
+----------------------- -----------------------
+  CSF (ventricular &              7.9          
+ subarachnoid spaces)                          
+
+        Insular                   7.6          
+
+Superior temporal gyrus           5.5          
+
+        Putamen                   4.8          
+
+   External capsule               3.9          
+-----------------------------------------------
+
+# What Areas Affect Stroke Severity
 
 ## Measuring Stroke Severity
 
@@ -549,17 +592,19 @@ Problems:
 
 ## One Possible Solution: Permutation Testing 
 
+
+Compare adjusted $R^2$ from the original data with its permutation distribution
+
+Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
+
 Permutation procedure:
 
 1.  Permute outcomes
 2.  Apply selection procedure P and obtain HPR
 3.  Calculate adjusted $R^2$
 
-Compare adjusted $R^2$ from the original data with its permutation distribution
+## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:100%; display: block; margin: auto;" alt="Perm fig">
 
-Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
-
-Result: Permutation test p-value $<0.01$
 
 
 
