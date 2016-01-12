@@ -1,9 +1,10 @@
 ---
-title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed Tomography Scanning'
-author: 'John Muschelli<br/> http://bit.ly/JOBTALK'
-date: 'January 14, 2016'
-bibliography: "Oral_Proposal.bib"
+title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed
+  Tomography Scanning'
+author: "John Muschelli<br/> http://bit.ly/JOBTALK"
+date: "January 14, 2016"
 output:
+  beamer_presentation: default
   ioslides_presentation:
     css: john_orals.css
     keep_md: yes
@@ -15,7 +16,8 @@ output:
     keep_md: yes
     mathjax: local
     self_contained: no
-    widescreen: yes  
+    widescreen: yes
+bibliography: Oral_Proposal.bib
 ---
 
 
