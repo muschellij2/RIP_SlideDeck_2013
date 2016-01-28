@@ -10,15 +10,15 @@
 
 
 
-  <meta name="date" content="2016-01-12" />
+  <meta name="date" content="2016-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <link rel="stylesheet" media="all" href="Job_Talk_2016Jan07_files/ioslides-13.5.1/fonts/fonts.css">
+  <link rel="stylesheet" media="all" href="Job_Talk_files/ioslides-13.5.1/fonts/fonts.css">
 
-  <link rel="stylesheet" media="all" href="Job_Talk_2016Jan07_files/ioslides-13.5.1/theme/css/default.css">
-  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="Job_Talk_2016Jan07_files/ioslides-13.5.1/theme/css/phone.css">
+  <link rel="stylesheet" media="all" href="Job_Talk_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="Job_Talk_files/ioslides-13.5.1/theme/css/phone.css">
 
   <base target="_blank">
 
@@ -77,12 +77,12 @@
 
   <link rel="stylesheet" href="john_orals.css" type="text/css" />
 
-  <script src="Job_Talk_2016Jan07_files/htmlwidgets-0.5/htmlwidgets.js"></script>
-  <script src="Job_Talk_2016Jan07_files/jquery-1.11.1/jquery.min.js"></script>
-  <script src="Job_Talk_2016Jan07_files/datatables-binding-0.1/datatables.js"></script>
-  <script src="Job_Talk_2016Jan07_files/datatables-1.10.7/jquery.dataTables.min.js"></script>
-  <link href="Job_Talk_2016Jan07_files/datatables-default-1.10.7/dataTables.extra.css" rel="stylesheet" />
-  <link href="Job_Talk_2016Jan07_files/datatables-default-1.10.7/jquery.dataTables.min.css" rel="stylesheet" />
+  <script src="Job_Talk_files/htmlwidgets-0.5/htmlwidgets.js"></script>
+  <script src="Job_Talk_files/jquery-1.11.1/jquery.min.js"></script>
+  <script src="Job_Talk_files/datatables-binding-0.1/datatables.js"></script>
+  <script src="Job_Talk_files/datatables-1.10.7/jquery.dataTables.min.js"></script>
+  <link href="Job_Talk_files/datatables-default-1.10.7/dataTables.extra.css" rel="stylesheet" />
+  <link href="Job_Talk_files/datatables-default-1.10.7/jquery.dataTables.min.css" rel="stylesheet" />
 
 </head>
 
@@ -96,7 +96,7 @@
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">January 12, 2016</p>
+            <p style="margin-top: 6px; margin-left: -2px;">January 28, 2016</p>
           </hgroup>
   </slide>
 
@@ -194,8 +194,8 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <p>From the <code>cranlogs</code> R package:</p>
 
-<p><div id="htmlwidget-3811" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-3811">{"x":{"data":[["brainR","fslr","WhiteStripe","matlabr","spm12r","diffr","oasis"],[6815,5984,3451,739,466,384,103],[63,75,52,59,48,56,65]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
+<p><div id="htmlwidget-2654" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-2654">{"x":{"data":[["brainR","fslr","WhiteStripe","matlabr","spm12r","diffr","oasis"],[7011,6204,3586,939,611,564,256],[97,106,68,106,69,91,79]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script></p>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Neuroimaging Analysis in Stroke</h2></hgroup><article  id="neuroimaging-analysis-in-stroke">
 
@@ -254,7 +254,11 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>Segmentation ⇔ classification</li>
 <li>Image ⇔ 3-dimensional array</li>
 <li>Mask/Region of Interest ⇔ binary (0/1) image</li>
-<li>Registration ⇔ Spatial Normalization/Standarization</li>
+<li>Registration ⇔ Spatial Normalization/Standarization
+
+<ul>
+<li>&quot;Lining up&quot; Brains</li>
+</ul></li>
 </ul></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Brain Segmentation of CT Scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans">
@@ -608,7 +612,7 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 <div style="margin-left:48%;">
 <p><img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
 
-</article></slide><slide class=''><hgroup><h2>Reader-Based Locations</h2></hgroup><article  id="reader-based-locations">
+</article></slide><slide class=''><hgroup><h2>Standard Description of Location: Reader-Based</h2></hgroup><article  id="standard-description-of-location-reader-based">
 
 <table class = 'rmdtable'>
 <col width="43%" />
@@ -626,7 +630,7 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 <td align="right">76 (68.5%)</td>
 </tr>
 <tr class="odd">
-<td align="left"><strong>Clot Location RC (%)</strong></td>
+<td align="left"><strong>Reader-Based Clot Location (%)</strong></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
@@ -782,20 +786,20 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 
 </slides>
 
-<script src="Job_Talk_2016Jan07_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
-<script src="Job_Talk_2016Jan07_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
-<script src="Job_Talk_2016Jan07_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
-<script src="Job_Talk_2016Jan07_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
-<script src="Job_Talk_2016Jan07_files/ioslides-13.5.1/js/hammer.js"></script>
-<script src="Job_Talk_2016Jan07_files/ioslides-13.5.1/js/slide-controller.js"></script>
-<script src="Job_Talk_2016Jan07_files/ioslides-13.5.1/js/slide-deck.js"></script>
+<script src="Job_Talk_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="Job_Talk_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="Job_Talk_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="Job_Talk_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="Job_Talk_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="Job_Talk_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="Job_Talk_files/ioslides-13.5.1/js/slide-deck.js"></script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "Job_Talk_2016Jan07_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "Job_Talk_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

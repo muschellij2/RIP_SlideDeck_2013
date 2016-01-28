@@ -1,6 +1,6 @@
 # Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed Tomography Scanning
 John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/JOBTALK  
-January 12, 2016  
+January 28, 2016  
 
 
 <script type="text/x-mathjax-config">
@@ -98,8 +98,8 @@ From the `cranlogs` R package:
 
 
 
-<!--html_preserve--><div id="htmlwidget-3811" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-3811">{"x":{"data":[["brainR","fslr","WhiteStripe","matlabr","spm12r","diffr","oasis"],[6815,5984,3451,739,466,384,103],[63,75,52,59,48,56,65]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-2654" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-2654">{"x":{"data":[["brainR","fslr","WhiteStripe","matlabr","spm12r","diffr","oasis"],[7011,6204,3586,939,611,564,256],[97,106,68,106,69,91,79]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
 
 
 
@@ -157,6 +157,7 @@ x-ray goes around object and detector the other side of the object determines ho
 * Image ⇔ 3-dimensional array
 * Mask/Region of Interest ⇔ binary (0/1) image 
 * Registration ⇔  Spatial Normalization/Standarization
+    - "Lining up" Brains
 </div>
 
 
@@ -505,7 +506,7 @@ $$
 <img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline">
 </div>
 
-## Reader-Based Locations
+## Standard Description of Location: Reader-Based
 
 
 ------------------------------------------
@@ -515,7 +516,8 @@ Age in Years: Mean (SD)        60.8 (11.2)
 
 Male: N (%)                     76 (68.5%)
 
-**Clot Location RC (%)**                  
+**Reader-Based Clot Location              
+(%)**                                     
 
 &nbsp;&nbsp;&nbsp;**Putamen**    68 (61.3)
 

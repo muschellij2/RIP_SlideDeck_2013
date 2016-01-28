@@ -2,7 +2,7 @@
 title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed
   Tomography Scanning'
 author: "John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/JOBTALK"
-date: "January 12, 2016"
+date: "January 28, 2016"
 output:
   ioslides_presentation:
     css: john_orals.css
@@ -296,6 +296,7 @@ x-ray goes around object and detector the other side of the object determines ho
 * Image ⇔ 3-dimensional array
 * Mask/Region of Interest ⇔ binary (0/1) image 
 * Registration ⇔  Spatial Normalization/Standarization
+    - "Lining up" Brains
 </div>
 
 
@@ -646,11 +647,13 @@ $$
 <img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline">
 </div>
 
-## Reader-Based Locations
+## Standard Description of Location: Reader-Based
 
 ```{r, results='asis'}
 tb1[,1] = gsub("&nbsp;&nbsp;&nbsp;(.*)", "&nbsp;&nbsp;&nbsp;**\\1**", tb1[,1])
 ind = grepl("Clot Location", tb1[,1])
+tb1[ind,1] = gsub("RC", "", tb1[ind,1])
+tb1[ind,1] = gsub("^Clot", "Reader-Based Clot", tb1[ind,1])
 tb1[ind,1] = paste0("**", tb1[ind,1], "**")
 pander(tb1, justify = c("lr"))
 ```
