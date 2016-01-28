@@ -1,5 +1,5 @@
 ---
-title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed
+title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed
   Tomography Scanning'
 author: "John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/JOBTALK"
 date: "January 28, 2016"
@@ -157,7 +157,7 @@ x = sapply(bib, citep)
 - **fslr** <p style='font-size: 12pt;'>(Muschelli, John, et al. "fslr: Connecting the FSL Software with R." R JOURNAL 7.1 (2015): 163-175.)</p>
 - brainR <p style='font-size: 12pt;'>(Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. "brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data." R JOURNAL 6.1 (2014): 42-48.)</p>
 - extrantsr
-- cttools
+- ichseg
 - dcm2niir
 - matlabr
 - spm12r
@@ -174,6 +174,7 @@ x = sapply(bib, citep)
 - SuBLIME
 - googleCite
 - diffr
+- rscopus
 
 </div>
 </div>
@@ -210,7 +211,7 @@ if (!require(cranlogs)) {
 first_date = "2014-01-10"
 today = Sys.Date()
 long_today = format(Sys.time(), "%B %d, %Y")
-packs = c("fslr", "brainR", "matlabr", "spm12r", "WhiteStripe", "diffr", "oasis")
+packs = c("fslr", "brainR", "matlabr", "spm12r", "WhiteStripe", "diffr", "oasis", "rscopus")
 last_week = cran_downloads( when = "last-week",
                             packages = packs)
 last_week = ddply(last_week, .(package), summarise, 
@@ -219,7 +220,7 @@ dl = cran_downloads( from = first_date, to = today,
                      packages = packs)
 dl = ddply(dl, .(package), summarise, All_Time = sum(count))
 dl = merge(dl, last_week)
-dl = plyr::arrange(dl, desc(All_Time))
+dl = plyr::arrange(dl, desc(Last_Week))
 colnames(dl) = c("Package", "All Time", "Last Week")
 ```
 
@@ -377,6 +378,15 @@ pander(tb1, justify = c("lr"))
 </div>
 
 </div>
+
+## Image Representation: voxels (3D pixels)
+
+<div class="columns-2">
+Pixel:
+<img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;">
+<br>
+Voxel:
+<img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;">
 
 
 ## Image Representation: voxels (3D pixels)

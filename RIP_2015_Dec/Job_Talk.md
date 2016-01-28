@@ -1,4 +1,4 @@
-# Computational Methods for Neuroimaging in R: Stroke Hemorrhage in X-ray Computed Tomography Scanning
+# Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed Tomography Scanning
 John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/JOBTALK  
 January 28, 2016  
 
@@ -47,7 +47,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 - **fslr** <p style='font-size: 12pt;'>(Muschelli, John, et al. "fslr: Connecting the FSL Software with R." R JOURNAL 7.1 (2015): 163-175.)</p>
 - brainR <p style='font-size: 12pt;'>(Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. "brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data." R JOURNAL 6.1 (2014): 42-48.)</p>
 - extrantsr
-- cttools
+- ichseg
 - dcm2niir
 - matlabr
 - spm12r
@@ -64,6 +64,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 - SuBLIME
 - googleCite
 - diffr
+- rscopus
 
 </div>
 </div>
@@ -98,8 +99,8 @@ From the `cranlogs` R package:
 
 
 
-<!--html_preserve--><div id="htmlwidget-2654" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-2654">{"x":{"data":[["brainR","fslr","WhiteStripe","matlabr","spm12r","diffr","oasis"],[7011,6204,3586,939,611,564,256],[97,106,68,106,69,91,79]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-7237" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-7237">{"x":{"data":[["fslr","matlabr","brainR","diffr","oasis","rscopus","spm12r","WhiteStripe"],[6204,939,7011,564,256,597,611,3586],[106,106,97,91,79,74,69,68]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
 
 
 
@@ -252,6 +253,15 @@ Mean (SD)
 </div>
 
 </div>
+
+## Image Representation: voxels (3D pixels)
+
+<div class="columns-2">
+Pixel:
+<img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;">
+<br>
+Voxel:
+<img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;">
 
 
 ## Image Representation: voxels (3D pixels)
