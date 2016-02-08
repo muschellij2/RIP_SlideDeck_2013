@@ -81,7 +81,8 @@ From the `cranlogs` R package:
 
 
 
-
+<!--html_preserve--><div id="htmlwidget-2216" style="width:100%;height:auto;" class="datatables"></div>
+<script type="application/json" data-for="htmlwidget-2216">{"x":{"data":[["fslr","matlabr","rscopus","brainR","diffr","oasis","spm12r","WhiteStripe"],[6336,1055,691,7117,664,345,692,3664],[65,64,52,49,49,46,41,37]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
 
 
 
@@ -382,7 +383,7 @@ Due to a large number of tests, a Bonferroni correction (or FDR) did not result 
     - For example, $p < 0.01$    
 
 
-## Threshold P-value Map $0.01$ ⇒ HPR
+## Threshold P-value Map at $0.01$ ⇒ HPR
 
 <div style="width:49%;float:left;">
 <img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="width: 100%">

@@ -185,7 +185,7 @@ x = sapply(bib, citep)
 From the `cranlogs` R package:
 
 
-```{r, cache= TRUE, eval = FALSE}
+```{r, cache= TRUE, eval = TRUE}
 if (!require(cranlogs)) {
   library(devtools)
   install_github("metacran/cranlogs")
@@ -212,7 +212,7 @@ colnames(dl) = c("Package", "All Time", "Last Week")
 library(DT)
 ```
 
-```{r, results = "asis", eval = FALSE}
+```{r, results = "asis", eval = TRUE}
 datatable(dl, filter = "none", selection = "none", rownames = FALSE,
           options = list(dom = 't', autoWidth = TRUE,
                          columnDefs = list(list(
@@ -504,7 +504,7 @@ Due to a large number of tests, a Bonferroni correction (or FDR) did not result 
     - For example, $p < 0.01$    
 
 
-## Threshold P-value Map $0.01$ ⇒ HPR
+## Threshold P-value Map at $0.01$ ⇒ HPR
 
 <div style="width:49%;float:left;">
 <img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="width: 100%">
