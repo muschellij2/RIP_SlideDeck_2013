@@ -173,24 +173,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li>rscopus</li>
 </ul></div></div>
 
-</article></slide><slide class=''><hgroup><h2>fslr: Connecting FSL and R</h2></hgroup><article  id="fslr-connecting-fsl-and-r">
-
-<p>fslr</p>
-
-<ul>
-<li>Ports most of FSL functionality into R</li>
-<li><a href='https://cran.r-project.org/web/packages/fslr/index.html' title=''>https://cran.r-project.org/web/packages/fslr/index.html</a></li>
-</ul>
-
-<p>FSL</p>
-
-<ul>
-<li>Full neuroimaging suite of analysis and preprocessing tools</li>
-<li>Actively developed (first release in 2000) (Jenkinson, et al., 2012)</li>
-<li>Popular: 13.9% of published neuroimaging studies used FSL (Carp, 2012).</li>
-<li>Open source and free (for academics)</li>
-</ul>
-
 </article></slide><slide class=''><hgroup><h2>Number of Downloads (CRAN packages)</h2></hgroup><article  id="number-of-downloads-cran-packages">
 
 <p>From the <code>cranlogs</code> R package:</p>
@@ -352,11 +334,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
 
 <div class="columns-2">
-<p>Pixel: <img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;"> <br> Voxel: <img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;"></p>
-
-</article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels-1">
-
-<div class="columns-2">
 <p><img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;"> <br> <img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;" loop=infinite></p>
 
 <p style="font-size: 10pt;">
@@ -405,9 +382,8 @@ P(Y_{i}(v) = 1) = f(X_i(v))
 <li>Random Forests (Liaw, et al., 2002; Breiman, 2001)
 
 <div class="centerer">
-
-\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="Random Forest"></li>
-</ul></div>
+<p>\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="Random Forest"></p></div></li>
+</ul>
 
 </article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="compare-estimated-to-true-volume">
 
@@ -723,20 +699,6 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 </ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>One Possible Solution: Permutation Testing</h2></hgroup><article  id="one-possible-solution-permutation-testing">
-
-<p>Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome</p>
-
-<p>Permutation procedure:</p>
-
-<ol>
-<li>Permute NIHSS</li>
-<li>Apply selection procedure and obtain HPR on permuted NIHSS</li>
-<li>Calculate adjusted \(R^2\) on true NIHSS</li>
-</ol>
-
-</article></slide><slide class=''><hgroup><h2>Result: Permutation test p-value \(&lt;0.01\) <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig"></h2></hgroup><article  id="result-permutation-test-p-value-0.01">
-
 </article></slide><slide class=''><hgroup><h2>Conclusions of Stroke Analyses</h2></hgroup><article  id="conclusions-of-stroke-analyses">
 
 <div style="font-size: 24pt">
@@ -783,7 +745,45 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 </ul></li>
 </ul></div>
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you" class="unnumbered">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">
+
+</article></slide><slide class=''><hgroup><h2>One Possible Solution: Permutation Testing</h2></hgroup><article  id="one-possible-solution-permutation-testing">
+
+<p>Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome</p>
+
+<p>Permutation procedure:</p>
+
+<ol>
+<li>Permute NIHSS</li>
+<li>Apply selection procedure and obtain HPR on permuted NIHSS</li>
+<li>Calculate adjusted \(R^2\) on true NIHSS</li>
+</ol>
+
+</article></slide><slide class=''><hgroup><h2>Result: Permutation test p-value \(&lt;0.01\) <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig"></h2></hgroup><article  id="result-permutation-test-p-value-0.01">
+
+</article></slide><slide class=''><hgroup><h2>fslr: Connecting FSL and R</h2></hgroup><article  id="fslr-connecting-fsl-and-r">
+
+<p>fslr</p>
+
+<ul>
+<li>Ports most of FSL functionality into R</li>
+<li><a href='https://cran.r-project.org/web/packages/fslr/index.html' title=''>https://cran.r-project.org/web/packages/fslr/index.html</a></li>
+</ul>
+
+<p>FSL</p>
+
+<ul>
+<li>Full neuroimaging suite of analysis and preprocessing tools</li>
+<li>Actively developed (first release in 2000) (Jenkinson, et al., 2012)</li>
+<li>Popular: 13.9% of published neuroimaging studies used FSL (Carp, 2012).</li>
+<li>Open source and free (for academics)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels-1">
+
+<div class="columns-2">
+
+<p>Pixel: <img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;"> <br> Voxel: <img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;"></p>
 
 <div id="refs" class="references">
 </div></article></slide>

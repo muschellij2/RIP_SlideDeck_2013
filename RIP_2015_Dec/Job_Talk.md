@@ -70,21 +70,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </div>
 
 
-## fslr: Connecting FSL and R
-
-fslr
-
-- Ports most of FSL functionality into R 
-- https://cran.r-project.org/web/packages/fslr/index.html
-
-FSL 
-
-- Full neuroimaging suite of analysis and preprocessing tools
-- Actively developed (first release in 2000) (Jenkinson, et al., 2012)
-- Popular: 13.9% of published neuroimaging studies used FSL (Carp, 2012).
-- Open source and free (for academics)
-
-
 
 
 
@@ -253,15 +238,6 @@ Mean (SD)
 </div>
 
 </div>
-
-## Image Representation: voxels (3D pixels)
-
-<div class="columns-2">
-Pixel:
-<img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;">
-<br>
-Voxel:
-<img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;">
 
 
 ## Image Representation: voxels (3D pixels)
@@ -597,19 +573,6 @@ Problems:
 - Double-dipping: Using the data twice
     - Violates separation of exploratory and confirmatory analyses
 
-## One Possible Solution: Permutation Testing 
-
-Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
-
-Permutation procedure:
-
-1.  Permute NIHSS
-2.  Apply selection procedure and obtain HPR on permuted NIHSS
-3.  Calculate adjusted $R^2$ on true NIHSS
-
-## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig">
-
-
 
 
 ## Conclusions of Stroke Analyses
@@ -652,4 +615,46 @@ Permutation procedure:
 
 # Thank You
 
+
+
+
+
+## One Possible Solution: Permutation Testing 
+
+Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
+
+Permutation procedure:
+
+1.  Permute NIHSS
+2.  Apply selection procedure and obtain HPR on permuted NIHSS
+3.  Calculate adjusted $R^2$ on true NIHSS
+
+## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig">
+
+
+
+
+## fslr: Connecting FSL and R
+
+fslr
+
+- Ports most of FSL functionality into R 
+- https://cran.r-project.org/web/packages/fslr/index.html
+
+FSL 
+
+- Full neuroimaging suite of analysis and preprocessing tools
+- Actively developed (first release in 2000) (Jenkinson, et al., 2012)
+- Popular: 13.9% of published neuroimaging studies used FSL (Carp, 2012).
+- Open source and free (for academics)
+
+
+## Image Representation: voxels (3D pixels)
+
+<div class="columns-2">
+Pixel:
+<img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;">
+<br>
+Voxel:
+<img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;">
 
