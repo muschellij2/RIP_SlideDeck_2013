@@ -1,20 +1,130 @@
-# Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed Tomography Scanning
-John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/ICHTALK  
-February 19, 2016  
+---
+title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed
+  Tomography Scanning'
+author: "John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/ICHTALK"
+date: "February 19, 2016"
+output:
+  ioslides_presentation:
+    css: john_orals.css
+    keep_md: yes
+    mathjax: local
+    self_contained: no
+    widescreen: yes
+  beamer_presentation: default
+  slidy_presentation:
+    css: john_orals.css
+    keep_md: yes
+    mathjax: local
+    self_contained: no
+    widescreen: yes
+bibliography: Oral_Proposal.bib
+---
 
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </script>
 
+```{r opts, prompt=FALSE, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, comment=""}
+library(knitr)
+library(knitcitations)
+cite_options(max.names = 1)
+opts_chunk$set(echo = FALSE, prompt = FALSE, message = FALSE, warning = FALSE, comment = "", results = 'hide')
+setwd("~/CT_Registration/RIP_SlideDeck/RIP_2015_Dec/")
+```
 
 
+```{r, prompt=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+rm.obj = ls()
+rm.obj = rm.obj[ !(rm.obj %in% c("fname", "slide"))]
+rm(list = rm.obj)
+library(ggplot2)
+library(xtable)
+library(scales)
+library(fslr)
+library(pander)
+options(stringsAsFactors = FALSE)
+rootdir = path.expand("~/Dropbox/CTR/DHanley/MISTIE")
+homedir = file.path(rootdir, "ICH Analysis")
+Mdir = file.path(rootdir, "MISTIE DSMB Analysis")
+resdir <- file.path(homedir, "results")
+rundir <- file.path(resdir, "Manuscript")
+progdir <- file.path(homedir, "stataprograms")
+datadir <- file.path(Mdir, "statacalc")
+knitdir <- "~/CT_Registration/RIP_SlideDeck/RIP_2015_Dec/"
+load(file=file.path(rundir, "All_IncludingICES_Patients.Rda"))
+load(file=file.path(rundir, "Randomized_Patients.Rda"))
+load(file=file.path(knitdir, "111_Filenames.Rda"))
+pt.ids = c(100318L, 100362L, 100365L, 101306L, 101307L, 101308L, 102317L, 
+102322L, 102324L, 102331L, 102360L, 102367L, 102374L, 102391L, 
+102393L, 102403L, 102406L, 120376L, 131310L, 131316L, 131334L, 
+131354L, 133409L, 133417L, 134304L, 134305L, 134320L, 134327L, 
+134345L, 134380L, 134381L, 134382L, 134392L, 134408L, 134412L, 
+134416L, 152302L, 152303L, 152353L, 157328L, 157329L, 157332L, 
+157335L, 157336L, 157370L, 157372L, 157399L, 157410L, 161413L, 
+173312L, 173313L, 173325L, 173341L, 173361L, 173364L, 173368L, 
+173384L, 173396L, 173404L, 175387L, 175397L, 175405L, 179373L, 
+179383L, 179386L, 179394L, 179395L, 179402L, 184388L, 191301L, 
+191311L, 191314L, 191315L, 191319L, 191321L, 191333L, 191375L, 
+191400L, 205509L, 205517L, 205519L, 216390L, 219350L, 222337L, 
+222357L, 222358L, 223355L, 223369L, 223407L, 225502L, 225503L, 
+225504L, 225505L, 225506L, 225507L, 225510L, 225511L, 225515L, 
+225524L, 230356L, 230363L, 230366L, 230371L, 230377L, 232514L, 
+232516L, 234385L, 265389L, 265398L, 289518L, 289525L)
+fdf$id = as.numeric(gsub("-", "", fdf$id))
+fdf = fdf[ fdf$id %in% pt.ids, ]
+```
 
+```{r demog}
+library(tableone)
+library(stargazer)
+library(pander)
+library(plyr)
+alldemog = read.csv("All_180_FollowUp_wDemographics.csv", as.is = TRUE)
+alldemog = alldemog[, c("patientName", "Clot_Location_RC")]
+alldemog$Clot_Location_RC = plyr::revalue(
+  alldemog$Clot_Location_RC,
+  c("Globus Palidus" = "Globus Pallidus"))
+n.ids = length(unique(fdf$id))
+demog = fdf$id 
 
+demog = all.alldat[ all.alldat$patientName %in% demog, ]
+demog$Clot_Location_RC = NULL
+demog = merge(demog, alldemog, all.x = TRUE )
+stopifnot(nrow(demog) == n.ids)
+demog$Diagnostic_ICH_Volume =demog$ICH_Dx_10 * 10 
+demog$Diagnostic_IVH_Volume =demog$IVH_Dx_10 * 10 
+tt = sort(table(demog$Clot_Location_RC), decreasing = TRUE)
+nclot = names(tt)[tt > 0]
+demog$Clot_Location_RC = factor(demog$Clot_Location_RC, levels = nclot)
 
+vars = c("Age", "Gender", "Clot_Location_RC",
+         "Diagnostic_ICH_Volume")
+catvars = c("Gender", "Clot_Location_RC")
+tb1 = CreateTableOne(vars = vars, factorVars = catvars, 
+                     data = demog)
+tb1 = print(tb1, contDigits = 1)
+gen = grepl("Gender", rownames(tb1))
+rownames(tb1)[ gen ] = "Male: N (%)"
+tb1[gen,1] = gsub("\\((.*)\\)", "(\\1%)", tb1[gen,1,drop=FALSE])
 
+rownames(tb1) = gsub("_", " ", rownames(tb1))
+rownames(tb1) = gsub(" \\(mean", ": Mean", rownames(tb1))
+rownames(tb1) = gsub("(sd))", "(SD)", rownames(tb1), fixed=TRUE)
+rownames(tb1) = gsub("Volume", "Volume in mL", rownames(tb1), fixed=TRUE)
+rownames(tb1) = gsub("Age", "Age in Years", rownames(tb1), fixed=TRUE)
+rownames(tb1) = gsub("Clot_Location_RC", "ICH Location", rownames(tb1), fixed=TRUE)
+tb1 = tb1[rownames(tb1) != "n", , drop=FALSE]
+# tb1 = pander.return(tb1)
+# tb1 = tb1[ tb1 != ""]
+```
 
-
+```{r}
+library(RefManageR)
+library(knitcitations)
+bib <- ReadBib(file.path(knitdir, 'Oral_Proposal.bib'))
+x = sapply(bib, citep)
+```
 
 
 ## Overview of Work/Research
@@ -75,16 +185,45 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 From the `cranlogs` R package:
 
 
+```{r, cache= TRUE}
+if (!require(cranlogs)) {
+  library(devtools)
+  install_github("metacran/cranlogs")
+}
+first_date = "2014-01-10"
+today = Sys.Date()
+long_today = format(Sys.time(), "%B %d, %Y")
+packs = c("fslr", "brainR", "matlabr", "spm12r", "WhiteStripe", "diffr", "oasis", "rscopus")
+last_week = cran_downloads( when = "last-week",
+                            packages = packs)
+last_week = ddply(last_week, .(package), summarise, 
+                  Last_Week = sum(count))
+dl = cran_downloads( from = first_date, to = today,
+                     packages = packs)
+dl = ddply(dl, .(package), summarise, All_Time = sum(count))
+dl = merge(dl, last_week)
+dl = plyr::arrange(dl, desc(Last_Week))
+colnames(dl) = c("Package", "All Time", "Last Week")
+```
 
 
 
+```{r}
+library(DT)
+```
 
+```{r, results = "asis", eval = TRUE}
+datatable(dl, filter = "none", selection = "none", rownames = FALSE,
+          options = list(dom = 't', autoWidth = TRUE,
+                         columnDefs = list(list(
+                           className = 'dt-center',
+                           targets = 0)))
+)
+```
 
-
-<!--html_preserve--><div id="htmlwidget-7237" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-7237">{"x":{"data":[["fslr","matlabr","brainR","diffr","oasis","rscopus","spm12r","WhiteStripe"],[6204,939,7011,564,256,597,611,3586],[106,106,97,91,79,74,69,68]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
-
-
+```{r outtab, results='asis', eval = FALSE}
+pander(dl)
+```
 
 # Neuroimaging Analysis in Stroke
 
@@ -161,7 +300,7 @@ Want to go from an image:
 <img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
 </div>
 
-## Brain Segmentation of CT scans
+## Brain Segmentation of (CT) scans
 
 
 <div class="columns-2">
@@ -183,7 +322,9 @@ To a brain-extracted image:
 
 # Larger ICH Volume ⇒ Worse Outcome
 
-
+```{r biblio, results='hide'}
+bibliography() 
+```
 
 
 ## ICH Segmentation, Volume/Location Estimation 
@@ -201,28 +342,12 @@ To a binary hemorrhage mask:
 <div id="wrap">
 <div id="left_col">
 
-
-----------------------------------------
-&nbsp;                           Overall
----------------------------- -----------
-Age in Years: Mean (SD)      60.8 (11.2)
-
-Male: N (%)                   76 (68.5%)
-
-Clot Location RC (%)                    
-
-&nbsp;&nbsp;&nbsp;Putamen      68 (61.3)
-
-&nbsp;&nbsp;&nbsp;Lobar        33 (29.7)
-
-&nbsp;&nbsp;&nbsp;Globus        6 ( 5.4)
-Pallidus                                
-
-&nbsp;&nbsp;&nbsp;Thalamus      4 ( 3.6)
-
-Diagnostic ICH Volume in mL: 37.4 (20.1)
-Mean (SD)                               
-----------------------------------------
+```{r, results='asis'}
+tb1 = cbind(rownames(tb1), tb1)
+rownames(tb1) = NULL
+tb1[,1] = gsub("   ", "&nbsp;&nbsp;&nbsp;", tb1[,1])
+pander(tb1, justify = c("lr"))
+```
 
 </div>
 <div id="right_col"  style='font-size: 24pt;'>
@@ -235,6 +360,16 @@ Mean (SD)
 </div>
 
 </div>
+
+## Image Representation: voxels (3D pixels)
+
+<div class="columns-2">
+Pixel:
+<img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;">
+<br>
+Voxel:
+<img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;">
+
 
 ## Image Representation: voxels (3D pixels)
 <div class="columns-2">
@@ -269,18 +404,40 @@ Mean (SD)
 
 Let $Y_{i}(v)$ be the presence / absence of ICH for voxel $v$ from person $i$.  
 
+General model form: 
 $$
-\text{logit}\left(P(Y_{i}(v) = 1)\right) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}
+P(Y_{i}(v) = 1) = f(X_i(v))
 $$
-where $x_{i, 1}(v) \dots x_{i, 21}(v)$ are the predictors.  
+where $X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))$ are the predictors.  
 
-## Predicted Volume Estimates True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg">
+* For models, we'll use the $\text{logit}$ link function.
+
+
+## Models Fit on the Training Data
+
+- Logistic Regression: \(f(X) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\)
+- Generalized Additive Models `r citep("hastie_generalized_1990")`
+- LASSO `r citep(c("tibshirani_regression_1996", "friedman_regularization_2010"))`: 
+$$ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p} \left|\beta_{k}\right|
+$$
+- Random Forests `r citep(c("randomForest", "breiman2001random"))`
+<div class="centerer">
+\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="Random Forest">
+</div>
+
+ 
+
+## Compare Estimated to True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg">
+
+## Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO">
 
 ## Patient with Median Overlap in Validation Set
 
 <img src="figure/Reseg_Figure_DSI_Quantile_050_No_DSI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"> 
 
-## Shiny Application: http://bit.ly/ICH_SEG <img src="Shiny_prediction.png" style="width:105%; display: block; margin: auto;" alt="shiny orig">
+## Shiny Application: http://bit.ly/ICH_SEG <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig">
+
+
 
 # Quantitative Hemorrhage Localization
 
@@ -325,30 +482,25 @@ where $x_{i, 1}(v) \dots x_{i, 21}(v)$ are the predictors.
 
 ## Hemorrhage Engagement of Brain Regions 
 
-
-Use the "Eve" segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate:
+Use the "Eve" segmentation map `r citep("oishi_human_2008")`, which outlines structures, we can calculate:
 $$
-\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{ICH Mask} } {\sum \text{ICH Mask}} \times 100\% \nonumber
+\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
 $$
 
+```{r}
+df = read.table("Subject_Table.txt", stringsAsFactors = FALSE)
+df$Area = gsub("WM", "White Matter", df$Area)
+proper = function(x){
+  substring(x, 1, 1) <- toupper(substring(x, 1, 1))
+  substring(x, 2) <- tolower(substring(x, 2))
+  x
+}
+df$Area = proper(df$Area)
+```
 
-
-
--------------------------------------
-          Area            Prevalence 
------------------------- ------------
-   Postcentral gyrus         16.7    
-
-  Supramarginal gyrus        10.8    
-
-Superior parietal lobule     10.4    
-
-Postcentral white matter     10.2    
-
-    Precentral gyrus         8.2     
--------------------------------------
-
-
+```{r, results='asis'}
+pander(df)
+```
 
 # Population ICH Distribution
 
@@ -371,33 +523,61 @@ N - number of patients, V - number of voxels
 
 
 
+```{r, eval = FALSE}
+n = 5
+load("Population_Table.Rda")
+pop.tab = head(col.dfs$EVE_1, n)
+pop.tab = pop.tab[, c("Area", "EVE_1")]
+pop.tab$EVE_1 = sprintf("%02.1f", pop.tab$EVE_1)
 
+names(pop.tab) = c("Area", "Population Prevalence")
+pop.tab$Area = revalue(pop.tab$Area, c("Ventricles" = "Background"))
+df = pop.tab
+# df = merge(pop.tab, nihss.tab, sort=FALSE, all = TRUE)
+# df = merge(df, gcs.tab, sort=FALSE, all = TRUE)
+
+
+proper = function(x){
+  substring(x, 1, 1) <- toupper(substring(x, 1, 1))
+  substring(x, 2) <- tolower(substring(x, 2))
+  x
+}
+
+df$Area = proper(df$Area)
+df$Area = revalue(df$Area, c("Background" = "CSF (ventricular & subarachnoid spaces)"))
+df$Area = revalue(df$Area, c("Csf" = "CSF (ventricular & subarachnoid spaces)"))
+df$Area = gsub("_", " ", df$Area)
+df$Area = gsub(" wm( |)", " WM ", df$Area)
+df$Area = str_trim(df$Area)
+df = df[order(as.numeric(df$"Population Prevalence"), 
+#              as.numeric(df[, "NIHSS HPR"]), 
+#              as.numeric(df[, "GCS HPR"]), 
+              decreasing = TRUE),]
+df[sapply(df, is.na)] = ""
+rownames(df) = NULL
+```
 
 
 # What Areas Affect Stroke Severity
 
 ## Measuring Stroke Severity
 
-* Stroke-related impairment measured by NIH Stroke Scale (NIHSS) (Brott, et al., 1989)
+* Stroke-related impairment measured by NIH Stroke Scale (NIHSS) `r citep("brott_measurements_1989")`
     * Multiple sub-domains
     * Higher is worse (higher stroke severity)
 
+```{r, echo=FALSE}
+mat = matrix(c("0", "No Stroke Symptoms",
+"1-4", "Minor Stroke",
+"5-15", "Moderate Stroke",
+"16-20", "Moderate to Severe Stroke",
+"21-42", "Severe Stroke"), byrow = TRUE, ncol = 2)
+colnames(mat) = c("NIHSS Score", "Stroke Severity")
+```
 
-
-
----------------------------------------
- NIHSS Score       Stroke Severity     
-------------- -------------------------
-      0          No Stroke Symptoms    
-
-     1-4            Minor Stroke       
-
-    5-15           Moderate Stroke     
-
-    16-20     Moderate to Severe Stroke
-
-    21-42           Severe Stroke      
----------------------------------------
+```{r, results='asis'}
+pander(mat)
+```
 
 ## Voxel-wise Regression/T-tests
 
@@ -474,29 +654,14 @@ $$
 
 ## Standard Description of Location: Reader-Based
 
-
-------------------------------------------
-&nbsp;                             Overall
------------------------------- -----------
-Age in Years: Mean (SD)        60.8 (11.2)
-
-Male: N (%)                     76 (68.5%)
-
-**Reader-Based Clot Location              
-(%)**                                     
-
-&nbsp;&nbsp;&nbsp;**Putamen**    68 (61.3)
-
-&nbsp;&nbsp;&nbsp;**Lobar**      33 (29.7)
-
-&nbsp;&nbsp;&nbsp;**Globus        6 ( 5.4)
-Pallidus**                                
-
-&nbsp;&nbsp;&nbsp;**Thalamus**    4 ( 3.6)
-
-Diagnostic ICH Volume in mL:   37.4 (20.1)
-Mean (SD)                                 
-------------------------------------------
+```{r, results='asis'}
+tb1[,1] = gsub("&nbsp;&nbsp;&nbsp;(.*)", "&nbsp;&nbsp;&nbsp;**\\1**", tb1[,1])
+ind = grepl("Clot Location", tb1[,1])
+tb1[ind,1] = gsub("RC", "", tb1[ind,1])
+tb1[ind,1] = gsub("^Clot", "Reader-Based Clot", tb1[ind,1])
+tb1[ind,1] = paste0("**", tb1[ind,1], "**")
+pander(tb1, justify = c("lr"))
+```
 
 ## Known predictors of NIHSS
 
@@ -521,7 +686,7 @@ $$\begin{eqnarray}
 \end{eqnarray}$$
 to the **reader-based model**:
 $$\begin{eqnarray} 
-{\rm NIHSS}_i &=& \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus\,Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
+{\rm NIHSS}_i &=& \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
 &+& \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
 \end{eqnarray}$$
 where $I(k)$ represents the indicator that ICH location was $k$
@@ -539,14 +704,6 @@ Nested Model Comparison:
 
 * LRT: Reader+HPR model vs. Reader-only model: $p < 0.001$
 
-* Reader+HPR model:
-$$\begin{eqnarray} 
-{\rm NIHSS}_i &=& \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus\,Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
-&+& \beta_4 {\rm Coverage}_i \\
-&+& \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
-\end{eqnarray}$$
-
-
 ## Does HPR coverage perform better than chance?
 
 Procedure (P):
@@ -560,6 +717,18 @@ Problems:
 - Multiplicity
 - Double-dipping: Using the data twice
     - Violates separation of exploratory and confirmatory analyses
+
+## One Possible Solution: Permutation Testing 
+
+Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
+
+Permutation procedure:
+
+1.  Permute NIHSS
+2.  Apply selection procedure and obtain HPR on permuted NIHSS
+3.  Calculate adjusted $R^2$ on true NIHSS
+
+## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig">
 
 
 
@@ -587,4 +756,23 @@ Problems:
 
 </div>
 
+
+
 # Thank You
+
+
+
+
+## Other Work
+
+<div style="font-size: 24pt">
+
+- Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD)
+- Catheter scoring with pre/post-op registration for ICH 
+- Creating Department-level indices of publication
+- Teaching Neuroimaging and R 
+    - Mathematical and Statistical Challenges in Neuroimaging Data Analysis 
+    - JSM 2016
+
+
+</div>

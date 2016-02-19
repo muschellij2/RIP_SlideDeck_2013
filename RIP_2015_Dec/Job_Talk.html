@@ -255,7 +255,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div class="columns-2">
 <p>Want to go from an image: <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> <img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
 
-</article></slide><slide class=''><hgroup><h2>Brain Segmentation of (CT) scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans-2">
+</article></slide><slide class=''><hgroup><h2>Brain Segmentation of CT scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans-2">
 
 <div class="columns-2">
 <p>Want to go from an image: <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a brain-extracted image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
@@ -334,11 +334,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
 
 <div class="columns-2">
-<p>Pixel: <img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;"> <br> Voxel: <img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;"></p>
-
-</article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels-1">
-
-<div class="columns-2">
 <p><img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;"> <br> <img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;" loop=infinite></p>
 
 <p style="font-size: 10pt;">
@@ -369,37 +364,17 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 <p>Let \(Y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
 
-<p>General model form: \[
-P(Y_{i}(v) = 1) = f(X_i(v))
-\] where \(X_i(v) = (x_{i, 1}(v) \dots x_{i, 21}(v))\) are the predictors.</p>
+<p>\[
+\text{logit}\left(P(Y_{i}(v) = 1)\right) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}
+\] where \(x_{i, 1}(v) \dots x_{i, 21}(v)\) are the predictors.</p>
 
-<ul>
-<li>For models, we&#39;ll use the \(\text{logit}\) link function.</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Models Fit on the Training Data</h2></hgroup><article  id="models-fit-on-the-training-data">
-
-<ul>
-<li>Logistic Regression: \(f(X) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\)</li>
-<li>Generalized Additive Models (Hastie, et al., 1990)</li>
-<li>LASSO (Tibshirani, 1996; Friedman, et al., 2010): \[ L(f(X)) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p} \left|\beta_{k}\right|
-\]</li>
-<li>Random Forests (Liaw, et al., 2002; Breiman, 2001)
-
-<div class="centerer">
-
-\(f(X) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="Random Forest"></li>
-</ul></div>
-
-</article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="compare-estimated-to-true-volume">
-
-</article></slide><slide class=''><hgroup><h2>Compare Estimated to True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="compare-estimated-to-true-volume-1">
+</article></slide><slide class=''><hgroup><h2>Predicted Volume Estimates True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="predicted-volume-estimates-true-volume">
 
 </article></slide><slide class=''><hgroup><h2>Patient with Median Overlap in Validation Set</h2></hgroup><article  id="patient-with-median-overlap-in-validation-set">
 
 <p><img src="figure/Reseg_Figure_DSI_Quantile_050_No_DSI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
 
-</article></slide><slide class=''><hgroup><h2>Shiny Application: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:100%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-application-httpbit.lyich_seg">
+</article></slide><slide class=''><hgroup><h2>Shiny Application: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:105%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-application-httpbit.lyich_seg">
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Quantitative Hemorrhage Localization</h2></hgroup><article  id="quantitative-hemorrhage-localization">
 
@@ -412,8 +387,6 @@ P(Y_{i}(v) = 1) = f(X_i(v))
 <li>Determine if differences in location relate to stroke severity</li>
 <li>Generate a stroke region of engagement using within-sample validation</li>
 </ol></div>
-
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution">
 
 </article></slide><slide class=''><hgroup><h2>Register CT Image to Template</h2></hgroup><article  id="register-ct-image-to-template">
 
@@ -433,10 +406,10 @@ Registered Image with Hemorrhage: <img src="figure/raw_spm_100-362_20100126_1926
 <div class="right-half">
 Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%; float:left;" alt="template"><br/></div></div>
 
-</article></slide><slide class=''><hgroup><h2>What Brain Areas have Hemorrhage?</h2></hgroup><article  id="what-brain-areas-have-hemorrhage">
+</article></slide><slide class=''><hgroup><h2>Hemorrhage Engagement of Brain Regions</h2></hgroup><article  id="hemorrhage-engagement-of-brain-regions">
 
 <p>Use the &quot;Eve&quot; segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate: \[
-\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
+\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{ICH Mask} } {\sum \text{ICH Mask}} \times 100\% \nonumber
 \]</p>
 
 <table class = 'rmdtable'>
@@ -468,6 +441,8 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 </tr>
 </table>
 
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution">
+
 </article></slide><slide class=''><hgroup><h2>Aggregating Multiple Hemorrhage Masks</h2></hgroup><article  id="aggregating-multiple-hemorrhage-masks">
 
 <p>N - number of patients, V - number of voxels</p>
@@ -481,18 +456,6 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 </article></slide><slide class=''><hgroup><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution-1">
 
 <p><img src="figure/Figure4_Proportion_Final.png" style="width:50%; display: block; margin: auto;" alt="The room"></p>
-
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Hemorrhage Engagement of Regions in the Brain</h2></hgroup><article  id="hemorrhage-engagement-of-regions-in-the-brain">
-
-</article></slide><slide class=''><hgroup><h2>What Brain Areas have Hemorrhage?</h2></hgroup><article  id="what-brain-areas-have-hemorrhage-1">
-
-<p>Use the &quot;Eve&quot; segmentation map/atlas (Oishi, et al., 2008), which outlines structures, we can calculate: \[
-\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
-\]</p>
-
-</article></slide><slide class=''><hgroup><h2>What Brain Areas have Hemorrhage?</h2></hgroup><article  id="what-brain-areas-have-hemorrhage-2">
-
-<p>Top 5 regions</p>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>What Areas Affect Stroke Severity</h2></hgroup><article  id="what-areas-affect-stroke-severity">
 
@@ -571,7 +534,7 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 </ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Threshold P-value Map \(0.01\) ⇒ HPR</h2></hgroup><article  id="threshold-p-value-map-0.01-hpr">
+</article></slide><slide class=''><hgroup><h2>Threshold P-value Map at \(0.01\) ⇒ HPR</h2></hgroup><article  id="threshold-p-value-map-at-0.01-hpr">
 
 <div style="width:49%;float:left;">
 <p><img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="width: 100%"></p></div>
@@ -672,7 +635,7 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 {\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
 \end{eqnarray}\] to the <strong>reader-based model</strong>: \[\begin{eqnarray} 
-{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus{ }Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus\,Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
 &amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
 \end{eqnarray}\] where \(I(k)\) represents the indicator that ICH location was \(k\)</p>
 
@@ -687,7 +650,12 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 <p>Nested Model Comparison:</p>
 
 <ul>
-<li>LRT: Reader+HPR model vs. Reader-only model: \(p &lt; 0.001\)</li>
+<li><p>LRT: Reader+HPR model vs. Reader-only model: \(p &lt; 0.001\)</p></li>
+<li><p>Reader+HPR model: \[\begin{eqnarray} 
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus\,Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
+&amp;+&amp; \beta_4 {\rm Coverage}_i \\
+&amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}\]</p></li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Does HPR coverage perform better than chance?</h2></hgroup><article  id="does-hpr-coverage-perform-better-than-chance">
@@ -710,20 +678,6 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 <li>Violates separation of exploratory and confirmatory analyses</li>
 </ul></li>
 </ul>
-
-</article></slide><slide class=''><hgroup><h2>One Possible Solution: Permutation Testing</h2></hgroup><article  id="one-possible-solution-permutation-testing">
-
-<p>Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome</p>
-
-<p>Permutation procedure:</p>
-
-<ol>
-<li>Permute NIHSS</li>
-<li>Apply selection procedure and obtain HPR on permuted NIHSS</li>
-<li>Calculate adjusted \(R^2\) on true NIHSS</li>
-</ol>
-
-</article></slide><slide class=''><hgroup><h2>Result: Permutation test p-value \(&lt;0.01\) <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig"></h2></hgroup><article  id="result-permutation-test-p-value-0.01">
 
 </article></slide><slide class=''><hgroup><h2>Conclusions of Stroke Analyses</h2></hgroup><article  id="conclusions-of-stroke-analyses">
 
@@ -753,21 +707,6 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 <ul>
 <li><strong>Validate these regions (MISTIE III)</strong></li>
 <li><strong>Scalar on image regression</strong></li>
-</ul></li>
-</ul></div>
-
-</article></slide><slide class=''><hgroup><h2>Other Work</h2></hgroup><article  id="other-work">
-
-<div style="font-size: 24pt">
-<ul>
-<li>Segmentation of Gadolinium-Enhancing Lesions in Patients with MS on MRI (T1w, T2w, FLAIR, PD)</li>
-<li>Catheter scoring with pre/post-op registration for ICH</li>
-<li>Creating Department-level indices of publication</li>
-<li>Teaching Neuroimaging and R
-
-<ul>
-<li>Mathematical and Statistical Challenges in Neuroimaging Data Analysis</li>
-<li>JSM 2016</li>
 </ul></li>
 </ul></div>
 
