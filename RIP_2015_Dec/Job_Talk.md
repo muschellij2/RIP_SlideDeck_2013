@@ -328,7 +328,7 @@ where $x_{i, 1}(v) \dots x_{i, 21}(v)$ are the predictors.
 
 Use the "Eve" segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate:
 $$
-\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{ICH Mask} } {\sum \text{ICH Mask}} \times 100\% \nonumber
+\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Hemorrhage Mask} } {\sum \text{Hemorrhage Mask}} \times 100\% \nonumber
 $$
 
 
