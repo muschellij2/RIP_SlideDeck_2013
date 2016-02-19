@@ -573,7 +573,7 @@ Problems:
 </div>
 
 
-## Future Work of Stroke Analyses
+## Conclusions of Stroke Analyses
 
 <div style="font-size: 24pt">
 
