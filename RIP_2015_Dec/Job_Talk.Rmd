@@ -2,7 +2,7 @@
 title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed
   Tomography Scanning'
 author: "John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/ICHTALK"
-date: "January 28, 2016"
+date: "February 19, 2016"
 output:
   ioslides_presentation:
     css: john_orals.css
@@ -178,24 +178,6 @@ x = sapply(bib, citep)
 
 </div>
 </div>
-
-
-## fslr: Connecting FSL and R
-
-fslr
-
-- Ports most of FSL functionality into R 
-- https://cran.r-project.org/web/packages/fslr/index.html
-
-FSL 
-
-- Full neuroimaging suite of analysis and preprocessing tools
-- Actively developed (first release in 2000) `r citep("jenkinson_fsl_2012")`
-- Popular: 13.9% of published neuroimaging studies used FSL `r citep("carp_secret_2012")`.
-- Open source and free (for academics)
-
-
-
 
 
 ## Number of Downloads (CRAN packages)
@@ -464,10 +446,10 @@ $$
 
 <div style="font-size: 24pt">
 
+1. Quantify of hemorrhage engagement of regions in the brain
 2. Create a 3-dimensional (3D) density map of hemorrhages in MISTIE population
-3. Quantify of hemorrhage engagement of regions in the brain
-4. Determine if differences in location relate to stroke severity
-5. Generate a stroke region of engagement using within-sample validation
+3. Determine if differences in location relate to stroke severity
+4. Generate a stroke region of engagement using within-sample validation
 </div>
 
 # Population ICH Distribution
@@ -498,6 +480,30 @@ $$
    </div>
 </div>
 
+
+## What Brain Areas have Hemorrhage?
+
+Use the "Eve" segmentation map `r citep("oishi_human_2008")`, which outlines structures, we can calculate:
+$$
+\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
+$$
+
+```{r}
+df = read.table("Subject_Table.txt", stringsAsFactors = FALSE)
+df$Area = gsub("WM", "White Matter", df$Area)
+proper = function(x){
+  substring(x, 1, 1) <- toupper(substring(x, 1, 1))
+  substring(x, 2) <- tolower(substring(x, 2))
+  x
+}
+df$Area = proper(df$Area)
+```
+
+```{r, results='asis'}
+pander(df)
+```
+
+
 ## Aggregating Multiple Hemorrhage Masks
 
 N - number of patients, V - number of voxels
@@ -516,13 +522,13 @@ N - number of patients, V - number of voxels
 
 ## What Brain Areas have Hemorrhage?
 
-Use the "Eve" segmentation map `r citep("oishi_human_2008")`, which outlines structures, we can calculate:
+Use the "Eve" segmentation map/atlas `r citep("oishi_human_2008")`, which outlines structures, we can calculate:
 $$
 \text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
 $$
 
 
-```{r}
+```{r, eval = FALSE}
 n = 5
 load("Population_Table.Rda")
 pop.tab = head(col.dfs$EVE_1, n)
@@ -556,10 +562,11 @@ df[sapply(df, is.na)] = ""
 rownames(df) = NULL
 ```
 
+
 ## What Brain Areas have Hemorrhage?
 
 Top 5 regions
-```{r, results='asis'}
+```{r, results='asis', eval = FALSE}
 pander(df)
 ```
 

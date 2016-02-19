@@ -1,6 +1,6 @@
 # Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed Tomography Scanning
 John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/ICHTALK  
-January 28, 2016  
+February 19, 2016  
 
 
 <script type="text/x-mathjax-config">
@@ -68,9 +68,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 </div>
 </div>
-
-
-
 
 
 ## Number of Downloads (CRAN packages)
@@ -239,6 +236,15 @@ Mean (SD)
 
 </div>
 
+## Image Representation: voxels (3D pixels)
+
+<div class="columns-2">
+Pixel:
+<img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;">
+<br>
+Voxel:
+<img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;">
+
 
 ## Image Representation: voxels (3D pixels)
 <div class="columns-2">
@@ -315,10 +321,10 @@ $$
 
 <div style="font-size: 24pt">
 
+1. Quantify of hemorrhage engagement of regions in the brain
 2. Create a 3-dimensional (3D) density map of hemorrhages in MISTIE population
-3. Quantify of hemorrhage engagement of regions in the brain
-4. Determine if differences in location relate to stroke severity
-5. Generate a stroke region of engagement using within-sample validation
+3. Determine if differences in location relate to stroke severity
+4. Generate a stroke region of engagement using within-sample validation
 </div>
 
 # Population ICH Distribution
@@ -349,6 +355,32 @@ $$
    </div>
 </div>
 
+
+## What Brain Areas have Hemorrhage?
+
+Use the "Eve" segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate:
+$$
+\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
+$$
+
+
+
+
+-------------------------------------
+          Area            Prevalence 
+------------------------ ------------
+   Postcentral gyrus         16.7    
+
+  Supramarginal gyrus        10.8    
+
+Superior parietal lobule     10.4    
+
+Postcentral white matter     10.2    
+
+    Precentral gyrus         8.2     
+-------------------------------------
+
+
 ## Aggregating Multiple Hemorrhage Masks
 
 N - number of patients, V - number of voxels
@@ -367,10 +399,11 @@ N - number of patients, V - number of voxels
 
 ## What Brain Areas have Hemorrhage?
 
-Use the "Eve" segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate:
+Use the "Eve" segmentation map/atlas (Oishi, et al., 2008), which outlines structures, we can calculate:
 $$
 \text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Population Map} } {\sum \text{Population Map}} \times 100\% \nonumber
 $$
+
 
 
 
@@ -379,20 +412,6 @@ $$
 
 Top 5 regions
 
------------------------------------------------
-         Area            Population Prevalence 
------------------------ -----------------------
-  CSF (ventricular &              7.9          
- subarachnoid spaces)                          
-
-        Insular                   7.6          
-
-Superior temporal gyrus           5.5          
-
-        Putamen                   4.8          
-
-   External capsule               3.9          
------------------------------------------------
 
 # What Areas Affect Stroke Severity
 
@@ -573,6 +592,19 @@ Problems:
 - Double-dipping: Using the data twice
     - Violates separation of exploratory and confirmatory analyses
 
+## One Possible Solution: Permutation Testing 
+
+Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
+
+Permutation procedure:
+
+1.  Permute NIHSS
+2.  Apply selection procedure and obtain HPR on permuted NIHSS
+3.  Calculate adjusted $R^2$ on true NIHSS
+
+## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig">
+
+
 
 
 ## Conclusions of Stroke Analyses
@@ -615,46 +647,4 @@ Problems:
 
 # Thank You
 
-
-
-
-
-## One Possible Solution: Permutation Testing 
-
-Null hypothesis: the prediction performance of HPR coverage is the same with the prediction performance of HPR coverage when there is no association between location and outcome 
-
-Permutation procedure:
-
-1.  Permute NIHSS
-2.  Apply selection procedure and obtain HPR on permuted NIHSS
-3.  Calculate adjusted $R^2$ on true NIHSS
-
-## Result: Permutation test p-value $<0.01$ <img src="figure/NIHSS_Permutation_Figure.png" style="width:55%; display: block; margin: auto;" alt="Perm fig">
-
-
-
-
-## fslr: Connecting FSL and R
-
-fslr
-
-- Ports most of FSL functionality into R 
-- https://cran.r-project.org/web/packages/fslr/index.html
-
-FSL 
-
-- Full neuroimaging suite of analysis and preprocessing tools
-- Actively developed (first release in 2000) (Jenkinson, et al., 2012)
-- Popular: 13.9% of published neuroimaging studies used FSL (Carp, 2012).
-- Open source and free (for academics)
-
-
-## Image Representation: voxels (3D pixels)
-
-<div class="columns-2">
-Pixel:
-<img src="figure/centered_voxel.png"  style="width:100%;  display: block; margin: auto;">
-<br>
-Voxel:
-<img src="figure/voxel_figure.gif" loop=infinite style="width:100%;  inline; display: block; margin: auto;">
 
