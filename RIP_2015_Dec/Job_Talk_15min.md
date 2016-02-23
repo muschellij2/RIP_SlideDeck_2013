@@ -33,6 +33,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
     + **Tissue ⇒ intracerebral hemorrhage (ICH)**
 - ≈ 13% of strokes
 - Larger ICH Volume ⇒ Worse Outcome
+<br>
 
 ![](figure/stroke_hem_web.jpg)
 
