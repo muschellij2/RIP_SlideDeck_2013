@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Segmentation of Stroke Hemorrhages in X-ray Computed Tomography Scanning</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+  <meta name="date" content="2016-02-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="Job_Talk_15min_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="Job_Talk_15min_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="Job_Talk_15min_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Segmentation of Stroke Hemorrhages in X-ray Computed Tomography Scanning',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> <a href="http://bit.ly/talk15" class="uri">http://bit.ly/talk15</a>' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="john_orals.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">February 24, 2016</p>
+          </hgroup>
+  </slide>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<slide class=''><hgroup><h2>The MISTIE Stroke Trial</h2></hgroup><article  id="the-mistie-stroke-trial">
+
+<ul>
+<li>Minimally Invasive Surgery plus r-tPA for Intracerebral Hemorrhage Evacuation (<strong>MISTIE</strong>)
+
+<ul>
+<li>Multi-center, multi-national Phase II clinical trial</li>
+</ul></li>
+<li>Patients with intracerebral hemorrhages (≥ 20 millilters)</li>
+</ul>
+
+<p><img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+<ul>
+<li><a href='http://braininjuryoutcomes.com/mistie-about' title=''>http://braininjuryoutcomes.com/mistie-about</a></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>What is Intracranial/Intracerebral hemorrhage?</h2></hgroup><article  id="what-is-intracranialintracerebral-hemorrhage">
+
+<div class="columns-2" style="font-size: 28pt;">
+<ul>
+<li>When a blood vessel ruptures into:
+
+<ul>
+<li><strong>Tissue ⇒ intracerebral hemorrhage (ICH)</strong></li>
+</ul></li>
+<li>≈ 13% of strokes</li>
+<li>Larger ICH Volume ⇒ Worse Outcome</li>
+</ul>
+
+<img src='figure/stroke_hem_web.jpg' title=''/>
+
+<p style="font-size:10.5px; ">
+
+<a href = "http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm" style ="word-wrap: break-word;" >http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm</a>
+
+</p></div>
+
+</article></slide><slide class=''><hgroup><h2>X-ray Computed Tomography (CT) Scans</h2></hgroup><article  id="x-ray-computed-tomography-ct-scans">
+
+<aside class='note'><section><p>Images are acquired from an X-ray scanner.<br/>x-ray goes around object and detector the other side of the object determines how many x-rays are recovered - fancy transform - Image!</p></section></aside>
+
+<div style="width:48%;float:left;">
+<p><sub><sup><sub><sup>Image from <a href='http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm' title=''>http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm</a></sup></sub></sup></sub> <img src='figure/CT_diagram2.gif' title=''/> <br></p></div>
+
+<div style="margin-left:48%;">
+<p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>ICH Segmentation, Volume/Location Estimation</h2></hgroup><article  id="ich-segmentation-volumelocation-estimation">
+
+<div class="columns-2">
+<p>Want to go from a brain image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a binary hemorrhage mask: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Subject Data used: 111 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-111-scans-1-per-patient">
+
+<div id="wrap">
+<div id="left_col">
+<table class = 'rmdtable'>
+<col width="40%" />
+<col width="15%" />
+<tr class="header">
+<th align="left"> </th>
+<th align="right">Overall</th>
+</tr>
+<tr class="odd">
+<td align="left">Age in Years: Mean (SD)</td>
+<td align="right">60.8 (11.2)</td>
+</tr>
+<tr class="even">
+<td align="left">Male: N (%)</td>
+<td align="right">76 (68.5%)</td>
+</tr>
+<tr class="odd">
+<td align="left">Clot Location RC (%)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">   Putamen</td>
+<td align="right">68 (61.3)</td>
+</tr>
+<tr class="odd">
+<td align="left">   Lobar</td>
+<td align="right">33 (29.7)</td>
+</tr>
+<tr class="even">
+<td align="left">   Globus Pallidus</td>
+<td align="right">6 ( 5.4)</td>
+</tr>
+<tr class="odd">
+<td align="left">   Thalamus</td>
+<td align="right">4 ( 3.6)</td>
+</tr>
+<tr class="even">
+<td align="left">Diagnostic ICH Volume in mL: Mean (SD)</td>
+<td align="right">37.4 (20.1)</td>
+</tr>
+</table></div>
+
+<div id="right_col" style="font-size: 24pt;">
+<ul>
+<li>Adults (inclusion criteria 18-80 years old)</li>
+<li>Mostly males</li>
+<li>Reader-classified Location of Hemorrhage</li>
+</ul></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
+
+<div class="columns-2">
+<p><img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;"> <br> <img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;" loop=infinite></p>
+
+<p style="font-size: 10pt;">
+
+Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data.&quot; R JOURNAL 6.1 (2014): 42-48.
+
+</p></div>
+
+</article></slide><slide class=''><hgroup><h2>Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates2.png" style="width:48%; display: block; margin: auto;" alt="Preds"></h2></hgroup><article  id="step-1-create-predictors-of-ich">
+
+</article></slide><slide class=''><hgroup><h2>Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="stacking"></h2></hgroup><article  id="data-structure-for-one-patient">
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<div class="container">
+<div id="left_col2">
+<p>Training Data Structure</p>
+
+<ul>
+<li>Stack together 10 randomly selected patients</li>
+<li>Train model/classifier on this design matrix</li>
+</ul></div>
+
+<div id="right_col2">
+<img src="figure/Large_Design_Matrix.png" style="width:20%;  display: block; margin: auto;" alt="MISTIE LOGO"><br/></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Step 2: Fit Models</h2></hgroup><article  id="step-2-fit-models">
+
+<p>Let \(Y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
+
+<p>\[
+\text{logit}\left(P(Y_{i}(v) = 1)\right) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}
+\] where \(x_{i, 1}(v) \dots x_{i, 21}(v)\) are the predictors.</p>
+
+</article></slide><slide class=''><hgroup><h2>Predicted Volume Estimates True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="predicted-volume-estimates-true-volume">
+
+</article></slide><slide class=''><hgroup><h2>Patient with Median Overlap in Validation Set</h2></hgroup><article  id="patient-with-median-overlap-in-validation-set">
+
+<p><img src="figure/Reseg_Figure_DSI_Quantile_050_No_DSI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Shiny Application: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:105%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-application-httpbit.lyich_seg">
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you" class="unnumbered">
+
+<div id="refs" class="references">
+</div></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="Job_Talk_15min_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="Job_Talk_15min_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="Job_Talk_15min_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="Job_Talk_15min_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="Job_Talk_15min_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="Job_Talk_15min_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="Job_Talk_15min_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "Job_Talk_15min_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

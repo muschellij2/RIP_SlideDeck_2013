@@ -1,0 +1,259 @@
+---
+title: 'Segmentation of Stroke Hemorrhages in X-ray Computed
+  Tomography Scanning'
+author: "John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/talk15"
+date: "February 24, 2016"
+output:
+  ioslides_presentation:
+    css: john_orals.css
+    keep_md: yes
+    mathjax: local
+    self_contained: no
+    widescreen: yes
+  beamer_presentation: default
+  slidy_presentation:
+    css: john_orals.css
+    keep_md: yes
+    mathjax: local
+    self_contained: no
+    widescreen: yes
+bibliography: Oral_Proposal.bib
+---
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+```{r opts, prompt=FALSE, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, comment=""}
+library(knitr)
+library(knitcitations)
+cite_options(max.names = 1)
+opts_chunk$set(echo = FALSE, prompt = FALSE, message = FALSE, warning = FALSE, comment = "", results = 'hide')
+setwd("~/CT_Registration/RIP_SlideDeck/RIP_2015_Dec/")
+```
+
+
+```{r, prompt=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+rm.obj = ls()
+rm.obj = rm.obj[ !(rm.obj %in% c("fname", "slide"))]
+rm(list = rm.obj)
+library(ggplot2)
+library(xtable)
+library(scales)
+library(fslr)
+library(pander)
+options(stringsAsFactors = FALSE)
+rootdir = path.expand("~/Dropbox/CTR/DHanley/MISTIE")
+homedir = file.path(rootdir, "ICH Analysis")
+Mdir = file.path(rootdir, "MISTIE DSMB Analysis")
+resdir <- file.path(homedir, "results")
+rundir <- file.path(resdir, "Manuscript")
+progdir <- file.path(homedir, "stataprograms")
+datadir <- file.path(Mdir, "statacalc")
+knitdir <- "~/CT_Registration/RIP_SlideDeck/RIP_2015_Dec/"
+load(file=file.path(rundir, "All_IncludingICES_Patients.Rda"))
+load(file=file.path(rundir, "Randomized_Patients.Rda"))
+load(file=file.path(knitdir, "111_Filenames.Rda"))
+pt.ids = c(100318L, 100362L, 100365L, 101306L, 101307L, 101308L, 102317L, 
+102322L, 102324L, 102331L, 102360L, 102367L, 102374L, 102391L, 
+102393L, 102403L, 102406L, 120376L, 131310L, 131316L, 131334L, 
+131354L, 133409L, 133417L, 134304L, 134305L, 134320L, 134327L, 
+134345L, 134380L, 134381L, 134382L, 134392L, 134408L, 134412L, 
+134416L, 152302L, 152303L, 152353L, 157328L, 157329L, 157332L, 
+157335L, 157336L, 157370L, 157372L, 157399L, 157410L, 161413L, 
+173312L, 173313L, 173325L, 173341L, 173361L, 173364L, 173368L, 
+173384L, 173396L, 173404L, 175387L, 175397L, 175405L, 179373L, 
+179383L, 179386L, 179394L, 179395L, 179402L, 184388L, 191301L, 
+191311L, 191314L, 191315L, 191319L, 191321L, 191333L, 191375L, 
+191400L, 205509L, 205517L, 205519L, 216390L, 219350L, 222337L, 
+222357L, 222358L, 223355L, 223369L, 223407L, 225502L, 225503L, 
+225504L, 225505L, 225506L, 225507L, 225510L, 225511L, 225515L, 
+225524L, 230356L, 230363L, 230366L, 230371L, 230377L, 232514L, 
+232516L, 234385L, 265389L, 265398L, 289518L, 289525L)
+fdf$id = as.numeric(gsub("-", "", fdf$id))
+fdf = fdf[ fdf$id %in% pt.ids, ]
+```
+
+```{r demog}
+library(tableone)
+library(stargazer)
+library(pander)
+library(plyr)
+alldemog = read.csv("All_180_FollowUp_wDemographics.csv", as.is = TRUE)
+alldemog = alldemog[, c("patientName", "Clot_Location_RC")]
+alldemog$Clot_Location_RC = plyr::revalue(
+  alldemog$Clot_Location_RC,
+  c("Globus Palidus" = "Globus Pallidus"))
+n.ids = length(unique(fdf$id))
+demog = fdf$id 
+
+demog = all.alldat[ all.alldat$patientName %in% demog, ]
+demog$Clot_Location_RC = NULL
+demog = merge(demog, alldemog, all.x = TRUE )
+stopifnot(nrow(demog) == n.ids)
+demog$Diagnostic_ICH_Volume =demog$ICH_Dx_10 * 10 
+demog$Diagnostic_IVH_Volume =demog$IVH_Dx_10 * 10 
+tt = sort(table(demog$Clot_Location_RC), decreasing = TRUE)
+nclot = names(tt)[tt > 0]
+demog$Clot_Location_RC = factor(demog$Clot_Location_RC, levels = nclot)
+
+vars = c("Age", "Gender", "Clot_Location_RC",
+         "Diagnostic_ICH_Volume")
+catvars = c("Gender", "Clot_Location_RC")
+tb1 = CreateTableOne(vars = vars, factorVars = catvars, 
+                     data = demog)
+tb1 = print(tb1, contDigits = 1)
+gen = grepl("Gender", rownames(tb1))
+rownames(tb1)[ gen ] = "Male: N (%)"
+tb1[gen,1] = gsub("\\((.*)\\)", "(\\1%)", tb1[gen,1,drop=FALSE])
+
+rownames(tb1) = gsub("_", " ", rownames(tb1))
+rownames(tb1) = gsub(" \\(mean", ": Mean", rownames(tb1))
+rownames(tb1) = gsub("(sd))", "(SD)", rownames(tb1), fixed=TRUE)
+rownames(tb1) = gsub("Volume", "Volume in mL", rownames(tb1), fixed=TRUE)
+rownames(tb1) = gsub("Age", "Age in Years", rownames(tb1), fixed=TRUE)
+rownames(tb1) = gsub("Clot_Location_RC", "ICH Location", rownames(tb1), fixed=TRUE)
+tb1 = tb1[rownames(tb1) != "n", , drop=FALSE]
+# tb1 = pander.return(tb1)
+# tb1 = tb1[ tb1 != ""]
+```
+
+```{r}
+library(RefManageR)
+library(knitcitations)
+bib <- ReadBib(file.path(knitdir, 'Oral_Proposal.bib'))
+x = sapply(bib, citep)
+```
+
+## The MISTIE Stroke Trial 
+
+* Minimally Invasive Surgery plus r-tPA for Intracerebral Hemorrhage Evacuation (<strong>MISTIE</strong>) 
+    - Multi-center, multi-national Phase II clinical trial
+* Patients with intracerebral hemorrhages (≥ 20 millilters)
+
+<img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO">
+
+* http://braininjuryoutcomes.com/mistie-about
+
+
+## What is Intracranial/Intracerebral hemorrhage?
+
+<div class="columns-2" style='font-size: 28pt;'>
+- When a blood vessel ruptures into:
+    + **Tissue ⇒ intracerebral hemorrhage (ICH)**
+- ≈ 13% of strokes
+- Larger ICH Volume ⇒ Worse Outcome
+
+![](figure/stroke_hem_web.jpg)
+
+<p style = "font-size:10.5px; ">
+<a href = "http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm" style ="word-wrap: break-word;" >http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm</a>
+</p>
+
+</div>
+
+
+## X-ray Computed Tomography (CT) Scans
+<div class="notes">
+Images are acquired from an X-ray scanner.  
+x-ray goes around object and detector the other side of the object determines how many x-rays are recovered 
+- fancy transform
+- Image!
+</div>
+<div style="width:48%;float:left;">
+<sub><sup><sub><sup>Image from http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm</sup></sub></sup></sub>
+![inline fill](figure/CT_diagram2.gif)
+<br>
+</div>
+<div style="margin-left:48%;">
+<img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
+</div>
+
+
+```{r biblio, results='hide'}
+bibliography() 
+```
+
+
+## ICH Segmentation, Volume/Location Estimation 
+
+<div class="columns-2">
+Want to go from a brain image:
+<img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
+<br/>
+To a binary hemorrhage mask:
+<img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
+</div>
+
+
+## Subject Data used: 111 scans (1 per patient)
+<div id="wrap">
+<div id="left_col">
+
+```{r, results='asis'}
+tb1 = cbind(rownames(tb1), tb1)
+rownames(tb1) = NULL
+tb1[,1] = gsub("   ", "&nbsp;&nbsp;&nbsp;", tb1[,1])
+pander(tb1, justify = c("lr"))
+```
+
+</div>
+<div id="right_col"  style='font-size: 24pt;'>
+
+
+- Adults (inclusion criteria 18-80 years old)
+- Mostly males
+- Reader-classified Location of Hemorrhage
+
+</div>
+
+</div>
+
+## Image Representation: voxels (3D pixels)
+<div class="columns-2">
+<img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;">
+<br>
+<img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;" loop=infinite>
+
+<p style='font-size: 10pt;'>Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. "brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data." R JOURNAL 6.1 (2014): 42-48.</p>
+</div>
+
+
+## Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates2.png" style="width:48%; display: block; margin: auto;" alt="Preds">  
+
+## Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="stacking">  
+
+---
+<div class="container"> 
+  <div id="left_col2"> 
+  Training Data Structure
+  
+  * Stack together 10 randomly selected patients
+  * Train model/classifier on this design matrix
+
+  
+  </div>    
+  <div id="right_col2">
+  <img src="figure/Large_Design_Matrix.png" style="width:20%;  display: block; margin: auto;" alt="MISTIE LOGO">  
+  </div> 
+</div>
+
+## Step 2: Fit Models 
+
+Let $Y_{i}(v)$ be the presence / absence of ICH for voxel $v$ from person $i$.  
+
+$$
+\text{logit}\left(P(Y_{i}(v) = 1)\right) = \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}
+$$
+where $x_{i, 1}(v) \dots x_{i, 21}(v)$ are the predictors.  
+
+## Predicted Volume Estimates True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg">
+
+## Patient with Median Overlap in Validation Set
+
+<img src="figure/Reseg_Figure_DSI_Quantile_050_No_DSI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"> 
+
+## Shiny Application: http://bit.ly/ICH_SEG <img src="Shiny_prediction.png" style="width:105%; display: block; margin: auto;" alt="shiny orig">
+
+# Thank You
