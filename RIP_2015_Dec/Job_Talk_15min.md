@@ -1,7 +1,6 @@
 # Segmentation of Stroke Hemorrhages in X-ray Computed Tomography Scanning
-John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/talk15  
+John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://johnmuschelli.com/jnj_talk.html  
 February 24, 2016  
-
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
@@ -161,3 +160,42 @@ where $x_{i, 1}(v) \dots x_{i, 21}(v)$ are the predictors.
 ## Shiny Application: http://bit.ly/ICH_SEG <img src="Shiny_prediction.png" style="width:105%; display: block; margin: auto;" alt="shiny orig">
 
 # Thank You
+
+
+
+## Local Moment Information: Mean
+
+For each voxel,  neighborhood $N(v)$, of all adjacent neighboring voxels in $3$ dimensions.  Let $x_k(v)$ denote the voxel intensity in HU for voxel neighbor $k$, where $k = 1, \dots, 27$. 
+$$
+\begin{equation}
+\bar{x}(v) = \frac{1}{N(v)} \sum_{k \in N(v)} x_k(v) \label{eq:mean}
+\end{equation}
+$$
+<img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_moment1.png" style="width:30%;  display: block; margin: auto;" alt="MISTIE LOGO">
+
+## Local Moment Information: Higher Moments
+<img src="figure/moments.png" style="width:60%;  display: block; margin: auto;" alt="MISTIE LOGO">
+
+
+## Population Voxel-wise Mean/SD Image
+From $32$ CT images from Dr. Rorden (personal communication), we created a voxel-wise mean image $M$ and voxel-wise standard deviation $S$ image, after registering to a CT template (Rorden, et al., 2012).  
+
+<img src="figure/Z_template.png" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO">
+
+## Standardized-to-template Intensity
+We created a standardized voxel intensity with respect to the template ($z_{i,\text{template}}$) using the following equation:
+<div id="wrap">
+<div id="left_col2">
+<br>
+<br>
+
+$$
+z_{i,\text{template}}(v) = \frac{x_{i}(v) - M(v)}{S(v)}
+$$
+</div>
+
+<div id="right_col2">
+
+<img src="figure/Z_image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO">
+</div>
+</div>

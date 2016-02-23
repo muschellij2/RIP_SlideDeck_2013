@@ -36,7 +36,7 @@
       // Author information
       presenters: [
             {
-        name:  'John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> <a href="http://bit.ly/talk15" class="uri">http://bit.ly/talk15</a>' ,
+        name:  'John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> <a href="http://johnmuschelli.com/jnj_talk.html" class="uri">http://johnmuschelli.com/jnj_talk.html</a>' ,
         company: '',
         gplus: '',
         twitter: '',
@@ -248,7 +248,40 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 </article></slide><slide class=''><hgroup><h2>Shiny Application: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:105%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-application-httpbit.lyich_seg">
 
-</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you" class="unnumbered">
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you">
+
+</article></slide><slide class=''><hgroup><h2>Local Moment Information: Mean</h2></hgroup><article  id="local-moment-information-mean">
+
+<p>For each voxel, neighborhood \(N(v)\), of all adjacent neighboring voxels in \(3\) dimensions. Let \(x_k(v)\) denote the voxel intensity in HU for voxel neighbor \(k\), where \(k = 1, \dots, 27\). \[
+\begin{equation}
+\bar{x}(v) = \frac{1}{N(v)} \sum_{k \in N(v)} x_k(v) \label{eq:mean}
+\end{equation}
+\] <img src="figure/161-413_20110710_1619_CT_2_HEAD_Head_moment1.png" style="width:30%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Local Moment Information: Higher Moments</h2></hgroup><article  id="local-moment-information-higher-moments">
+
+<p><img src="figure/moments.png" style="width:60%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Population Voxel-wise Mean/SD Image</h2></hgroup><article  id="population-voxel-wise-meansd-image">
+
+<p>From \(32\) CT images from Dr. Rorden (personal communication), we created a voxel-wise mean image \(M\) and voxel-wise standard deviation \(S\) image, after registering to a CT template (Rorden, et al., 2012).</p>
+
+<p><img src="figure/Z_template.png" style="width:50%;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Standardized-to-template Intensity</h2></hgroup><article  id="standardized-to-template-intensity">
+
+We created a standardized voxel intensity with respect to the template (\(z_{i,\text{template}}\)) using the following equation:
+
+<div id="wrap">
+<div id="left_col2">
+<p><br> <br></p>
+
+<p>\[
+z_{i,\text{template}}(v) = \frac{x_{i}(v) - M(v)}{S(v)}
+\]</p></div>
+
+<div id="right_col2">
+<p><img src="figure/Z_image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div></div>
 
 <div id="refs" class="references">
 </div></article></slide>
