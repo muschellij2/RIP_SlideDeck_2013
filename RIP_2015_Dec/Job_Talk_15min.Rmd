@@ -20,7 +20,6 @@ output:
 bibliography: Oral_Proposal.bib
 ---
 
-
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 </script>
