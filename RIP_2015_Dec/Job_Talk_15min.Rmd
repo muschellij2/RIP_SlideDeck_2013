@@ -1,7 +1,7 @@
 ---
 title: 'Segmentation of Stroke Hemorrhages in X-ray Computed
   Tomography Scanning'
-author: "John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/talk15"
+author: "John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://johnmuschelli.com/jnj_talk.html"
 date: "February 24, 2016"
 output:
   ioslides_presentation:
