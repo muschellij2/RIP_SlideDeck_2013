@@ -199,6 +199,44 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <li><a href='http://braininjuryoutcomes.com/mistie-about' title=''>http://braininjuryoutcomes.com/mistie-about</a></li>
 </ul>
 
+</article></slide><slide class=''><hgroup><h2>When I stroke I don&#39;t mean ischemic</h2></hgroup><article  id="when-i-stroke-i-dont-mean-ischemic">
+
+<div class="container">
+<div id="left_col">
+<p><img src="figure/ischemic_stroke_edema_700w.jpg" alt="Ischemic" style="display: block; margin: auto; width: 80%"></p></div>
+
+<div id="right_col">
+<ul>
+<li>Ischemic stroke - clot blocks oxygen/nutrients</li>
+<li>Tissue dies</li>
+</ul>
+
+<p style="font-size:10.5px;">
+
+Image from <a href = "http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/
+" style ="word-wrap: break-word;" >http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/ </a>
+
+</p></div></div>
+
+</article></slide><slide class=''><hgroup><h2>When I stroke I don&#39;t mean ischemic</h2></hgroup><article  id="when-i-stroke-i-dont-mean-ischemic-1">
+
+<div class="container">
+<div id="left_col">
+<p><img src="figure/ischemic_stroke_edema_700w_not.jpg" alt="Ischemic" style="display: block; margin: auto; width: 80%"></p></div>
+
+<div id="right_col">
+<ul>
+<li>Ischemic stroke - clot blocks oxygen/nutrients</li>
+<li>Tissue dies</li>
+</ul>
+
+<p style="font-size:10.5px;">
+
+Image from <a href = "http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/
+" style ="word-wrap: break-word;" >http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/ </a>
+
+</p></div></div>
+
 </article></slide><slide class=''><hgroup><h2>What is Intracranial/Intracerebral hemorrhage?</h2></hgroup><article  id="what-is-intracranialintracerebral-hemorrhage">
 
 <div class="columns-2" style="font-size: 28pt;">
@@ -207,7 +245,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <ul>
 <li><strong>Tissue ⇒ intracerebral hemorrhage (ICH)</strong></li>
-<li>Ventricles ⇒ intraventricular hemorrhage (IVH)</li>
 </ul></li>
 <li>≈ 13% of strokes</li>
 </ul>
@@ -264,13 +301,11 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 
 <ul>
 <li>Muschelli, John, et al. &quot;Validated automatic brain extraction of head CT images.&quot; NeuroImage 114 (2015): 379-385.</li>
-<li>R code: <a href='http://bit.ly/CTBET_RCODE' title=''>http://bit.ly/CTBET_RCODE</a>
-
-<ul>
-<li>Based on <strong>fslr</strong></li>
-</ul></li>
+<li>R code: <a href='http://bit.ly/CTBET_RCODE' title=''>http://bit.ly/CTBET_RCODE</a> - based on <strong>fslr</strong></li>
 <li>bash code: <a href='http://bit.ly/CTBET_BASH' title=''>http://bit.ly/CTBET_BASH</a></li>
 </ul>
+
+<p><img src="figure/Normal_SS.png" style="width:38%;  display: block; margin: auto;" alt="SS"></p>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="larger-ich-volume-worse-outcome">
 
@@ -284,7 +319,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <div id="wrap">
 <div id="left_col">
 <table class = 'rmdtable'>
-<col width="40%" />
+<col width="43%" />
 <col width="15%" />
 <tr class="header">
 <th align="left"> </th>
@@ -299,7 +334,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <td align="right">76 (68.5%)</td>
 </tr>
 <tr class="odd">
-<td align="left">Clot Location RC (%)</td>
+<td align="left">Reader-Based Clot Location (%)</td>
 <td align="right"></td>
 </tr>
 <tr class="even">
@@ -319,7 +354,7 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 <td align="right">4 ( 3.6)</td>
 </tr>
 <tr class="even">
-<td align="left">Diagnostic ICH Volume in mL: Mean (SD)</td>
+<td align="left">ICH Volume in mL: Mean (SD)</td>
 <td align="right">37.4 (20.1)</td>
 </tr>
 </table></div>
@@ -342,7 +377,7 @@ Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Inter
 
 </p></div>
 
-</article></slide><slide class=''><hgroup><h2>Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="step-1-create-predictors-of-ich">
+</article></slide><slide class=''><hgroup><h2>Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates2.png" style="width:48%; display: block; margin: auto;" alt="Preds"></h2></hgroup><article  id="step-1-create-predictors-of-ich">
 
 </article></slide><slide class=''><hgroup><h2>Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="data-structure-for-one-patient">
 
@@ -408,8 +443,12 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 
 </article></slide><slide class=''><hgroup><h2>Hemorrhage Engagement of Brain Regions</h2></hgroup><article  id="hemorrhage-engagement-of-brain-regions">
 
-<p>Use the &quot;Eve&quot; segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate: \[
-\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Hemorrhage Mask} } {\sum \text{Hemorrhage Mask}} \times 100\% \nonumber
+<p>We can compare the area to the &quot;Eve&quot; segmentation map (Oishi, et al., 2008) which outlines structures: <img src="figure/Eve_Atlas_Comparison.png" style="width:100%;" alt="Native"></p>
+
+</article></slide><slide class=''><hgroup><h2>Hemorrhage Engagement of Brain Regions</h2></hgroup><article  id="hemorrhage-engagement-of-brain-regions-1">
+
+<p>From this, we can calculate region-level engagement: \[
+\text{Engagement}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Hemorrhage Mask} } {\sum \text{Hemorrhage Mask}} \times 100\% \nonumber
 \]</p>
 
 <table class = 'rmdtable'>
@@ -417,7 +456,7 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 <col width="16%" />
 <tr class="header">
 <th align="center">Area</th>
-<th align="center">Prevalence</th>
+<th align="center">Engagement</th>
 </tr>
 <tr class="odd">
 <td align="center">Postcentral gyrus</td>
@@ -534,6 +573,14 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 </ul></li>
 </ul>
 
+<br>
+
+<p style="font-size: 40pt; text-align: center;">
+
+WARNING: EXPLORATORY ANALYSIS AHEAD!
+
+</p>
+
 </article></slide><slide class=''><hgroup><h2>Threshold P-value Map at \(0.01\) ⇒ HPR</h2></hgroup><article  id="threshold-p-value-map-at-0.01-hpr">
 
 <div style="width:49%;float:left;">
@@ -608,7 +655,7 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 <td align="right">4 ( 3.6)</td>
 </tr>
 <tr class="even">
-<td align="left">Diagnostic ICH Volume in mL: Mean (SD)</td>
+<td align="left">ICH Volume in mL: Mean (SD)</td>
 <td align="right">37.4 (20.1)</td>
 </tr>
 </table>
@@ -709,6 +756,37 @@ Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_C
 <li><strong>Scalar on image regression</strong></li>
 </ul></li>
 </ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Acknowledgments</h2></hgroup><article  id="acknowledgments">
+
+<div class="container">
+<div class="column-left">
+<ul>
+<li>Family/Parents/Stephanie</li>
+<li>Epi and Biostat Aging Training Grant (T32)</li>
+</ul></div>
+
+<div class="column-center">
+<ul>
+<li>Ciprian</li>
+<li>Dan &amp; BIOS</li>
+<li>Brian</li>
+<li>Michelle</li>
+<li>Vadim</li>
+<li><p>Alden</p></li>
+<li>Carol</li>
+<li>Rick</li>
+<li>Ravi</li>
+<li>Michael</li>
+</ul></div>
+
+<div class="column-right">
+<ul>
+<li>Elizabeth Margaret Sweeney</li>
+<li>Biostat students/staff</li>
+<li>Open doors of Biostat faculty</li>
+<li>MISTIE patients</li>
+</ul></div></div>
 
 </article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you" class="unnumbered">
 

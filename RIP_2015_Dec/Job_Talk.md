@@ -99,12 +99,53 @@ From the `cranlogs` R package:
 * http://braininjuryoutcomes.com/mistie-about
 
 
+## When I stroke I don't mean ischemic
+
+<div class="container">
+<div id="left_col">
+<img src="figure/ischemic_stroke_edema_700w.jpg" alt="Ischemic" style="display: block; margin: auto; width: 80%">
+</div>
+<div id="right_col">
+
+- Ischemic stroke - clot blocks oxygen/nutrients
+- Tissue dies
+
+<p style = "font-size:10.5px;">
+Image from <a href = "http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/
+" style ="word-wrap: break-word;" >http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/
+</a>
+</p>
+</div>
+</div>
+
+
+## When I stroke I don't mean ischemic
+
+<div class="container">
+<div id="left_col">
+<img src="figure/ischemic_stroke_edema_700w_not.jpg" alt="Ischemic" style="display: block; margin: auto; width: 80%">
+</div>
+<div id="right_col">
+
+- Ischemic stroke - clot blocks oxygen/nutrients
+- Tissue dies
+
+<p style = "font-size:10.5px;">
+Image from <a href = "http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/
+" style ="word-wrap: break-word;" >http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/
+</a>
+</p>
+</div>
+</div>
+
+
+
+
 ## What is Intracranial/Intracerebral hemorrhage?
 
 <div class="columns-2" style='font-size: 28pt;'>
 - When a blood vessel ruptures into:
     + **Tissue ⇒ intracerebral hemorrhage (ICH)**
-    + Ventricles ⇒ intraventricular hemorrhage (IVH)
 - ≈ 13% of strokes
 
 ![](figure/stroke_hem_web.jpg)
@@ -175,10 +216,10 @@ To a brain-extracted image:
 ## Publicly Available code
 
 * Muschelli, John, et al. "Validated automatic brain extraction of head CT images." NeuroImage 114 (2015): 379-385. 
-* R code: http://bit.ly/CTBET_RCODE
-    * Based on **fslr** 
+* R code: http://bit.ly/CTBET_RCODE - based on **fslr** 
 * bash code: http://bit.ly/CTBET_BASH
 
+<img src="figure/Normal_SS.png" style="width:38%;  display: block; margin: auto;" alt="SS">
 
 
 # Larger ICH Volume ⇒ Worse Outcome
@@ -202,27 +243,26 @@ To a binary hemorrhage mask:
 <div id="left_col">
 
 
-----------------------------------------
-&nbsp;                           Overall
----------------------------- -----------
-Age in Years: Mean (SD)      60.8 (11.2)
+------------------------------------------
+&nbsp;                             Overall
+------------------------------ -----------
+Age in Years: Mean (SD)        60.8 (11.2)
 
-Male: N (%)                   76 (68.5%)
+Male: N (%)                     76 (68.5%)
 
-Clot Location RC (%)                    
+Reader-Based Clot Location (%)            
 
-&nbsp;&nbsp;&nbsp;Putamen      68 (61.3)
+&nbsp;&nbsp;&nbsp;Putamen        68 (61.3)
 
-&nbsp;&nbsp;&nbsp;Lobar        33 (29.7)
+&nbsp;&nbsp;&nbsp;Lobar          33 (29.7)
 
-&nbsp;&nbsp;&nbsp;Globus        6 ( 5.4)
-Pallidus                                
+&nbsp;&nbsp;&nbsp;Globus          6 ( 5.4)
+Pallidus                                  
 
-&nbsp;&nbsp;&nbsp;Thalamus      4 ( 3.6)
+&nbsp;&nbsp;&nbsp;Thalamus        4 ( 3.6)
 
-Diagnostic ICH Volume in mL: 37.4 (20.1)
-Mean (SD)                               
-----------------------------------------
+ICH Volume in mL: Mean (SD)    37.4 (20.1)
+------------------------------------------
 
 </div>
 <div id="right_col"  style='font-size: 24pt;'>
@@ -245,8 +285,7 @@ Mean (SD)
 <p style='font-size: 10pt;'>Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. "brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data." R JOURNAL 6.1 (2014): 42-48.</p>
 </div>
 
-
-## Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates.png" style="width:550px;  display: block; margin: auto;" alt="MISTIE LOGO">  
+## Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates2.png" style="width:48%; display: block; margin: auto;" alt="Preds">  
 
 ## Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO">  
 
@@ -326,16 +365,21 @@ where $x_{i, 1}(v) \dots x_{i, 21}(v)$ are the predictors.
 ## Hemorrhage Engagement of Brain Regions 
 
 
-Use the "Eve" segmentation map (Oishi, et al., 2008), which outlines structures, we can calculate:
+We can compare the area to the "Eve" segmentation map (Oishi, et al., 2008) which outlines structures:
+<img src="figure/Eve_Atlas_Comparison.png" style="width:100%;" alt="Native">
+
+
+## Hemorrhage Engagement of Brain Regions 
+From this, we can calculate region-level engagement:
 $$
-\text{Prevalence}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Hemorrhage Mask} } {\sum \text{Hemorrhage Mask}} \times 100\% \nonumber
+\text{Engagement}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Hemorrhage Mask} } {\sum \text{Hemorrhage Mask}} \times 100\% \nonumber
 $$
 
 
 
 
 -------------------------------------
-          Area            Prevalence 
+          Area            Engagement 
 ------------------------ ------------
    Postcentral gyrus         16.7    
 
@@ -425,6 +469,10 @@ Due to a large number of tests, a Bonferroni correction (or FDR) did not result 
 - Create a High Predictive Region (HPR) based on a threshold: 
     - For example, $p < 0.01$    
 
+<br>
+<p style='font-size: 40pt; text-align: center;'>
+WARNING: EXPLORATORY ANALYSIS AHEAD!
+</p>
 
 ## Threshold P-value Map at $0.01$ ⇒ HPR
 
@@ -494,8 +542,7 @@ Pallidus**
 
 &nbsp;&nbsp;&nbsp;**Thalamus**    4 ( 3.6)
 
-Diagnostic ICH Volume in mL:   37.4 (20.1)
-Mean (SD)                                 
+ICH Volume in mL: Mean (SD)    37.4 (20.1)
 ------------------------------------------
 
 ## Known predictors of NIHSS
@@ -584,6 +631,40 @@ Problems:
 - Voxel-wise regression can show regions associated with severity
     - **Validate these regions (MISTIE III)**
     - **Scalar on image regression**
+
+</div>
+
+## Acknowledgments
+
+<div class="container">
+   <div class="column-left">
+   
+- Family/Parents/Stephanie
+- Epi and Biostat Aging Training Grant (T32)
+</div>
+
+<div class="column-center">
+
+- Ciprian
+- Dan & BIOS
+- Brian
+- Michelle 
+- Vadim
+- Alden
+
+- Carol 
+- Rick
+- Ravi
+- Michael
+</div>
+
+<div class="column-right">
+
+- Elizabeth Margaret Sweeney
+- Biostat students/staff
+- Open doors of Biostat faculty
+- MISTIE patients
+</div>
 
 </div>
 

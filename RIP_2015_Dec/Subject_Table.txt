@@ -1,4 +1,4 @@
-"Area" "Prevalence"
+"Area" "Engagement"
 "1" "POSTCENTRAL GYRUS" 16.7
 "2" "SUPRAMARGINAL GYRUS" 10.8
 "3" "SUPERIOR PARIETAL LOBULE" 10.4
