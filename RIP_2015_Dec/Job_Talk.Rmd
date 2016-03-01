@@ -752,8 +752,10 @@ Problems:
 
 
 ## Conclusions of Stroke Analyses
+
 <div style="font-size: 24pt">
-- We can segment ICH volume from CT scans <br/><br/>
+
+- We can segment ICH volume from CT scans <br><br>
 - We can create population-level ICH distributions <br/><br/>
 - Voxel-wise regression can show regions associated with severity <br/><br/>
 
