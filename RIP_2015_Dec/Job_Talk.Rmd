@@ -186,7 +186,7 @@ x = sapply(bib, citep)
 From the `cranlogs` R package:
 
 
-```{r, cache= TRUE}
+```{r, cache= FALSE}
 if (!require(cranlogs)) {
   library(devtools)
   install_github("metacran/cranlogs")
