@@ -18,9 +18,27 @@ xx = rbind(xx, c(-99, "Outside Brain Mask"))
 xx$index = as.numeric(xx$index)
 jhut1.df = xx
 
+
+tab = table(index = c(atlas))
+tab = as.data.frame(tab)
+colnames(tab) = c("index", "n_voxels")
+jhut1.df = merge(jhut1.df, tab, all.x = TRUE)
+jhut1.df$n_voxels[is.na(jhut1.df$n_voxels)] = 0
+
+
 ind = atlas[which(roi > 0.5)]
 df = as.data.frame(table(index = ind))
 df = merge(df, jhut1.df, all.x = TRUE)
+
+###########################
+# Do the specific index
+###########################
+jhut1.df = merge(jhut1.df, df, all.x = TRUE)
+# inds = jhut1.df[grep("utamen|caudate|globus", 
+#                      tolower(jhut1.df$Area)),]
+# inds = jhut1.df[grep("cingulate", 
+#                      tolower(jhut1.df$Area)),]
+
 
 stopifnot(!grepl("left", df$Area))
 df$Area = gsub("_(left|right)", "", 
@@ -42,6 +60,7 @@ xdf = arrange(df, desc(Engagement)) %>%
     head(n = n)
 
 write.table(xdf, file = "../Subject_Table.txt")
+
 
 
 t2 = window_img(template, window = c(0, 100))
