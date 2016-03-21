@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed Tomography Scanning</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+  <meta name="date" content="2016-03-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="jnj_talk2_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="jnj_talk2_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="jnj_talk2_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed Tomography Scanning',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'John Muschelli, PhD - Johns Hopkins Bloomberg School of Public Health<br/> <a href="http://johnmuschelli.com/jnj_talk2.html" class="uri">http://johnmuschelli.com/jnj_talk2.html</a>' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="john_orals.css" type="text/css" />
+
+  <script src="jnj_talk2_files/htmlwidgets-0.6/htmlwidgets.js"></script>
+  <script src="jnj_talk2_files/jquery-1.11.1/jquery.min.js"></script>
+  <script src="jnj_talk2_files/datatables-binding-0.1/datatables.js"></script>
+  <script src="jnj_talk2_files/datatables-1.10.7/jquery.dataTables.min.js"></script>
+  <link href="jnj_talk2_files/datatables-default-1.10.7/dataTables.extra.css" rel="stylesheet" />
+  <link href="jnj_talk2_files/datatables-default-1.10.7/jquery.dataTables.min.css" rel="stylesheet" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">March 21, 2016</p>
+          </hgroup>
+  </slide>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+<slide class=''><hgroup><h2>Overview of Work/Research</h2></hgroup><article  id="overview-of-workresearch">
+
+<div style="font-size: 28pt;">
+<ul>
+<li>Neuroimaging and R</li>
+<li>Segmentation/Classification of Computed Tomography (CT) scans
+
+<ul>
+<li>Brain segmentation</li>
+<li>Hemorrhage segmentation</li>
+</ul></li>
+<li>Quantitative hemorrhage localization</li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Overview of Work/Research</h2></hgroup><article  id="overview-of-workresearch-1">
+
+<div style="font-size: 28pt;">
+<ul>
+<li>Neuroimaging and R</li>
+<li>Segmentation/Classification of Computed Tomography (CT) scans
+
+<ul>
+<li>Brain segmentation</li>
+<li>Hemorrhage segmentation</li>
+</ul></li>
+<li><strong>Quantitative hemorrhage localization</strong></li>
+</ul></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Neuroimaging and R: <br/> <br/> Creating Tools I Would Use</h2></hgroup><article  id="neuroimaging-and-r-creating-tools-i-would-use">
+
+</article></slide><slide class=''><hgroup><h2>Authored R Packages:</h2></hgroup><article  id="authored-r-packages">
+
+<div id="wrap">
+<div id="left_col">
+<ul>
+<li><strong>fslr</strong>
+
+<p style="font-size: 12pt;">
+
+(Muschelli, John, et al. &quot;fslr: Connecting the FSL Software with R.&quot; R JOURNAL 7.1 (2015): 163-175.)
+
+</p></li>
+<li>brainR
+
+<p style="font-size: 12pt;">
+
+(Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data.&quot; R JOURNAL 6.1 (2014): 42-48.)
+
+</p></li>
+<li>extrantsr</li>
+<li>ichseg</li>
+<li>dcm2niir</li>
+<li>matlabr</li>
+<li>spm12r</li>
+</ul></div>
+
+<div id="right_col">
+<ul>
+<li>drammsr</li>
+<li>itksnapr</li>
+<li>papayar</li>
+<li>WhiteStripe</li>
+<li>oasis</li>
+<li>SuBLIME</li>
+<li>googleCite</li>
+<li>diffr</li>
+<li>rscopus</li>
+</ul></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Number of Downloads (CRAN packages)</h2></hgroup><article  id="number-of-downloads-cran-packages">
+
+<p>From the <code>cranlogs</code> R package:</p>
+
+<p><div id="htmlwidget-819" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-819">{"x":{"data":[["matlabr","brainR","fslr","rscopus","diffr","WhiteStripe","oasis","spm12r"],[1439,7487,6747,961,980,3918,600,930],[44,42,40,26,25,24,20,18]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package\u003c/th>\n      <th>All Time\u003c/th>\n      <th>Last Week\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[],"jsHooks":[]}</script></p>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Neuroimaging Analysis in Stroke</h2></hgroup><article  id="neuroimaging-analysis-in-stroke">
+
+</article></slide><slide class=''><hgroup><h2>The MISTIE Stroke Trial</h2></hgroup><article  id="the-mistie-stroke-trial">
+
+<ul>
+<li>Minimally Invasive Surgery plus r-tPA for Intracerebral Hemorrhage Evacuation (<strong>MISTIE</strong>)
+
+<ul>
+<li>Multi-center, multi-national Phase II clinical trial</li>
+</ul></li>
+<li>Patients with intracerebral hemorrhages (≥ 20 millilters)</li>
+</ul>
+
+<p><img src="figure/MISTIE3-LOGO.png" style="width:200px; height:100px; display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+<ul>
+<li><a href='http://braininjuryoutcomes.com/mistie-about' title=''>http://braininjuryoutcomes.com/mistie-about</a></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>When I stroke I don&#39;t mean ischemic</h2></hgroup><article  id="when-i-stroke-i-dont-mean-ischemic">
+
+<div class="container">
+<div id="left_col">
+<p><img src="figure/ischemic_stroke_edema_700w.jpg" alt="Ischemic" style="display: block; margin: auto; width: 80%"></p></div>
+
+<div id="right_col">
+<ul>
+<li>Ischemic stroke - clot blocks oxygen/nutrients</li>
+<li>Tissue dies</li>
+</ul>
+
+<p style="font-size:10.5px;">
+
+Image from <a href = "http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/
+" style ="word-wrap: break-word;" >http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/ </a>
+
+</p></div></div>
+
+</article></slide><slide class=''><hgroup><h2>When I stroke I don&#39;t mean ischemic</h2></hgroup><article  id="when-i-stroke-i-dont-mean-ischemic-1">
+
+<div class="container">
+<div id="left_col">
+<p><img src="figure/ischemic_stroke_edema_700w_not.jpg" alt="Ischemic" style="display: block; margin: auto; width: 80%"></p></div>
+
+<div id="right_col">
+<ul>
+<li>Ischemic stroke - clot blocks oxygen/nutrients</li>
+<li>Tissue dies</li>
+</ul>
+
+<p style="font-size:10.5px;">
+
+Image from <a href = "http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/
+" style ="word-wrap: break-word;" >http://www.strokecenter.org/patients/about-stroke/ischemic-stroke/ </a>
+
+</p></div></div>
+
+</article></slide><slide class=''><hgroup><h2>What is Intracranial/Intracerebral hemorrhage?</h2></hgroup><article  id="what-is-intracranialintracerebral-hemorrhage">
+
+<div class="columns-2" style="font-size: 28pt;">
+<ul>
+<li>When a blood vessel ruptures into:
+
+<ul>
+<li><strong>Tissue ⇒ intracerebral hemorrhage (ICH)</strong></li>
+</ul></li>
+<li>≈ 13% of strokes</li>
+</ul>
+
+<img src='figure/stroke_hem_web.jpg' title=''/>
+
+<p style="font-size:10.5px; ">
+
+<a href = "http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm" style ="word-wrap: break-word;" >http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3484153/k.7675/Stroke__Hemorrhagic_stroke.htm</a>
+
+</p></div>
+
+</article></slide><slide class=''><hgroup><h2>X-ray Computed Tomography (CT) Scans</h2></hgroup><article  id="x-ray-computed-tomography-ct-scans">
+
+<aside class='note'><section><p>Images are acquired from an X-ray scanner.<br/>x-ray goes around object and detector the other side of the object determines how many x-rays are recovered - fancy transform - Image!</p></section></aside>
+
+<div style="width:48%;float:left;">
+<p><sub><sup><sub><sup>Image from <a href='http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm' title=''>http://www.cyberphysics.co.uk/topics/medical/CTScanner.htm</a></sup></sub></sup></sub> <img src='figure/CT_diagram2.gif' title=''/> <br></p></div>
+
+<div style="margin-left:48%;">
+<p><img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Terminology: Neuroimaging to Data/Statistics</h2></hgroup><article  id="terminology-neuroimaging-to-datastatistics">
+
+<div style="font-size: 26pt">
+<ul>
+<li>Segmentation ⇔ classification</li>
+<li>Image ⇔ 3-dimensional array</li>
+<li>Mask/Region of Interest ⇔ binary (0/1) image</li>
+<li>Registration ⇔ Spatial Normalization/Standarization
+
+<ul>
+<li>&quot;Lining up&quot; Brains</li>
+</ul></li>
+</ul></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Brain Segmentation of CT Scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans">
+
+</article></slide><slide class=''><hgroup><h2>Problem: CT Scans Capture <strong>Everything</strong></h2></hgroup><article  id="problem-ct-scans-capture-everything">
+
+<p><img src="figure/the_room.png" style="width:100%; display: block; margin: auto;" alt="The room"></p>
+
+</article></slide><slide class=''><hgroup><h2>Brain Segmentation of CT Scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans-1">
+
+<div class="columns-2">
+<p>Want to go from an image: <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> <img src="figure/White_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Brain Segmentation of CT scans</h2></hgroup><article  id="brain-segmentation-of-ct-scans-2">
+
+<div class="columns-2">
+<p>Want to go from an image: <img src="figure/Original_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a brain-extracted image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Publicly Available code</h2></hgroup><article  id="publicly-available-code">
+
+<ul>
+<li>Muschelli, John, et al. &quot;Validated automatic brain extraction of head CT images.&quot; NeuroImage 114 (2015): 379-385.</li>
+<li>R code: <a href='http://bit.ly/CTBET_RCODE' title=''>http://bit.ly/CTBET_RCODE</a> - based on <strong>fslr</strong></li>
+<li>bash code: <a href='http://bit.ly/CTBET_BASH' title=''>http://bit.ly/CTBET_BASH</a></li>
+</ul>
+
+<p><img src="figure/Normal_SS.png" style="width:38%;  display: block; margin: auto;" alt="SS"></p>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Larger ICH Volume ⇒ Worse Outcome</h2></hgroup><article  id="larger-ich-volume-worse-outcome">
+
+</article></slide><slide class=''><hgroup><h2>ICH Segmentation, Volume/Location Estimation</h2></hgroup><article  id="ich-segmentation-volumelocation-estimation">
+
+<div class="columns-2">
+<p>Want to go from a brain image: <img src="figure/SS_Image.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"> <br/> To a binary hemorrhage mask: <img src="figure/SS_Image_PrePredict_ROI_Mask.png" style="width:100%;  display: block; margin: auto;" alt="MISTIE LOGO"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Subject Data used: 111 scans (1 per patient)</h2></hgroup><article  id="subject-data-used-111-scans-1-per-patient">
+
+<div id="wrap">
+<div id="left_col">
+<table class = 'rmdtable'>
+<col width="43%" />
+<col width="15%" />
+<tr class="header">
+<th align="left"> </th>
+<th align="right">Overall</th>
+</tr>
+<tr class="odd">
+<td align="left">Age in Years: Mean (SD)</td>
+<td align="right">60.8 (11.2)</td>
+</tr>
+<tr class="even">
+<td align="left">Male: N (%)</td>
+<td align="right">76 (68.5%)</td>
+</tr>
+<tr class="odd">
+<td align="left">Reader-Based Clot Location (%)</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">   Putamen</td>
+<td align="right">68 (61.3)</td>
+</tr>
+<tr class="odd">
+<td align="left">   Lobar</td>
+<td align="right">33 (29.7)</td>
+</tr>
+<tr class="even">
+<td align="left">   Globus Pallidus</td>
+<td align="right">6 ( 5.4)</td>
+</tr>
+<tr class="odd">
+<td align="left">   Thalamus</td>
+<td align="right">4 ( 3.6)</td>
+</tr>
+<tr class="even">
+<td align="left">ICH Volume in mL: Mean (SD)</td>
+<td align="right">37.4 (20.1)</td>
+</tr>
+</table></div>
+
+<div id="right_col" style="font-size: 24pt;">
+<ul>
+<li>Adults (inclusion criteria 18-80 years old)</li>
+<li>Mostly males</li>
+<li>Reader-classified Location of Hemorrhage</li>
+</ul></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Image Representation: voxels (3D pixels)</h2></hgroup><article  id="image-representation-voxels-3d-pixels">
+
+<div class="columns-2">
+<p><img src="figure/Zoom_No_ICH.png"  style="width:100%;  display: block; margin: auto;"> <br> <img src="figure/movie_final.gif" style="width:80%;  inline; display: block; margin: auto;" loop=infinite></p>
+
+<p style="font-size: 10pt;">
+
+Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. &quot;brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data.&quot; R JOURNAL 6.1 (2014): 42-48.
+
+</p></div>
+
+</article></slide><slide class=''><hgroup><h2>Step 1: Create Predictors of ICH <img src="figure/Just_The_Covariates2.png" style="width:48%; display: block; margin: auto;" alt="Preds"></h2></hgroup><article  id="step-1-create-predictors-of-ich">
+
+</article></slide><slide class=''><hgroup><h2>Data Structure for One Patient <br/> <img src="figure/voxel_stacking.png" style="width:70%;  display: block; margin: auto;" alt="MISTIE LOGO"></h2></hgroup><article  id="data-structure-for-one-patient">
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<div class="container">
+<div id="left_col2">
+<h2>
+
+Step 2: Aggregate Data
+
+</h2>
+
+<p>Training Data Structure</p>
+
+<ul>
+<li>Stack together 10 randomly selected patients</li>
+<li>Train model/classifier on this design matrix</li>
+</ul></div>
+
+<div id="right_col2">
+<img src="figure/Large_Design_Matrix_small.jpg" style="width:45%;  display: block; margin: auto;" alt="MISTIE LOGO"><br/></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Step 3: Fit Models / Classifier</h2></hgroup><article  id="step-3-fit-models-classifier">
+
+<p>Let \(y_{i}(v)\) be the presence / absence of ICH for voxel \(v\) from person \(i\).</p>
+
+<p>General model form: \[
+ P(Y_{i}(v) = 1)  \propto f(X_{i}(v))
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2>Models Fit on the Training Data</h2></hgroup><article  id="models-fit-on-the-training-data">
+
+<ul>
+<li>Logistic Regression: \(f(X_{i}(v)) = \text{expit} \left\{ \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v)\beta_{k}\right\} \)</li>
+<li>Generalized Additive Model (Hastie, et al., 1990)
+
+<ul>
+<li>fit using thin plate splines</li>
+</ul></li>
+<li>LASSO (Tibshirani, 1996; Friedman, et al., 2010): \[ \mathcal{L}\left(\left.Y_{i}(v) \right|\, f(X_i(v))\right) \propto \beta_0 + \sum_{k= 1}^{p} x_{i, k}(v) \beta_{k} + \lambda \sum_{k= 1}^{p} \left|\beta_{k}\right|
+\]</li>
+<li>Random Forests (Liaw, et al., 2002; Breiman, 2001)
+
+<div class="centerer">
+<p>\(f(X_{i}(v)) \propto\) <img src="Random_Forest.png" style="width:40%;inline;" alt="MISTIE LOGO"></p></div></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Predicted Volume Estimates True Volume <img src="figure/Reseg_Volume_Logistic.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="predicted-volume-estimates-true-volume">
+
+</article></slide><slide class=''><hgroup><h2>Predicted Volume Estimates True Volume <img src="figure/Reseg_Volume_Comparison.png" style="width:55%;  display: block; margin: auto;" alt="Reseg"></h2></hgroup><article  id="predicted-volume-estimates-true-volume-1">
+
+</article></slide><slide class=''><hgroup><h2>Patient with Median Overlap in Validation Set</h2></hgroup><article  id="patient-with-median-overlap-in-validation-set">
+
+<p><img src="figure/Reseg_Figure_DSI_Quantile_050_No_DSI.png" style="width:500px;  display: block; margin: auto;" alt="MISTIE LOGO"></p>
+
+</article></slide><slide class=''><hgroup><h2>Shiny Application: <a href='http://bit.ly/ICH_SEG' title=''>http://bit.ly/ICH_SEG</a> <img src="Shiny_prediction.png" style="width:105%; display: block; margin: auto;" alt="shiny orig"></h2></hgroup><article  id="shiny-application-httpbit.lyich_seg">
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Quantitative Hemorrhage Localization</h2></hgroup><article  id="quantitative-hemorrhage-localization">
+
+</article></slide><slide class=''><hgroup><h2>Localization Goals</h2></hgroup><article  id="localization-goals">
+
+<div style="font-size: 24pt">
+<ol>
+<li>Quantify of hemorrhage engagement of regions in the brain</li>
+<li>Create a 3-dimensional (3D) density map of hemorrhages in MISTIE population</li>
+<li>Determine if differences in location relate to stroke severity</li>
+<li>Generate a stroke region of engagement using within-sample validation</li>
+</ol></div>
+
+</article></slide><slide class=''><hgroup><h2>Register CT Image to Template</h2></hgroup><article  id="register-ct-image-to-template">
+
+<div class="container">
+<div class="left-half">
+Original Image with Hemorrhage: <img src="figure/native_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%;" alt="Native"></div>
+
+<div class="right-half">
+Template Image:<br/><img src="figure/Template.png" style="width:100%; float:left;" alt="template"><br/></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Transformed Masks in Template Space</h2></hgroup><article  id="transformed-masks-in-template-space">
+
+<div class="container">
+<div class="left-half">
+Registered Image with Hemorrhage: <img src="figure/raw_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%;" alt="Native"></div>
+
+<div class="right-half">
+Registered Hemorrhage Mask:<br/><img src="figure/roi_spm_100-362_20100126_1926_CT_2_CT_ROUTINE.png" style="width:100%; float:left;" alt="template"><br/></div></div>
+
+</article></slide><slide class=''><hgroup><h2>Hemorrhage Engagement of Brain Regions</h2></hgroup><article  id="hemorrhage-engagement-of-brain-regions">
+
+<p>We can compare the area to the &quot;Eve&quot; segmentation map (Oishi, et al., 2008) which outlines structures: <img src="figure/Eve_Atlas_Comparison.png" style="width:100%;" alt="Native"></p>
+
+</article></slide><slide class=''><hgroup><h2>Hemorrhage Engagement of Brain Regions</h2></hgroup><article  id="hemorrhage-engagement-of-brain-regions-1">
+
+<p>From this, we can calculate region-level engagement: \[
+\text{Engagement}_r = \frac{ \sum\limits_{\text{Voxels in region r}} \text{Hemorrhage Mask} } {\sum \text{Hemorrhage Mask}} \times 100\% \nonumber
+\]</p>
+
+<table class = 'rmdtable'>
+<col width="34%" />
+<col width="16%" />
+<tr class="header">
+<th align="center">Area</th>
+<th align="center">Engagement</th>
+</tr>
+<tr class="odd">
+<td align="center">Postcentral gyrus</td>
+<td align="center">16.7</td>
+</tr>
+<tr class="even">
+<td align="center">Supramarginal gyrus</td>
+<td align="center">10.8</td>
+</tr>
+<tr class="odd">
+<td align="center">Superior parietal lobule</td>
+<td align="center">10.4</td>
+</tr>
+<tr class="even">
+<td align="center">Postcentral white matter</td>
+<td align="center">10.2</td>
+</tr>
+<tr class="odd">
+<td align="center">Precentral gyrus</td>
+<td align="center">8.2</td>
+</tr>
+</table>
+
+<ul>
+<li>Can also give region engagement (e.g. 10% of putamen engaged)
+
+<ul>
+<li>putamen, caudate, and globus pallidus not engaged</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution">
+
+</article></slide><slide class=''><hgroup><h2>Aggregating Multiple Hemorrhage Masks</h2></hgroup><article  id="aggregating-multiple-hemorrhage-masks">
+
+<p>N - number of patients, V - number of voxels</p>
+
+<p><img src="figure/hemorrhage_stacking.png" style="width:100%; display: block; margin: auto;" alt="pipeline"></p>
+
+</article></slide><slide class=''><hgroup><h2>Creating a Population-level ICH Distribution</h2></hgroup><article  id="creating-a-population-level-ich-distribution">
+
+<p><img src="figure/3d_hist.png" style="width:45%; display: block; margin: auto;" alt="pipeline"></p>
+
+</article></slide><slide class=''><hgroup><h2>Population ICH Distribution</h2></hgroup><article  id="population-ich-distribution-1">
+
+<p><img src="figure/Figure4_Proportion_Final.png" style="width:50%; display: block; margin: auto;" alt="The room"></p>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>What Areas Affect Stroke Severity</h2></hgroup><article  id="what-areas-affect-stroke-severity">
+
+</article></slide><slide class=''><hgroup><h2>Measuring Stroke Severity</h2></hgroup><article  id="measuring-stroke-severity">
+
+<ul>
+<li>Stroke-related impairment measured by NIH Stroke Scale (NIHSS) (Brott, et al., 1989)
+
+<ul>
+<li>Multiple sub-domains</li>
+<li>Higher is worse (higher stroke severity)</li>
+</ul></li>
+</ul>
+
+<table class = 'rmdtable'>
+<col width="19%" />
+<col width="34%" />
+<tr class="header">
+<th align="center">NIHSS Score</th>
+<th align="center">Stroke Severity</th>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">No Stroke Symptoms</td>
+</tr>
+<tr class="even">
+<td align="center">1-4</td>
+<td align="center">Minor Stroke</td>
+</tr>
+<tr class="odd">
+<td align="center">5-15</td>
+<td align="center">Moderate Stroke</td>
+</tr>
+<tr class="even">
+<td align="center">16-20</td>
+<td align="center">Moderate to Severe Stroke</td>
+</tr>
+<tr class="odd">
+<td align="center">21-42</td>
+<td align="center">Severe Stroke</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Voxel-wise Regression/T-tests</h2></hgroup><article  id="voxel-wise-regressiont-tests">
+
+<div class="container">
+
+<div id="left_col2">
+<p>Let \(v\) be voxel</p>
+
+<ul>
+<li>\(\mu_{1}(v)\): mean NIHSS score in patients where \(ICH(v){=}1\)</li>
+<li>Similarly for \(\mu_{0}(v)\).</li>
+<li>At each voxel, ran a t-test: \(H_{0}(v):\mu_{1}(v)=\mu_{0}(v)\)</li>
+<li><p>Only voxels where \(&gt;10\) subjects had ICH \((V=166202)\)</p>
+
+</div>
+
+<div id="right_col2">
+<p><img src="figure/Pvalue_Figure.png" alt="Data structure" style="display: block; margin: auto; width: 100%"></p></div></li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Voxel-wise P-value Map</h2></hgroup><article  id="voxel-wise-p-value-map">
+
+<p><img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="display: block; margin: auto; width: 55%"></p>
+
+</article></slide><slide class=''><hgroup><h2>High Predictive Regions</h2></hgroup><article  id="high-predictive-regions">
+
+<p>Due to a large number of tests, a Bonferroni correction (or FDR) did not result in singificant p-values.</p>
+
+<ul>
+<li>Create a High Predictive Region (HPR) based on a threshold:
+
+<ul>
+<li>For example, \(p &lt; 0.01\)</li>
+</ul></li>
+</ul>
+
+<br>
+
+<p style="font-size: 40pt; text-align: center;">
+
+WARNING: EXPLORATORY ANALYSIS AHEAD!
+
+</p>
+
+</article></slide><slide class=''><hgroup><h2>Threshold P-value Map at \(0.01\) ⇒ HPR</h2></hgroup><article  id="threshold-p-value-map-at-0.01-hpr">
+
+<div style="width:49%;float:left;">
+<p><img src="figure/Regression_Map_heatcol1_t1.png" alt="Data structure" style="width: 100%"></p></div>
+
+<div style="margin-left:48%;">
+<img src='figure/Top_19047_pvalues.png' title=''/></div>
+
+</article></slide><slide class=''><hgroup><h2>HPR Coverage</h2></hgroup><article  id="hpr-coverage">
+
+<p>Calculate the overlap of the HPR for each scan \(i\) \[
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+\] <img src="figure/hpr_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob"></p>
+
+</article></slide><slide class=''><hgroup><h2>HPR Coverage</h2></hgroup><article  id="hpr-coverage-1">
+
+<p>Calculate the overlap of the HPR for each scan \(i\) \[
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+\] <img src="figure/ich_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob"></p>
+
+</article></slide><slide class=''><hgroup><h2>HPR Coverage</h2></hgroup><article  id="hpr-coverage-2">
+
+<p>Calculate the overlap of the HPR for each scan \(i\) \[
+\text{HPR Coverage}_i = \frac{\text{# Voxels classified ICH in HPR for scan } i}{\text{# Voxels in HPR}} \times 100\% \nonumber
+\] <img src="figure/both_blob.png" style="width:35%; display: block; margin: auto;" alt="hpr blob"></p>
+
+</article></slide><slide class=''><hgroup><h2>Coverage is 2000/20000 * 100 = 10%: <img src="figure/both_blob.png" style="width:50%; display: block; margin: auto;" alt="hpr blob"></h2></hgroup><article  id="coverage-is-200020000-100-10">
+
+</article></slide><slide class=''><hgroup><h2>HPR Coverage Relationship with NIHSS</h2></hgroup><article  id="hpr-coverage-relationship-with-nihss">
+
+<div style="width:48%;float:left;">
+<img src='figure/Top_19047_pvalues.png' title=''/></div>
+
+<div style="margin-left:48%;">
+<p><img src="figure/Regress_ROI_NIHSS_Best_Model.png" style="width:100%;  display: block; margin: auto;" alt="Regline"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Standard Description of Location: Reader-Based</h2></hgroup><article  id="standard-description-of-location-reader-based">
+
+<table class = 'rmdtable'>
+<col width="43%" />
+<col width="15%" />
+<tr class="header">
+<th align="left"> </th>
+<th align="right">Overall</th>
+</tr>
+<tr class="odd">
+<td align="left">Age in Years: Mean (SD)</td>
+<td align="right">60.8 (11.2)</td>
+</tr>
+<tr class="even">
+<td align="left">Male: N (%)</td>
+<td align="right">76 (68.5%)</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Reader-Based Clot Location (%)</strong></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">   <strong>Putamen</strong></td>
+<td align="right">68 (61.3)</td>
+</tr>
+<tr class="odd">
+<td align="left">   <strong>Lobar</strong></td>
+<td align="right">33 (29.7)</td>
+</tr>
+<tr class="even">
+<td align="left">   <strong>Globus Pallidus</strong></td>
+<td align="right">6 ( 5.4)</td>
+</tr>
+<tr class="odd">
+<td align="left">   <strong>Thalamus</strong></td>
+<td align="right">4 ( 3.6)</td>
+</tr>
+<tr class="even">
+<td align="left">ICH Volume in mL: Mean (SD)</td>
+<td align="right">37.4 (20.1)</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Known predictors of NIHSS</h2></hgroup><article  id="known-predictors-of-nihss">
+
+<ul>
+<li>Age</li>
+<li>ICH Volume (ICHVol)</li>
+<li>Sex</li>
+</ul>
+
+<p>Null Model:</p>
+
+<p>\[\begin{eqnarray} 
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}\]</p>
+
+</article></slide><slide class=''><hgroup><h2>Compare HPR to using Reader-Based Locations</h2></hgroup><article  id="compare-hpr-to-using-reader-based-locations">
+
+<p>Using the adjusted \(R^2\), we compared the <strong>HPR model</strong>:</p>
+
+<p>\[\begin{eqnarray} 
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 {\rm Coverage}_i \\
+&amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}\\
+\end{eqnarray}\] to the <strong>reader-based model</strong>: \[\begin{eqnarray} 
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus\,Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
+&amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}\] where \(I(k)\) represents the indicator that ICH location was \(k\)</p>
+
+</article></slide><slide class=''><hgroup><h2>Testing if HPR is more Predictive than Reader</h2></hgroup><article  id="testing-if-hpr-is-more-predictive-than-reader">
+
+<ul>
+<li><p>Likelihood ratio test (LRT) comparing HPR coverage model to null model: \(p &lt; 0.001\)</p></li>
+<li><p>LRT: Reader model vs. null model: \(p = 0.1844\)</p></li>
+<li><p>Adjusted \(R^2\), Reader model: 0.129 vs. HPR coverage Model: 0.254</p></li>
+</ul>
+
+<p>Nested Model Comparison:</p>
+
+<ul>
+<li><p>LRT: Reader+HPR model vs. Reader-only model: \(p &lt; 0.001\)</p></li>
+<li><p>Reader+HPR model: \[\begin{eqnarray} 
+{\rm NIHSS}_i &amp;=&amp; \beta_0 + \beta_1 I({\rm Lobar}_i) + \beta_2 I({\rm Globus\,Pallidus }_i) + \beta_3 I({\rm Thalamus}_i) \\
+&amp;+&amp; \beta_4 {\rm Coverage}_i \\
+&amp;+&amp; \gamma_1{\rm Age}_i  +\gamma_2{\rm Sex}_i +\gamma_3{\rm ICHVol}_i + \epsilon_{i}
+\end{eqnarray}\]</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Does HPR coverage perform better than chance?</h2></hgroup><article  id="does-hpr-coverage-perform-better-than-chance">
+
+<p>Procedure (P):</p>
+
+<ol>
+<li>Fit voxel-wise models</li>
+<li>Collect the most predictive voxels</li>
+<li>Produce subject-level predictors by coalescing voxels</li>
+</ol>
+
+<p>Problems:</p>
+
+<ul>
+<li>Multiplicity</li>
+<li>Double-dipping: Using the data twice
+
+<ul>
+<li>Violates separation of exploratory and confirmatory analyses</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Conclusions of Stroke Analyses</h2></hgroup><article  id="conclusions-of-stroke-analyses">
+
+<div style="font-size: 24pt">
+<ul>
+<li>We can segment ICH volume from CT scans <br><br></li>
+<li>We can create population-level ICH distributions <br/><br/></li>
+<li>Voxel-wise regression can show regions associated with severity <br/><br/></li>
+</ul></div>
+
+</article></slide><slide class=''><hgroup><h2>Conclusions of Stroke Analyses</h2></hgroup><article  id="conclusions-of-stroke-analyses-1">
+
+<div style="font-size: 24pt">
+<ul>
+<li>We can segment ICH volume from CT scans
+
+<ul>
+<li><strong>Incorporate variability of estimated volume</strong></li>
+</ul></li>
+<li>We can create population-level ICH distributions
+
+<ul>
+<li><strong>Uncertainty measures of this</strong></li>
+</ul></li>
+<li>Voxel-wise regression can show regions associated with severity
+
+<ul>
+<li><strong>Validate these regions (MISTIE III)</strong></li>
+<li><strong>Scalar on image regression</strong></li>
+</ul></li>
+</ul></div>
+
+</article></slide><slide class='segue dark nobackground'><hgroup class = 'auto-fadein'><h2>Thank You</h2></hgroup><article  id="thank-you" class="unnumbered">
+
+<div id="refs" class="references">
+</div></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="jnj_talk2_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="jnj_talk2_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="jnj_talk2_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="jnj_talk2_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="jnj_talk2_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="jnj_talk2_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="jnj_talk2_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "jnj_talk2_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

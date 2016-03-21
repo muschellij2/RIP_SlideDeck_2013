@@ -1,6 +1,6 @@
 # Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed Tomography Scanning
 John Muschelli - Johns Hopkins Bloomberg School of Public Health<br/> http://bit.ly/ICHTALK  
-February 19, 2016  
+March 21, 2016  
 
 
 <script type="text/x-mathjax-config">
@@ -81,8 +81,8 @@ From the `cranlogs` R package:
 
 
 
-<!--html_preserve--><div id="htmlwidget-9215" style="width:100%;height:auto;" class="datatables"></div>
-<script type="application/json" data-for="htmlwidget-9215">{"x":{"data":[["fslr","brainR","matlabr","diffr","oasis","rscopus","spm12r","WhiteStripe"],[6592,7339,1273,865,506,856,843,3820],[78,76,69,68,52,49,45,45]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package</th>\n      <th>All Time</th>\n      <th>Last Week</th>\n    </tr>\n  </thead>\n</table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-5950" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5950">{"x":{"data":[["matlabr","brainR","fslr","rscopus","diffr","WhiteStripe","oasis","spm12r"],[1439,7487,6747,961,980,3918,600,930],[44,42,40,26,25,24,20,18]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package\u003c/th>\n      <th>All Time\u003c/th>\n      <th>Last Week\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 
 

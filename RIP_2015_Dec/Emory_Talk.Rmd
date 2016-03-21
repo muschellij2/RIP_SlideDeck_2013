@@ -2,7 +2,7 @@
 title: 'Computational Methods for Neuroimaging in R: Stroke Hemorrhages and X-ray Computed
   Tomography Scanning'
 author: "John Muschelli, PhD - Johns Hopkins Bloomberg School of Public Health<br/> http://johnmuschelli.com/Emory_Talk.html"
-date: "March 15, 2016"
+date: "March 21, 2016"
 output:
   ioslides_presentation:
     css: john_orals.css
