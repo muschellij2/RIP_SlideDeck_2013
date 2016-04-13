@@ -654,7 +654,8 @@ From the `cranlogs` R package:
 
 
 
-
+<!--html_preserve--><div id="htmlwidget-683" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-683">{"x":{"data":[["brainR","fslr","matlabr","diffr","WhiteStripe","oasis","spm12r","rscopus"],[7672,6927,1616,1123,4046,713,1035,1069],[72,59,58,52,47,43,37,35]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package\u003c/th>\n      <th>All Time\u003c/th>\n      <th>Last Week\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 
 

@@ -759,7 +759,7 @@ Problems:
 From the `cranlogs` R package:
 
 
-```{r cranlogs, cache = TRUE, eval = FALSE}
+```{r cranlogs, cache = TRUE, eval = TRUE}
 if (!require(cranlogs)) {
   library(devtools)
   install_github("metacran/cranlogs")
@@ -786,7 +786,7 @@ colnames(dl) = c("Package", "All Time", "Last Week")
 library(DT)
 ```
 
-```{r dt_cranlogs, results = "asis", eval = FALSE, dependson = "cranlogs"}
+```{r dt_cranlogs, results = "asis", eval = TRUE, dependson = "cranlogs"}
 datatable(dl, filter = "none", selection = "none", rownames = FALSE,
           options = list(dom = 't', autoWidth = TRUE,
                          columnDefs = list(list(
