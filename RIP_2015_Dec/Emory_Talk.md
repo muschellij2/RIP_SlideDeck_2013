@@ -20,7 +20,6 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 ## Overview of Work/Research
 
 <div style='font-size: 28pt;'>
-- Neuroimaging and R
 - Segmentation/Classification of Computed Tomography (CT) scans
     - Brain segmentation
     - Hemorrhage segmentation
@@ -30,65 +29,11 @@ MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
 ## Overview of Work/Research
 
 <div style='font-size: 28pt;'>
-- Neuroimaging and R
 - Segmentation/Classification of Computed Tomography (CT) scans
     - Brain segmentation
     - Hemorrhage segmentation
 - **Quantitative hemorrhage localization**
 </div>
-
-# Neuroimaging and R: <br/> <br/> Creating Tools I Would Use 
-
-## Authored R Packages:
-
-<div id="wrap">
-<div id="left_col">
-
-- **fslr** <p style='font-size: 12pt;'>(Muschelli, John, et al. "fslr: Connecting the FSL Software with R." R JOURNAL 7.1 (2015): 163-175.)</p>
-- brainR <p style='font-size: 12pt;'>(Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. "brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data." R JOURNAL 6.1 (2014): 42-48.)</p>
-- extrantsr
-- ichseg
-- dcm2niir
-- matlabr
-- spm12r
-
-
-</div>
-<div id="right_col">
-
-- drammsr
-- itksnapr
-- papayar
-- WhiteStripe
-- oasis
-- SuBLIME
-- googleCite
-- diffr
-- rscopus
-
-</div>
-</div>
-
-
-
-
-
-
-
-## Number of Downloads (CRAN packages)
-
-From the `cranlogs` R package:
-
-
-
-
-
-
-
-
-<!--html_preserve--><div id="htmlwidget-7711" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7711">{"x":{"data":[["matlabr","fslr","brainR","diffr","rscopus","oasis","WhiteStripe","spm12r"],[1397,6710,7446,955,935,580,3895,912],[50,43,32,28,19,18,18,17]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package\u003c/th>\n      <th>All Time\u003c/th>\n      <th>Last Week\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
-
 
 
 # Neuroimaging Analysis in Stroke
@@ -660,6 +605,60 @@ Problems:
     - **Scalar on image regression** 
 
 </div>
+
+
+# Neuroimaging and R: <br/> <br/> Creating Tools I Would Use 
+
+## Authored R Packages:
+
+<div id="wrap">
+<div id="left_col">
+
+- **fslr** <p style='font-size: 12pt;'>(Muschelli, John, et al. "fslr: Connecting the FSL Software with R." R JOURNAL 7.1 (2015): 163-175.)</p>
+- brainR <p style='font-size: 12pt;'>(Muschelli, John, Elizabeth Sweeney, and Ciprian Crainiceanu. "brainR: Interactive 3 and 4D Images of High Resolution Neuroimage Data." R JOURNAL 6.1 (2014): 42-48.)</p>
+- extrantsr
+- ichseg
+- dcm2niir
+- matlabr
+- spm12r
+
+
+</div>
+<div id="right_col">
+
+- drammsr
+- itksnapr
+- papayar
+- WhiteStripe
+- oasis
+- SuBLIME
+- googleCite
+- diffr
+- rscopus
+
+</div>
+</div>
+
+
+
+
+
+
+
+## Number of Downloads (CRAN packages)
+
+From the `cranlogs` R package:
+
+
+
+
+
+
+
+
+<!--html_preserve--><div id="htmlwidget-9889" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9889">{"x":{"data":[["fslr","brainR","matlabr","diffr","WhiteStripe","oasis","rscopus","spm12r"],[6879,7610,1567,1080,4006,677,1040,1003],[66,63,58,51,44,37,35,32]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Package\u003c/th>\n      <th>All Time\u003c/th>\n      <th>Last Week\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"dom":"t","autoWidth":true,"columnDefs":[{"className":"dt-center","targets":0},{"className":"dt-right","targets":[1,2]}],"order":[],"orderClasses":false},"callback":null,"filter":"none"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+
 
 
 # Thank You
