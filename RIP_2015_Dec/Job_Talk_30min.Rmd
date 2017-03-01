@@ -692,7 +692,7 @@ df$Area = revalue(df$Area, c("Background" = "CSF (ventricular & subarachnoid spa
 df$Area = revalue(df$Area, c("Csf" = "CSF (ventricular & subarachnoid spaces)"))
 df$Area = gsub("_", " ", df$Area)
 df$Area = gsub(" wm( |)", " WM ", df$Area)
-df$Area = str_trim(df$Area)
+df$Area = trimws(df$Area)
 df = df[order(as.numeric(df$"Population Prevalence"), 
 #              as.numeric(df[, "NIHSS HPR"]), 
 #              as.numeric(df[, "GCS HPR"]), 
